@@ -5,6 +5,7 @@ Rails:
   Enabled: true
 
 AllCops:
+  TargetRubyVersion: 3.0
   Exclude:
   - 'bin/*'
   - 'config/**/*'
