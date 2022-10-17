@@ -8,6 +8,10 @@ a {
   text-decoration: none;
   background-color: transparent;
 }
+html,
+body {
+  height: 100%;
+}
 
 /*=== HEADER ===*/
 header {
@@ -37,4 +41,17 @@ header {
 }
 .under-header {
   height: 48px;
+}
+
+/*=== FOOTER ===*/
+footer {
+  text-align: center;
+  width: 100%;
+  background-color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  border-top: 1px solid #eee;
+  padding: 15px 0;
+  position: sticky;
+  top: 100vh;
 }
