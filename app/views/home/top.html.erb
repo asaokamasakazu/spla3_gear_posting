@@ -1,2 +1,87 @@
-<h1>Home#top</h1>
-<p>Find me in app/views/home/top.html.erb</p>
+<div class="top">
+  <div class="top-title-area">
+    <div class="top-title-container">
+      <h1 class="top-h1">スプラトゥーン3 ギア編成投稿所</h1>
+      <p class="top-p">スプラトゥーン3 ギア編成投稿所では、君のイカしたギア編成を投稿できるぞ！</p>
+      <p class="top-p">みんなの投稿を見て、イカしたギア編成を見つけたらお気に入り登録しておこう！</p>
+      <div class="tio-buttons">
+        <%= link_to "#" do %>
+          <div class="button top-button top-button-first">
+            <p>> 新規登録してギア編成を投稿する</p>
+          </div>
+        <% end %>
+        <br>
+        <%= link_to "#" do %>
+          <div class="button top-button">
+            <p>> ログインはこちら</p>
+          </div>
+        <% end %>
+        <%= link_to "#" do %>
+          <div class="button top-button">
+            <p>> ゲストログインはこちら</p>
+          </div>
+        <% end %>
+      </div>
+      <hr>
+      <div class="top-search-area">
+        <h2>＼ブキ名で投稿を検索／</h2>
+        <div class="top-search-form">
+          <input type="text" placeholder="ブキ名を入力">
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="top-posts-area">
+    <h2>人気投稿</h2>
+    <%= link_to "> 人気投稿一覧", "#" %>
+  </div>
+  <div class="top-posts-area">
+    <h2>新着投稿</h2>
+    <%= link_to "> 新規投稿一覧", "#" %>
+  </div>
+  <div class="top-users-area">
+    <h2>人気ユーザー</h2>
+    <%= link_to "> 人気ユーザー一覧", "#" %>
+  </div>
+  <div class="top-gear-powers-area">
+    <h2>ギアパワー解説</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td>hoge</td>
+          <td>hoge</td>
+        </tr>
+        <tr>
+          <td>hoge</td>
+          <td>hoge</td>
+        </tr>
+        <tr>
+          <td>hoge</td>
+          <td>hoge</td>
+        </tr>
+        <tr>
+          <td>hoge</td>
+          <td>hoge</td>
+        </tr>
+        <tr>
+          <td>hoge</td>
+          <td>hoge</td>
+        </tr>
+        <tr>
+          <td>hoge</td>
+          <td>hoge</td>
+        </tr>
+        <tr>
+          <td>hoge</td>
+          <td>hoge</td>
+        </tr>
+        <tr>
+          <td>hoge</td>
+          <td>hoge</td>
+        </tr>
+      </tbody>
+    </table>
+    <%= link_to "> ギアパワー一覧", "#" %>
+  </div>
+</div>

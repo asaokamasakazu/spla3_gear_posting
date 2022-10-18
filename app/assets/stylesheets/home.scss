@@ -1,3 +1,83 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.top {
+  width: 100%;
+}
+.top-title-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  text-align: center;
+  height: 70vh;
+  background-image: url("/background_images/background_image_1.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+.top-title-container {
+  padding: 20px;
+  color: #fff;;
+  a {
+    color: #fff;
+  }
+}
+.top-h1 {
+  font-family: 'Dela Gothic One', cursive;
+  font-size: 3.5rem;
+  font-weight: normal;
+  margin-bottom: 10px;
+}
+.top-p {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+.top-buttons {
+  display: flex;
+  justify-content: center;
+}
+.top-button {
+  width: 300px;
+  margin: 0 auto 10px auto;
+}
+.top-button-first {
+  margin-top: 50px;
+  background-color: #0069d8;
+}
+.top-search-area {
+  padding-bottom: 20px;
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+}
+.top-search-form {
+  position: relative;
+  display: inline;
+}
+.top-search-form input {
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding-left: 30px;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  width: 250px;
+}
+.top-search-form i {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  font-size: 18px;
+}
+.fas {
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  color: #333;
+}
+
+.top-posts-area {
+  padding: 0 35px;
+}
