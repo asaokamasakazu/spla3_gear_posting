@@ -14,6 +14,9 @@ a {
   text-decoration: none;
   background-color: transparent;
 }
+li {
+  list-style-type: none;
+}
 hr {
   height: 1px;
   background-color: #eaedef;
@@ -23,14 +26,48 @@ hr {
 .button {
   width: fit-content;
   display: inline-block;
-  border: 1px solid #0069d8;
+  border: 1px solid #fff450;
   border-radius: 5px;
   padding: 8px;
   font-size: 0.9rem;
   transition: all .3s;
+  color: #fff450;
 }
 .button:hover {
   letter-spacing: 1px;
+}
+.hover-textdecoration:hover {
+  text-decoration: underline;
+}
+.hover-brightness:hover {
+  filter: brightness(1.4);
+}
+.hover-opacity:hover {
+  opacity: 0.6;
+}
+.hover-color-red:hover {
+  color: rgb(245, 69, 98);
+}
+.hover-i-color-red:hover {
+  i {
+    color: rgb(245, 69, 98);
+  }
+}
+
+/*=== FONT AWESOME ===*/
+.fas {
+  font-weight: 900;
+  font-family: "Font Awesome 6 Free";
+}
+.far {
+  font-weight: 400;
+  font-family: "Font Awesome 6 Free";
+}
+.font-awesome-color-black {
+  color:#000;
+}
+.font-awesome-size-105 {
+  font-size: 1.05rem;
 }
 
 /*=== HEADER ===*/
