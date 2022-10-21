@@ -13,6 +13,11 @@
   background-attachment: fixed;
   background-position: center;
 }
+@media screen and (max-width: 520px) {
+  .top-title-area {
+    height: 60vh;
+  }
+}
 .top-title-container {
   padding: 20px;
   color: #fff;;
@@ -20,22 +25,60 @@
     color: #fff;
   }
 }
-.top-h1 {
+.top-h1-pc {
   font-family: 'Dela Gothic One', cursive;
   font-size: 3.5rem;
   font-weight: normal;
   margin-bottom: 10px;
 }
+.top-h1-tb {
+  display: none;
+}
+@media screen and (max-width: 960px) {
+  .top-h1-pc {
+    display: none;
+  }
+  .top-h1-tb {
+    display: block;
+    font-family: 'Dela Gothic One', cursive;
+    font-size: 2.5rem;
+    font-weight: normal;
+    line-height: 2.5rem;
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .top-h1-tb {
+    font-size: 2rem;
+    line-height: 2rem;
+    margin-bottom: 8px;
+  }
+}
 .top-p {
   font-size: 0.9rem;
   margin-bottom: 5px;
 }
+@media screen and (max-width: 520px) {
+  .top-p {
+    font-size: 0.65rem;
+  }
+}
 .top-button {
   width: 300px;
-  margin: 0 auto 10px auto;
+  margin: 0 auto 10px;
+}
+@media screen and (max-width: 960px) {
+  .top-button {
+    width: 100%;
+  }
 }
 .top-buttons-header {
   margin: 50px 0 3px;
+}
+@media screen and (max-width: 960px) {
+  .top-buttons-header {
+    margin: 25px 0 0;
+  }
 }
 .top-button-first {
   background-color: #fff450;
@@ -44,11 +87,23 @@
 .top-button-second {
   margin-right: 8px;
 }
+@media screen and (max-width: 520px) {
+  .top-title-hr {
+    margin: 20px 0;
+  }
+}
 .top-search-area {
   padding-bottom: 20px;
   h2 {
     font-size: 1.2rem;
     margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .top-search-area {
+    h2 {
+      font-size: 1rem;
+    }
   }
 }
 .top-search-form {
