@@ -277,5 +277,48 @@
   width: 100%;
   margin-top: 7px;
   color: #000;
-  background-color: #fff450
+  background-color: #fff450;
+}
+.gear-powers-area {
+  text-align: center;
+  padding: 25px 10px;
+  background-image: url("/background_images/background_image_3.png");
+}
+.gear-powers-container {
+  border-radius: 7px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 20px 30px;
+  color: #fff;
+  h2 {
+    font-size: 1.8rem;
+  }
+  a {
+    color: #fff;
+  }
+}
+.gear-powers-table {
+  max-width: 700px;
+  margin: 14px auto;
+  img {
+    width: 50px;
+    margin-right: 5px;
+  }
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+}
+.gear-powers-table-td {
+  display: flex;
+  align-items: center;
+  padding: 7px;
+}
+.gear-powers-button {
+  width: 100%;
+  margin-top: 7px;
+  color: #000;
+  background-color: #fff;
+  border-color: #fff;
 }

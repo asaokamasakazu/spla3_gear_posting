@@ -23,6 +23,21 @@ hr {
   border: none;
   margin: 30px 0;
 }
+table {
+  border-collapse: collapse;
+  border: none;
+}
+td,th {
+  border: none;
+  border-left: 1px solid #fff;
+  border-top: 1px solid #fff;
+}
+td:first-child,th:first-child {
+  border-left:none;
+}
+tr:first-child td,tr:first-child th {
+  border-top:none;
+}
 .button {
   width: fit-content;
   display: inline-block;
