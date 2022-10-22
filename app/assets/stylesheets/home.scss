@@ -483,11 +483,8 @@
   max-width: 950px;
   margin: 0 auto;
   padding: 20px 30px;
-  color: #fff;
   h2 {
     font-size: 1.8rem;
-  }
-  a {
     color: #fff;
   }
 }
@@ -510,6 +507,9 @@
   table {
     width: 100%;
     table-layout: fixed;
+  }
+  a {
+    color: #fff;
   }
 }
 @media screen and (max-width: 520px) {
