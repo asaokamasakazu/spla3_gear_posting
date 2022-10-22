@@ -5,6 +5,7 @@ Rails:
   Enabled: true
 
 AllCops:
+  NewCops: enable
   Exclude:
   - 'bin/*'
   - 'config/**/*'
