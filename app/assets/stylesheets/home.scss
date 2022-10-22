@@ -373,13 +373,26 @@
     color: #fff450;
   }
 }
+@media screen and (max-width: 520px) {
+  .users-container {
+    padding: 20px 15px;
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+}
 .users {
+  margin: 7px 0;
   padding-top: 5px;
 }
 .user {
-  margin: 7px 0;
   padding: 10px 20px 7px 20px;
   border-bottom: 1px solid #fff450;
+}
+@media screen and (max-width: 520px) {
+  .user {
+    padding: 7px 0 5px;
+  }
 }
 .user:first-child {
   border-top: 1px solid #fff450;
@@ -391,9 +404,19 @@
   justify-content: space-between;
   align-items: flex-end;
 }
+@media screen and (max-width: 520px) {
+  .user-container {
+    flex-direction: column;
+  }
+}
 .user-left {
   display: flex;
   align-items: center;
+}
+@media screen and (max-width: 520px) {
+  .user-left {
+    margin: 0 auto 0 0;
+  }
 }
 .user-icon {
   height: 50px;
@@ -401,9 +424,22 @@
     width: 50px;
   }
 }
+@media screen and (max-width: 520px) {
+  .user-icon {
+    height: 40px;
+    img {
+      width: 40px;
+    }
+  }
+}
 .user-info {
   text-align: left;
   padding-left: 20px;
+}
+@media screen and (max-width: 700px) {
+  .user-info {
+    padding-left: 7px;
+  }
 }
 .user-name {
   font-weight: bold;
@@ -417,8 +453,18 @@
     margin-right: 13px;
   }
 }
+@media screen and (max-width: 520px) {
+.user-achievements {
+  font-size: 0.75rem;
+}
+}
 .user-right {
   font-size: 0.9rem;
+}
+@media screen and (max-width: 700px) {
+  .user-right {
+    font-size: 0.8rem;
+  }
 }
 .users-button {
   width: 100%;
