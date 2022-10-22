@@ -144,6 +144,14 @@
     font-size: 1.8rem;
   }
 }
+@media screen and (max-width: 520px) {
+  .posts-container {
+    padding: 20px 15px;
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+}
 .posts-container:first-child {
   margin-bottom: 50px;
 }
@@ -155,6 +163,11 @@
   padding: 8px 20px;
   border-bottom: 1px solid #000;
 }
+@media screen and (max-width: 520px) {
+  .post {
+    padding: 8px 0;
+  }
+}
 .post:first-child {
   border-top: 1px solid #000;
 }
@@ -162,9 +175,30 @@
   max-width: 700px;
   margin: 0 auto;
 }
-.post-header {
+.post-header-pc {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+}
+@media screen and (max-width: 520px) {
+  .post-header-pc {
+    display: none;
+  }
+}
+.post-header-sp {
+  display: none;
+}
+@media screen and (max-width: 520px) {
+  .post-header-sp {
+    display: block;
+  }
+  .post-header-sp-user {
+    display: flex;
+    align-items: center;
+  }
+  .post-header-sp-text {
+    width: 100%;
+  }
 }
 .post-left {
   text-align: left;
@@ -173,8 +207,20 @@
   font-size: 1rem;
   font-weight: bold;
 }
+@media screen and (max-width: 520px) {
+  .post-title {
+    text-align: left;
+    margin-top: 4px;
+  }
+}
 .post-recommend {
   font-size: 0.7rem;
+}
+@media screen and (max-width: 520px) {
+  .post-recommend {
+    padding-left: 5px;
+    text-align: left;
+  }
 }
 .post-right {
   display: flex;
@@ -189,9 +235,20 @@
 .post-user-info {
   padding-left: 5px;
   text-align: left;
+  a {
+    font-size: 0.85rem;
+  }
 }
-.post-user-name {
-  font-size: 0.9rem;
+@media screen and (max-width: 520px) {
+  .post-user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    a {
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+  }
 }
 .post-user-time {
   font-size: 0.7rem;
@@ -201,6 +258,11 @@
   justify-content: space-between;
   margin: 8px 0;
 }
+@media screen and (max-width: 520px) {
+  .post-center {
+    margin: 1px 0 8px;
+  }
+}
 .post-center-one {
   width : calc(100% / 3);
   border: 1px solid #000;
@@ -209,6 +271,11 @@
 }
 .post-center-one:nth-child(2) {
   margin: 0 10px;
+}
+@media screen and (max-width: 520px) {
+  .post-center-one:nth-child(2) {
+    margin: 0 3px;
+  }
 }
 .post-gearcategory {
   display: flex;
@@ -230,16 +297,40 @@
   align-items: center;
   margin-top: 5px;
 }
+@media screen and (max-width: 960px) {
+  .post-gearpowers {
+    flex-direction: column;
+  }
+}
 .post-main-gearpower {
   margin: 0 3px;
   img {
     width: 50px;
   }
 }
+@media screen and (max-width: 520px) {
+  .post-main-gearpower {
+    height: 47px;
+    img {
+      width: 45px;
+    }
+  }
+}
 .post-sub-gearpowers {
   margin: 0 3px;
   img {
     width: 35px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .post-sub-gearpowers {
+    margin: 0 1px 3px;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 25px;
+      margin: 0 1px;
+    }
   }
 }
 .post-footer {
