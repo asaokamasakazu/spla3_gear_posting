@@ -1,2 +1,30 @@
-<h1>GearPowers#index</h1>
-<p>Find me in app/views/gear_powers/index.html.erb</p>
+<% provide(:title, "ギアパワー一覧") %>
+<div class="whole">
+  <div class="container">
+    <div class="title">
+      <h2>ギアパワー一覧</h2>
+      <p>ギアパワー一覧では、全ギアパワーの効果や付きやすいブランド、付きにくいブランドを掲載しています。</p>
+    </div>
+    <div class="main">
+      <div class="main-container">
+        <div class="gearpowers-index-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ギアパワー</th>
+                <th>略称</th>
+                <th width="25%">効果</th>
+                <th>メイン部位</th>
+                <th>付きやすいブランド</th>
+                <th>付きにくいブランド</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @gear_powers %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

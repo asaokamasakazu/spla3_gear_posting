@@ -68,6 +68,28 @@ tr:first-child td,tr:first-child th {
     color: rgb(245, 69, 98);
   }
 }
+.whole {
+  width: 100%;
+  padding: 25px 10px;
+}
+.container {
+  max-width: 950px;
+  margin: 0 auto;
+}
+.title {
+  margin-bottom: 20px;
+  h2 {
+    font-size: 1.8rem;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+}
+.main {
+  padding: 20px 30px;
+  border-radius: 7px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
 
 /*=== FONT AWESOME ===*/
 .fas {

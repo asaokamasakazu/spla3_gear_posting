@@ -1,0 +1,27 @@
+<tr>
+  <td>
+    <%= link_to "#", class: "hover-textdecoration hover-brightness" do %>
+      <%= image_tag "/gear_powers/gear_power_#{gear_power.id}.png", alt: gear_power.name %>
+      <%= gear_power.name %>
+    <% end %>
+  </td>
+  <td><%= gear_power.abbreviation %></td>
+  <td><%= gear_power.effect %></td>
+  <td><%= gear_power.main_part %></td>
+  <td>
+    <ul>
+      <li><%= gear_power.easy_brand1.present? ? "・#{gear_power.easy_brand1}" : "なし" %></li>
+      <% if gear_power.easy_brand2.present? %>
+        <li>・<%= gear_power.easy_brand2 %></li>
+      <% end %>
+    </ul>
+  </td>
+  <td>
+    <ul>
+      <li><%= gear_power.hard_brand1.present? ? "・#{gear_power.hard_brand1}" : "なし" %></li>
+      <% if gear_power.hard_brand2.present? %>
+        <li>・<%= gear_power.hard_brand2 %></li>
+      <% end %>
+    </ul>
+  </td>
+</tr>
