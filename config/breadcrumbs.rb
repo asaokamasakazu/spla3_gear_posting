@@ -1,5 +1,5 @@
 crumb :root do
-  link "Home", root_path
+  link '<i class="fa-solid fa-house"></i> Home'.html_safe, root_path
 end
 
 crumb :gear_powers_index do
