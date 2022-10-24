@@ -67,3 +67,5 @@ gem 'net-smtp'
 gem "aws-sdk-s3", require: false
 
 gem 'pry-rails'
+
+gem 'gretel'
