@@ -6,11 +6,11 @@
 html,
 body {
   height: 100%;
-  color: #000;
+  color: #333;
   background-image: url("/background_images/background_image_2.png");
 }
 a {
-  color: #000;
+  color: #333;
   text-decoration: none;
   background-color: transparent;
 }
@@ -110,7 +110,7 @@ tr:first-child td,tr:first-child th {
   font-family: "Font Awesome 6 Free";
 }
 .font-awesome-color-black {
-  color:#000;
+  color:#333;
 }
 .font-awesome-size-105 {
   font-size: 1.05rem;
