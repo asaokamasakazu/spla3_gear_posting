@@ -30,3 +30,27 @@
     margin: 0 auto;
   }
 }
+@media screen and (max-width: 520px) {
+  .gearpowers-index-table-scroll {
+    transform: scale(1, -1); 
+    overflow-x: auto;
+    table {
+      // white-space: nowrap;
+      width: 700px;
+    }
+  }
+  .gearpowers-index-table-scroll::-webkit-scrollbar {
+    height: 10px;
+  }
+  .gearpowers-index-table-scroll::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 7px;
+  }
+  .gearpowers-index-table-scroll::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 7px;
+  }
+  .gearpowers-index-table {
+    transform: scale(1, -1);    
+  }
+}

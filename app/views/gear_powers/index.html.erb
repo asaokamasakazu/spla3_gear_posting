@@ -7,22 +7,24 @@
     </div>
     <div class="main">
       <div class="main-container">
-        <div class="gearpowers-index-table">
-          <table>
-            <thead>
-              <tr>
-                <th>ギアパワー</th>
-                <th>略称</th>
-                <th width="25%">効果</th>
-                <th>メイン部位</th>
-                <th>付きやすいブランド</th>
-                <th>付きにくいブランド</th>
-              </tr>
-            </thead>
-            <tbody>
-              <%= render @gear_powers %>
-            </tbody>
-          </table>
+        <div class="gearpowers-index-table-scroll">
+          <div class="gearpowers-index-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>ギアパワー</th>
+                  <th>略称</th>
+                  <th width="25%">効果</th>
+                  <th>メイン部位</th>
+                  <th>付きやすいブランド</th>
+                  <th>付きにくいブランド</th>
+                </tr>
+              </thead>
+              <tbody>
+                <%= render @gear_powers %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
