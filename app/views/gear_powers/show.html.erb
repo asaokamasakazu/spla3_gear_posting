@@ -1,63 +1,64 @@
 <% provide(:title, @gear_power.name) %>
 <% breadcrumb :gear_powers_show, @gear_power %>
 <div class="whole">
-  <div class="container">
-    <div class="title">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
       <h2><%= @gear_power.name %></h2>
       <p>ギアパワー「<%= @gear_power.name %>」の解説ページです。</p>
     </div>
-    <div class="main">
-      <div class="main-container">
-        <h3>概要</h3>
-        <div class="gearpowers-show-table">
-          <table>
-            <tr>
-              <th>アイコン</th>
-              <td><%= image_tag "/gear_powers/gear_power_#{@gear_power.id}.png", alt: @gear_power.name %></td>
-            </tr>
-            <tr>
-              <th>略称</th>
-              <td><%= @gear_power.abbreviation %></td>
-            </tr>
-            <tr>
-              <th>効果</th>
-              <td><%= @gear_power.effect %></td>
-            </tr>
-            <tr>
-              <th>メイン部位</th>
-              <td><%= @gear_power.main_part %></td>
-            </tr>
-          </table>
-        </div>
-        <h3>付きやすいブランド</h3>
-        <div class="gearpowers-show-table">
-          <table>
-            <tr>
-              <th>付きやすい</th>
-              <td>
-                <ul>
-                  <li><%= @gear_power.easy_brand1.present? ? "・#{@gear_power.easy_brand1}" : "なし" %></li>
-                  <% if @gear_power.easy_brand2.present? %>
-                    <li>・<%= @gear_power.easy_brand2 %></li>
-                  <% end %>
-                </ul>
-              </td>
-            </tr>
-            <tr>
-              <th>付きにくい</th>
-              <td>
-                <ul>
-                  <li><%= @gear_power.hard_brand1.present? ? "・#{@gear_power.hard_brand1}" : "なし" %></li>
-                  <% if @gear_power.hard_brand2.present? %>
-                    <li>・<%= @gear_power.hard_brand2 %></li>
-                  <% end %>
-                </ul>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <%= link_to "&lt; ギアパワー一覧に戻る".html_safe, gear_powers_path, class: "button top-button posts-button" %>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <h3 class="main-container-h3">概要</h3>
+      <div class="gearpowers-show-table">
+        <table>
+          <tr>
+            <th>アイコン</th>
+            <td><%= image_tag "/gear_powers/gear_power_#{@gear_power.id}.png", alt: @gear_power.name %></td>
+          </tr>
+          <tr>
+            <th>略称</th>
+            <td><%= @gear_power.abbreviation %></td>
+          </tr>
+          <tr>
+            <th>効果</th>
+            <td><%= @gear_power.effect %></td>
+          </tr>
+          <tr>
+            <th>メイン部位</th>
+            <td><%= @gear_power.main_part %></td>
+          </tr>
+        </table>
       </div>
+      <h3 class="main-container-h3">付きやすいブランド</h3>
+      <div class="gearpowers-show-table">
+        <table>
+          <tr>
+            <th>付きやすい</th>
+            <td>
+              <ul>
+                <li><%= @gear_power.easy_brand1.present? ? "・#{@gear_power.easy_brand1}" : "なし" %></li>
+                <% if @gear_power.easy_brand2.present? %>
+                  <li>・<%= @gear_power.easy_brand2 %></li>
+                <% end %>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <th>付きにくい</th>
+            <td>
+              <ul>
+                <li><%= @gear_power.hard_brand1.present? ? "・#{@gear_power.hard_brand1}" : "なし" %></li>
+                <% if @gear_power.hard_brand2.present? %>
+                  <li>・<%= @gear_power.hard_brand2 %></li>
+                <% end %>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <%= link_to "&lt; ギアパワー一覧に戻る".html_safe, gear_powers_path, class: "button top-button posts-button" %>
     </div>
   </div>
 </div>

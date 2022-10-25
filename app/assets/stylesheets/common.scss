@@ -58,9 +58,7 @@ table {
   }
 }
 .breadcrumbs {
-  padding: 13px 10px 18px;
-  max-width: 970px;
-  margin: 0 auto;
+  padding-bottom:18px;
   font-size: 0.85rem;
   a:hover {
     text-decoration: underline;
@@ -68,14 +66,18 @@ table {
 }
 .whole {
   width: 100%;
-  padding: 0 10px 25px;
-}
-.container {
-  max-width: 950px;
-  margin: 0 auto;
 }
 .title {
-  margin-bottom: 20px;
+  background-image: url("/background_images/background_image_4.png");
+}
+.title-container {
+  max-width: 970px;
+  padding: 30px 10px 25px;
+  margin: 0 auto;
+  color: #fff;
+  a {
+    color: #fff;
+  }
   h2 {
     font-size: 1.8rem;
   }
@@ -84,15 +86,18 @@ table {
   }
 }
 .main {
+  padding: 40px 10px;
+}
+.main-container {
+  max-width: 950px;
+  margin: 0 auto;
   padding: 20px 30px;
   border-radius: 7px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
-.main-container {
-  h3 {
-    font-size: 1.3rem;
-    margin-bottom: 7px;
-  }
+.main-container-h3 {
+  font-size: 1.3rem;
+  margin-bottom: 7px;
 }
 
 /*=== FONT AWESOME ===*/
