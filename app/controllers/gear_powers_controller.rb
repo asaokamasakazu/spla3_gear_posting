@@ -4,5 +4,6 @@ class GearPowersController < ApplicationController
   end
 
   def show
+    @gear_power = GearPower.find(params[:id])
   end
 end
