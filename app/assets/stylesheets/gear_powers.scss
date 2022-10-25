@@ -13,13 +13,14 @@
   th,
   td {
     padding: 5px;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
   }
   th {
     border: none;
   }
   td {
     border-color: #fff450;
-    margin-top: 5px;
   }
   td:first-child {
     text-align: center;
