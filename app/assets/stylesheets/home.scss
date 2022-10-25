@@ -503,12 +503,25 @@
     width: 45px;
     margin-right: 5px;
   }
+  a {
+    color: #fff;
+  }
   table {
+    border: none;
     width: 100%;
     table-layout: fixed;
   }
-  a {
-    color: #fff;
+  td,
+  th {
+    border: none;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+  }
+  td:first-child,th:first-child {
+    border-left:none;
+  }
+  tr:first-child td,tr:first-child th {
+    border-top:none;
   }
 }
 @media screen and (max-width: 520px) {
