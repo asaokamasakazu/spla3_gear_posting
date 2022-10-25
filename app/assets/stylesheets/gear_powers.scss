@@ -75,3 +75,17 @@
     display: block;
   }
 }
+@media screen and (max-width: 960px) {
+  .gearpowers-show-table {
+    th  {
+      width: 20%;
+    }
+  }
+}
+@media screen and (max-width: 520px) {
+  .gearpowers-show-table {
+    th  {
+      width: 25%;
+    }
+  }
+}
