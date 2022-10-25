@@ -1,6 +1,6 @@
 <tr>
   <td>
-    <%= link_to "#", class: "hover-textdecoration hover-brightness" do %>
+    <%= link_to gear_power_path(gear_power), class: "hover-textdecoration hover-brightness" do %>
       <%= image_tag "/gear_powers/gear_power_#{gear_power.id}.png", alt: gear_power.name %>
       <%= gear_power.name %>
     <% end %>
