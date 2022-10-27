@@ -877,7 +877,7 @@
                 <td>
                   <%= link_to gear_power_path(gear_power.first), class: "hover-textdecoration hover-brightness" do %>
                     <div class="gear-powers-table-td">
-                      <%= image_tag "/gear_powers/gear_power_#{gear_power.first.id}.png", alt: gear_power.first.name %>
+                      <%= image_tag "/gear_powers/gear_power_#{gear_power.first.id}.png", alt: "#{gear_power.first.name}のアイコン" %>
                       <%= gear_power.first.name %>
                     </div>
                   <% end %>
@@ -886,7 +886,7 @@
                   <% if gear_power.first.name != gear_power.last.name %>
                     <%= link_to gear_power_path(gear_power.last), class: "hover-textdecoration hover-brightness" do %>
                       <div class="gear-powers-table-td">
-                        <%= image_tag "/gear_powers/gear_power_#{gear_power.last.id}.png", alt: gear_power.last.name %>
+                        <%= image_tag "/gear_powers/gear_power_#{gear_power.last.id}.png", alt: "#{gear_power.last.name}のアイコン" %>
                         <%= gear_power.last.name %>
                       </div>
                     <% end %>
