@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :gear_power1, class: GearPower do
+  factory :gear_power1, class: "GearPower" do
     name { "ラストスパート" }
     effect { "対戦終了の30カウント前からインク効率とインク回復速度がかなりアップします。" }
     easy_brand1 { "バトロイカ" }
