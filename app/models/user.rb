@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, { presence: true, length: { maximum: 20 } }
-  validates :rank, { numericality: true }
+  validates :rank, { numericality: true, allow_nil: true }
   validates :profile, { length: { maximum: 200 } }
 end
