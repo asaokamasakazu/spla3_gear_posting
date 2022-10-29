@@ -121,17 +121,15 @@ table {
   .forms-supplement {
     font-size: 0.9rem;
   }
-  input {
-    width: 300px;
-    height: 35px;
-    padding: 8px;
-    border: 1px solid #333;
-  }
 }
 .field {
   margin-bottom: 13px;
   input {
     margin-top: 2px;
+    width: 300px;
+    height: 35px;
+    padding: 8px;
+    border: 1px solid #333;
   }
   input:focus {
     border-color: rgb(89, 89, 255);
@@ -149,8 +147,9 @@ input:invalid + .required-message {
   display: block;
 }
 .actions {
-  margin-top: 20px;
+  margin-top: 25px;
   input {
+    width: 300px;
     padding: 8px 20px;
     height: 40px;
     border: 1px solid #333;
@@ -159,7 +158,7 @@ input:invalid + .required-message {
     text-align: center;
     color: #fff450;
     background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
-}
+  }
 }
 .under-forms {
   font-size: 0.8rem;
