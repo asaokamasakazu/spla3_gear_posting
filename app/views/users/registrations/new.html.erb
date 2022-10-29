@@ -1,29 +1,55 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<% provide(:title, "ユーザー登録") %>
+<% breadcrumb :users_new %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>ユーザー登録</h2>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="main">
+    <div class="main-container">
+      <h3 class="main-container-h3">アカウントを作成</h3>
+        <div class="forms-container">
+          <div class="forms">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= render "users/shared/error_messages", resource: resource %>
+              <div class="field">
+                <%= f.label :ユーザー名 %>
+                <span class="forms-supplement">(20文字まで)</span><br>
+                <%= f.text_field :name, autofocus: true, required: true, maxlength: 20 %>
+                <div class="required-message">※ 入力必須です</div>
+              </div>
+              <div class="field">
+                <%= f.label :メールアドレス %><br>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+                <div class="required-message">※ 入力必須です</div>
+              </div>
+              <div class="field">
+                <%= f.label :パスワード %>
+                <% if @minimum_password_length %>
+                  <span class="forms-supplement">(<%= @minimum_password_length %>文字以上)</span>
+                <% end %><br>
+                <%= f.password_field :password, autocomplete: "new-password", required: true, minlength: 6 %>
+                <div class="required-message">※ 入力必須です</div>
+              </div>
+              <div class="field">
+                <%= f.label :もう一度パスワードを入力してください。 %><br>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6 %>
+                <div class="required-message">※ 入力必須です</div>
+              </div>
+              <div class="actions">
+                <%= f.submit "新規登録する", class: "hover-transform", id: "beforeunload-off" %>
+              </div>
+            <% end %>
+          </div>
+          <hr class="hr-black"">
+          <div class="under-forms">
+            <p>すでにアカウントをお持ちの場合は、<%= link_to "ログイン", "#", class: "link-color-blue hover-textdecoration" %>してください。</p>
+            <p>アカウントを作成しないで利用する場合は、<%= link_to "ゲストログイン", "#", class: "link-color-blue hover-textdecoration" %>をお使いください。</p>
+          </div>
+        </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
+<%= javascript_pack_tag 'users/withdrawal_prevention' %>
