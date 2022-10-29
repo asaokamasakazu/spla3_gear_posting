@@ -30,13 +30,19 @@
                 <% if @minimum_password_length %>
                   <span class="forms-supplement">(<%= @minimum_password_length %>文字以上)</span>
                 <% end %><br>
-                <%= f.password_field :password, autocomplete: "new-password", required: true, minlength: 6 %>
+                <%= f.password_field :password, autocomplete: "new-password", required: true, minlength: 6, id: "input_pass" %>
                 <div class="required-message">※ 入力必須です</div>
               </div>
               <div class="field">
                 <%= f.label :もう一度パスワードを入力してください。 %><br>
-                <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6 %>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6, id: "input_pass_confirmation" %>
                 <div class="required-message">※ 入力必須です</div>
+              </div>
+              <div class="show-password">
+                <p>
+                  <%= check_box_tag :passview %>
+                  <%= label_tag :passview, "パスワードを表示する" %>
+                </p>
               </div>
               <div class="actions">
                 <%= f.submit "新規登録する", class: "hover-transform", id: "beforeunload-off" %>
@@ -53,3 +59,4 @@
   </div>
 </div>
 <%= javascript_pack_tag 'users/withdrawal_prevention' %>
+<%= javascript_pack_tag 'users/show_password' %>
