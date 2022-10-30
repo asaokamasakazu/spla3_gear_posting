@@ -153,6 +153,17 @@ table {
 input:invalid + .required-message {
   display: block;
 }
+.checkbox-and-label {
+  input {
+    width: 21px;
+    height: 21px;
+    margin-right: 5px;
+  }
+  p {
+    display: flex;
+    align-items: center;
+  }
+}
 .actions {
   margin-top: 25px;
   input {
