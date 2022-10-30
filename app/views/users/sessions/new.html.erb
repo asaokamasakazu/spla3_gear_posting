@@ -1,26 +1,59 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<% provide(:title, "ログイン") %>
+<% breadcrumb :users_sign_in %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>ログイン</h2>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <div class="flash-blue">
+    <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+  </div>
+  <div class="flash-red">
+    <% if alert %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <h3 class="main-container-h3">ログイン情報を入力</h3>
+      <div class="forms-container">
+          <div class="forms">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="field">
+                <%= f.label :email %><br>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+              </div>
+              <div class="field">
+                <%= f.label :password %><br>
+                <%= f.password_field :password, autocomplete: "current-password", required: true, minlength: 6, id: "input_pass" %>
+              </div>
+              <div class="checkbox-and-label">
+                <% if devise_mapping.rememberable? %>
+                  <p>
+                    <%= check_box_tag :passview %>
+                    <%= label_tag :passview, "パスワードを表示する" %>
+                  </p>
+                  <p>
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                  </p>
+                <% end %>
+              </div>
+              <div class="actions">
+                <%= f.submit "ログインする", class: "hover-transform" %>
+              </div>
+            <% end %>
+          </div>
+          <hr class="hr-black"">
+          <div class="under-forms">
+            <p>アカウントをお持ちでない場合は<%= link_to "登録", new_user_registration_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %>を行うか、<%= link_to "ゲストログイン", "#", class: "link-color-blue hover-textdecoration" %>をお使いください。</p>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag 'users/show_password' %>
