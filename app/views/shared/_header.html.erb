@@ -7,9 +7,15 @@
       <%= link_to "ギアパワー解説", gear_powers_path %>
     </div>
     <div class="header-right">
-      <%= link_to "ログイン", new_user_session_path, "data-turbolinks": false %>
-      <%= link_to "ゲストログイン", "#" %>
-      <%= link_to "新規登録", new_user_registration_path, "data-turbolinks": false %>
+      <% if current_user.present? %>
+        <%= link_to "投稿する", "#" %>
+        <%= link_to current_user.name, "#" %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, "data-turbolinks": false %>
+        <%= link_to "ゲストログイン", "#" %>
+        <%= link_to "新規登録", new_user_registration_path, "data-turbolinks": false %>
+      <% end %>
     </div>
   </div>
 </header>
