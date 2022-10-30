@@ -38,7 +38,7 @@
               <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true, minlength: 6, id: "input_pass_confirmation" %>
               <div class="required-message">※ 入力必須です</div>
             </div>
-            <div class="show-password">
+            <div class="checkbox-and-label">
               <p>
                 <%= check_box_tag :passview %>
                 <%= label_tag :passview, "パスワードを表示する" %>
