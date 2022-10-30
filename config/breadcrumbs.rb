@@ -16,3 +16,8 @@ crumb :users_new do
   link "ユーザー登録", new_user_registration_path
   parent :root
 end
+
+crumb :users_sign_in do
+  link "ログイン", new_user_session_path
+  parent :root
+end
