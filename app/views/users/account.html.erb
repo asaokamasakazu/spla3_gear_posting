@@ -1,0 +1,48 @@
+<% provide(:title, "アカウント情報") %>
+<% breadcrumb :users_account %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>アカウント情報</h2>
+      <p>アカウント情報では、現在登録中の情報をご確認いただけます。編集する場合は、編集するボタンをクリックしてください。</p>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <div class="account-line">
+        <p>アイコン</p>
+        <% if @user.image.present? %>
+          <%= image_tag @user.image, alt: "#{@user}のユーザーアイコン" %>
+        <% else %>
+          <%= image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン" %>
+        <% end %>
+      </div>
+      <div class="account-line">
+        <p>ユーザー名</p>
+        <p><%= @user.name %></p>
+      </div>
+      <div class="account-line">
+        <p>プロフィール</p>
+        <p>breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast </p>
+      </div>
+      <div class="account-line">
+        <p>ランク</p>
+        <p><%= @user.rank.present? ? @user.rank : "未設定" %></p>
+      </div>
+      <div class="account-line">
+        <p>ウデマエ</p>
+        <p><%= @user.prowess.present? ? @user.prowess : "未設定" %></p>
+      </div>
+      <div class="account-line">
+        <p>メールアドレス</p>
+        <p><%= @user.email %></p>
+      </div>
+      <div class="account-line">
+        <p>パスワード</p>
+        <p>**********</p>
+      </div>
+      <%= link_to "&gt; 編集する".html_safe, edit_user_registration_path, class: "button top-button posts-button" %>
+    </div>
+  </div>
+</div>

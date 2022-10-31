@@ -175,3 +175,40 @@
 .vertical-border {
   border-left: 1px solid #fff;
 }
+
+/*=== USERS/ACCOUNT ===*/
+.account-line {
+  padding: 20px 0;
+  p:first-child {
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+  img {
+    width: 50px;
+  }
+}
+.account-line:nth-last-child(n+3) {
+  border-bottom: 1px solid #333;
+}
+@media screen and (max-width: 630px) {
+  .account-line {
+    p {
+      width: 100%;
+    }
+    p:first-child {
+      margin-bottom: 3px;
+    }
+  }
+}
+@media screen and (min-width: 631px) {
+  .account-line {
+    display: flex;
+    align-items: center;
+    p:first-child {
+      width: 22%;
+    }
+    p:last-child {
+      width: 78%;
+    }
+  }
+}
