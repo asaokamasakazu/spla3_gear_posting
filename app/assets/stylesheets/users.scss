@@ -102,9 +102,6 @@
   h2 {
     font-size: 1.8rem;
   }
-  a {
-    color: #fff450;
-  }
 }
 @media screen and (max-width: 520px) {
   .users-container {
@@ -114,11 +111,18 @@
     }
   }
 }
+.users-color-ye {
+  a {
+    color: #fff450;
+  }
+}
 .users-button {
   width: 100%;
   margin-top: 7px;
-  color: #333;
   background-color: #fff450;
+  a {
+    color: #333;
+  }
 }
 
 /*=== USERS/SHOW ===*/
