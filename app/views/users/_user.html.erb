@@ -5,7 +5,7 @@
         <% if user.image.present? %>
           <%= link_to (image_tag user.image, alt: "#{user}のユーザーアイコン"), user_path(user), class: "hover-opacity" %>
         <% else %>
-          <%= link_to (image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン"), user_path(user), class: "hover-opacity" %>
+          <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), user_path(user), class: "hover-opacity" %>
         <% end %>
       </div>
       <div class="user-info">
