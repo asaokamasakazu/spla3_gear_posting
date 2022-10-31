@@ -21,3 +21,8 @@ crumb :users_sign_in do
   link "ログイン", new_user_session_path
   parent :root
 end
+
+crumb :users_show do |user|
+  link user.name, user_path(user)
+  parent :root
+end
