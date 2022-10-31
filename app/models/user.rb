@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :name, { presence: true, length: { maximum: 20 } }
   validates :rank, { numericality: true, allow_nil: true }
   validates :profile, { length: { maximum: 100 } }
+
+  has_one_attached :image
 end
