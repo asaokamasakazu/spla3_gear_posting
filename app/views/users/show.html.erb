@@ -24,7 +24,7 @@
         </div>
         <div class="title-container-first-line-right">
           <% if @user === current_user %>
-            <%= link_to "プロフィールを編集", "#", class: "to-edit-profile-button hover-opacity" %>
+            <%= link_to "プロフィールを編集", edit_user_registration_path, class: "to-edit-profile-button hover-opacity" %>
           <% end %>
         </div>
       </div>
