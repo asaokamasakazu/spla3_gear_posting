@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users' => 'users/registrations#new'
   end
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    collection do
+      get 'list'
+    end
+  end
   resources :gear_powers, only: [:index, :show]
   root :to => 'home#top'
 end
