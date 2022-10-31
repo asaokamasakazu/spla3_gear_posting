@@ -31,3 +31,8 @@ crumb :users_show do |user|
   link user.name, user_path(user)
   parent :users_list
 end
+
+crumb :users_account do
+  link "アカウント情報", account_users_path
+  parent :root
+end
