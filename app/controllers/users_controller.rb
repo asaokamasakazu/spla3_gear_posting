@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def list
-    @users = User.all
+    @users = User.all.order(created_at: :desc)
   end
 
   def show
