@@ -1,0 +1,54 @@
+<% provide(:title, "ユーザー一覧") %>
+<% breadcrumb :users_list %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>ユーザー一覧</h2>
+      <p>ユーザー一覧では、アカウント作成済みの全ユーザーを掲載しています。並び替えや絞り込み、テキスト検索が可能です。</p>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <div class="users">
+
+        <% @users.each do |user| %>
+          <div class="user-list-ver">
+            <div class="user-container">
+              <div class="user-left">
+                <div class="user-icon">
+                  <% if user.image.present? %>
+                    <%= link_to (image_tag @user.image, alt: "#{@user}のユーザーアイコン"), user_path(user), class: "hover-opacity" %>
+                  <% else %>
+                    <%= link_to (image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン"), user_path(user), class: "hover-opacity" %>
+                  <% end %>
+                </div>
+                <div class="user-info">
+                  <div class="user-name">
+                    <%= link_to user.name, user_path(user), class: "hover-textdecoration" %>
+                  </div>
+                  <div class="user-achievements">
+                    <ul>
+                      <li>投稿数 #</li>
+                      <li>被お気に入り数 #</li>
+                    </ul>
+                  </div>
+                  <div class="user-achievements">
+                    <ul>
+                      <li>ランク <%= user.rank.present? ? user.rank : "-" %></li>
+                      <li>最高到達ウデマエ <%= user.prowess.present? ? user.prowess : "-" %></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="user-right">
+                <%= link_to "&gt; プロフィールへ".html_safe, user_path(user), class: "hover-textdecoration" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
