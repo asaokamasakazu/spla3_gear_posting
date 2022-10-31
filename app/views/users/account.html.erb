@@ -24,7 +24,7 @@
       </div>
       <div class="account-line">
         <p>プロフィール</p>
-        <p>breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast breakfast </p>
+        <p><%= @user.profile.present? ? @user.profile : "未設定" %></p>
       </div>
       <div class="account-line">
         <p>ランク</p>
