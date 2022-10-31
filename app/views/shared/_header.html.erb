@@ -9,7 +9,7 @@
     <div class="header-right">
       <% if current_user.present? %>
         <%= link_to "投稿する", "#" %>
-        <%= link_to current_user.name, "#" %>
+        <%= link_to current_user.name, user_path(current_user) %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "ログイン", new_user_session_path, "data-turbolinks": false %>
