@@ -4,14 +4,14 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
   devise_scope :user do
-    get '/users' => 'users/registrations#new'
+    get "/users" => "users/registrations#new"
   end
   resources :users, only: [:show] do
     collection do
-      get 'list'
-      get 'account'
+      get "list"
+      get "account"
     end
   end
   resources :gear_powers, only: [:index, :show]
-  root :to => 'home#top'
+  root :to => "home#top"
 end
