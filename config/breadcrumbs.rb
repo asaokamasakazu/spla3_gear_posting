@@ -22,7 +22,12 @@ crumb :users_sign_in do
   parent :root
 end
 
+crumb :users_list do
+  link "ユーザー", list_users_path
+  parent :root
+end
+
 crumb :users_show do |user|
   link user.name, user_path(user)
-  parent :root
+  parent :users_list
 end
