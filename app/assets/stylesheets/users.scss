@@ -1,0 +1,50 @@
+/*=== USERS/SHOW ===*/
+.title-container-first-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title-container-first-line-left {
+  img {
+    width: 90px;
+  }
+}
+@media screen and (max-width: 960px) {
+  .title-container-first-line-left {
+    img {
+      width: 75px;
+    }
+  }
+}
+@media screen and (max-width: 520px) {
+  .title-container-first-line-left {
+    img {
+      width: 60px;
+    }
+  }
+}
+.title-container-first-line-right {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.to-edit-profile-button {
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  padding: 8px;
+  transition: all .3s;
+  color: #333;
+  text-align: center;
+}
+.title-container-footer {
+  font-size: 0.9rem;
+  ul {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+}
+.vertical-border {
+  border-left: 1px solid #fff;
+}
