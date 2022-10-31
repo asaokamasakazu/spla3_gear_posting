@@ -383,7 +383,7 @@
 }
 .user {
   padding: 10px 20px 7px 20px;
-  border-bottom: 1px solid #fff450;
+  border-bottom: 1px solid;
 }
 @media screen and (max-width: 520px) {
   .user {
@@ -391,7 +391,7 @@
   }
 }
 .user:first-child {
-  border-top: 1px solid #fff450;
+  border-top: 1px solid;
 }
 .user-container {
   max-width: 700px;
@@ -399,6 +399,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  border-color: #fff450;
 }
 @media screen and (max-width: 520px) {
   .user-container {

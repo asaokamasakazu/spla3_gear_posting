@@ -2,20 +2,6 @@
 
 /*=== TOP ===*/
 
-/*=== USERS/INDEX ===*/
-.user-list-ver {
-  padding: 10px 20px 7px 20px;
-  border-bottom: 1px solid #333;
-}
-@media screen and (max-width: 520px) {
-  .user-list-ver {
-    padding: 7px 0 5px;
-  }
-}
-.user-list-ver:first-child {
-  border-top: 1px solid #333;
-}
-
 /*=== USERS/SHOW ===*/
 .title-container-first-line {
   display: flex;
