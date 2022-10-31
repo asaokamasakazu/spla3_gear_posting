@@ -11,7 +11,7 @@
         <%= link_to "投稿する", "#" %>
         <%= link_to current_user.name, user_path(current_user) %>
         <%= link_to "設定", account_users_path %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしてよろしいですか？" } %>
       <% else %>
         <%= link_to "ログイン", new_user_session_path, "data-turbolinks": false %>
         <%= link_to "ゲストログイン", "#" %>
