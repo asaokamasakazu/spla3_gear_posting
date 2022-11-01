@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, {only: [:account]}
+  before_action :authenticate_user!, { only: [:account] }
 
   def list
     @users = User.all.order(created_at: :desc)
