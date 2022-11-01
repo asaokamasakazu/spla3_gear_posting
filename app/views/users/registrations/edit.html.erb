@@ -82,7 +82,7 @@
             <%= f.label :password %>
           </div>
           <div class="account-line-right">
-            <%= f.password_field :password, autocomplete: "new-password", minlength: 6 %><br>
+            <%= f.password_field :password, autocomplete: "new-password", minlength: 6, id: "input_pass" %><br>
             <span class="account-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
           </div>
         </div>
@@ -91,9 +91,15 @@
             <%= f.label :password_confirmation %>
           </div>
           <div class="account-line-right">
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: 6 %><br>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: 6, id: "input_pass_confirmation" %><br>
             <span class="account-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
           </div>
+        </div>
+        <div class="checkbox-and-label">
+          <p>
+            <%= check_box_tag :passview %>
+            <%= label_tag :passview, "パスワードを表示する" %>
+          </p>
         </div>
         <div class="account-actions">
           <%= f.submit "更新する", class: "hover-transform" %>
