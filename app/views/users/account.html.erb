@@ -21,36 +21,64 @@
   <div class="main">
     <div class="main-container">
       <div class="account-line">
-        <p>アイコン</p>
-        <% if @user.image.present? %>
-          <%= image_tag @user.image, alt: "#{@user}のユーザーアイコン" %>
-        <% else %>
-          <%= image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン" %>
-        <% end %>
+        <div class="account-line-left">
+          <p>アイコン</p>
+        </div>
+        <div class="account-line-right">
+          <% if @user.image.present? %>
+            <%= image_tag @user.image, alt: "#{@user}のユーザーアイコン" %>
+          <% else %>
+            <%= image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン" %>
+          <% end %>
+        </div>
       </div>
       <div class="account-line">
-        <p>ユーザー名</p>
-        <p><%= @user.name %></p>
+        <div class="account-line-left">
+          <p>ユーザー名</p>
+        </div>
+        <div class="account-line-right">
+          <p><%= @user.name %></p>
+        </div>
       </div>
       <div class="account-line">
-        <p>プロフィール</p>
-        <p><%= @user.profile.present? ? @user.profile : "未設定" %></p>
+        <div class="account-line-left">
+          <p>プロフィール</p>
+        </div>
+        <div class="account-line-right">
+          <p><%= @user.profile.present? ? @user.profile : "未設定" %></p>
+        </div>
       </div>
       <div class="account-line">
-        <p>ランク</p>
-        <p><%= @user.rank.present? ? @user.rank : "未設定" %></p>
+        <div class="account-line-left">
+          <p>ランク</p>
+        </div>
+        <div class="account-line-right">
+          <p><%= @user.rank.present? ? @user.rank : "未設定" %></p>
+        </div>
       </div>
       <div class="account-line">
-        <p>ウデマエ</p>
-        <p><%= @user.prowess.present? ? @user.prowess : "未設定" %></p>
+        <div class="account-line-left">
+          <p>ウデマエ</p>
+        </div>
+        <div class="account-line-right">
+          <p><%= @user.prowess.present? ? @user.prowess : "未設定" %></p>
+        </div>
       </div>
       <div class="account-line">
-        <p>メールアドレス</p>
-        <p><%= @user.email %></p>
+        <div class="account-line-left">
+          <p>メールアドレス</p>
+        </div>
+        <div class="account-line-right">
+          <p><%= @user.email %></p>
+        </div>
       </div>
       <div class="account-line">
-        <p>パスワード</p>
-        <p>**********</p>
+        <div class="account-line-left">
+          <p>パスワード</p>
+        </div>
+        <div class="account-line-right">
+          <p>**********</p>
+        </div>
       </div>
       <%= link_to "&gt; 編集する".html_safe, edit_user_registration_path, class: "button top-button posts-button" %>
     </div>
