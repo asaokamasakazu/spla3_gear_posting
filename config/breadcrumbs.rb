@@ -36,3 +36,8 @@ crumb :users_account do
   link "アカウント情報", account_users_path
   parent :root
 end
+
+crumb :users_edit do
+  link "アカウント編集", edit_user_registration_path
+  parent :users_account
+end
