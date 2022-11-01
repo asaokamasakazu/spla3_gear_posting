@@ -191,20 +191,27 @@
 }
 .account-line-right {
   font-size: 0.95rem;
-  input {
+  input,
+  select {
     height: 35px;
   }
   input,
-  textarea {
+  textarea, {
     padding: 8px;
     border: 1px solid #333;
   }
   input:focus,
-  textarea:focus {
+  textarea:focus,
+  select:focus {
     border-color: rgb(89, 89, 255);
     box-shadow: 0 0 5px 0 rgb(89, 89, 255);
     outline: 0;
     transition: all .3s;
+  }
+  select {
+    padding: 8px 3px;
+    border: 1px solid #333;
+    width: 100px;
   }
   img {
     width: 50px;
@@ -235,7 +242,6 @@
     cursor: pointer;
   }
 }
-
 @media screen and (max-width: 630px) {
   .account-line {
     margin-bottom: 13px;
