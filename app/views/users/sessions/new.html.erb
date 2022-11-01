@@ -1,12 +1,6 @@
 <% provide(:title, "ログイン") %>
 <% breadcrumb :users_sign_in %>
 <div class="whole">
-  <div class="title">
-    <div class="title-container">
-      <%= breadcrumbs separator: " &rsaquo; " %> 
-      <h2>ログイン</h2>
-    </div>
-  </div>
   <div class="flash-blue">
     <% if notice %>
         <p class="notice"><%= notice %></p>
@@ -16,6 +10,12 @@
     <% if alert %>
         <p class="alert"><%= alert %></p>
       <% end %>
+  </div>
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>ログイン</h2>
+    </div>
   </div>
   <div class="main">
     <div class="main-container">
