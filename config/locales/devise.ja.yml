@@ -29,6 +29,7 @@ ja:
         rank: ランク
         prowess: ウデマエ
         profile: プロフィール
+        image: アイコン
     models:
       user: ユーザ
   devise:
