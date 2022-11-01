@@ -2,6 +2,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  word-break: break-word;
 }
 html,
 body {
@@ -44,6 +45,30 @@ table {
 }
 .button:hover {
   transform: scale(1.03);
+}
+.input-file {
+  border: none !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+.FlexTextarea {
+  position: relative;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+.FlexTextarea__dummy {
+  overflow: hidden;
+  visibility: hidden;
+  min-height: 80px;
+  white-space: pre-wrap;
+}
+.FlexTextarea__textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 100%;
+  resize: none;
 }
 .hover-textdecoration:hover {
   text-decoration: underline;
@@ -140,9 +165,9 @@ table {
   label {
     font-size: 0.9rem;
   }
-  .forms-supplement {
-    font-size: 0.9rem;
-  }
+}
+.forms-supplement {
+  font-size: 0.9rem;
 }
 .field {
   margin-bottom: 13px;
@@ -195,7 +220,6 @@ input:invalid + .required-message {
 }
 .actions {
   margin-top: 25px;
-  
   input {
     width: 300px;
     padding: 8px 20px;

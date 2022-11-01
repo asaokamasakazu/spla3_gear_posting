@@ -1,43 +1,110 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<% provide(:title, "アカウント編集") %>
+<% breadcrumb :users_edit %>
+<div class="whole">
+  <div class="flash-blue">
+    <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+  <div class="flash-red">
+    <% if alert %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>アカウント編集</h2>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  <div class="main">
+    <div class="main-container">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :image %>
+          </div>
+          <div class="account-line-right">
+            <%= f.file_field :image, class: "input-file" %>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :name %>
+            <span class="length-supplement">(20文字まで)</span>
+          </div>
+          <div class="account-line-right">
+            <%= f.text_field :name, autofocus: true, maxlength: 20 %>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :profile %>
+            <span class="length-supplement">(100文字まで)</span>
+          </div>
+          <div class="account-line-right">
+            <div class="FlexTextarea">
+              <div class="FlexTextarea__dummy" aria-hidden="true"></div>
+              <%= f.text_area :profile, class: "FlexTextarea__textarea", maxlength: 100 %>
+            </div>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :rank %>
+          </div>
+          <div class="account-line-right">
+            <%= f.number_field :rank %>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :prowess %>
+          </div>
+          <div class="account-line-right">
+            <%= f.text_field :prowess %>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :email %>
+          </div>
+          <div class="account-line-right">
+            <%= f.email_field :email, autocomplete: "email" %>
+          </div>
+        </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :password %>
+          </div>
+          <div class="account-line-right">
+            <%= f.password_field :password, autocomplete: "new-password", minlength: 6 %><br>
+            <span class="account-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :password_confirmation %>
+          </div>
+          <div class="account-line-right">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: 6 %><br>
+            <span class="account-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
+          </div>
+        </div>
+        <div class="account-actions">
+          <%= f.submit "更新する", class: "hover-transform" %>
+        </div>
+      <% end %>
+      <hr class="hr-black"">
+      <div class="under-forms">
+        <p>アカウント情報の編集ではなく、<%= link_to "ログアウト", destroy_user_session_path, class: "link-color-blue hover-textdecoration", method: :delete, data: { confirm: "ログアウトしてよろしいですか？" } %>をご希望ですか？</p>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>
+<%= javascript_pack_tag 'users/adjust_textarea' %>
+<%= javascript_pack_tag 'users/show_password' %>

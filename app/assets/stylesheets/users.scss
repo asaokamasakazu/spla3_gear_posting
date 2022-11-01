@@ -176,27 +176,71 @@
   border-left: 1px solid #fff;
 }
 
-/*=== USERS/ACCOUNT ===*/
+/*=== USERS/ACCOUNT USERS/EDIT ===*/
 .account-line {
   padding: 20px 0;
-  p:first-child {
-    font-size: 0.85rem;
-    font-weight: bold;
+}
+.account-line:nth-last-child(n+3) {
+  border-bottom: 1px solid #333;
+}
+.account-line-left {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+.account-line-right {
+  font-size: 0.95rem;
+  input {
+    height: 35px;
+  }
+  input,
+  textarea {
+    padding: 8px;
+    border: 1px solid #333;
+  }
+  input:focus,
+  textarea:focus {
+    border-color: rgb(89, 89, 255);
+    box-shadow: 0 0 5px 0 rgb(89, 89, 255);
+    outline: 0;
+    transition: all .3s;
   }
   img {
     width: 50px;
   }
 }
-.account-line:nth-last-child(n+3) {
-  border-bottom: 1px solid #333;
+.account-line-supplement {
+  font-size: 0.8rem;
+  color: red;
 }
+.length-supplement {
+  font-size: 0.8rem;
+}
+.account-actions {
+  margin-top: 25px;
+  input {
+    width: 100%;
+    padding: 8px 20px;
+    height: 40px;
+    border: 1px solid #333;
+    font-size: 0.9rem;
+    transition: all .3s;
+    text-align: center;
+    color: #fff450;
+    background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+    cursor: pointer;
+  }
+}
+
 @media screen and (max-width: 630px) {
-  .account-line {
-    p {
+  .account-line-left {
+    width: 100%;
+    margin-bottom: 3px;
+  }
+  .account-line-right {
+    p,
+    input,
+    textarea {
       width: 100%;
-    }
-    p:first-child {
-      margin-bottom: 3px;
     }
   }
 }
@@ -204,11 +248,20 @@
   .account-line {
     display: flex;
     align-items: center;
-    p:first-child {
-      width: 22%;
+  }
+  .account-line-left {
+    width: 27%;
+  }
+  .account-line-right {
+    width: 73%;
+    input {
+      width: 68%;
     }
-    p:last-child {
-      width: 78%;
+    textarea {
+      width: 68%;
     }
+  }
+  .length-supplement {
+    display: block;
   }
 }
