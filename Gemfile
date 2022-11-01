@@ -73,3 +73,5 @@ gem 'pry-rails'
 gem 'gretel'
 
 gem 'devise'
+
+gem 'dotenv-rails'
