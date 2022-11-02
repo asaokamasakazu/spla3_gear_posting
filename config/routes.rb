@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       get "list"
       get "account"
+      get "search"
     end
   end
   resources :gear_powers, only: [:index, :show]
