@@ -1,0 +1,44 @@
+<% provide(:title, "ユーザー検索結果") %>
+<% breadcrumb :users_list %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>ユーザー一覧</h2>
+      <p>ユーザー一覧では、アカウント作成済みの全ユーザーを掲載しています。ユーザー名検索やウデマエの絞り込み、並び替えが可能です。</p>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-container">
+
+      <%= search_form_for @q, url: search_users_path do |f| %>
+        <%= f.label :name_cont, "ユーザー名" %>
+        <%= f.search_field :name_cont %>
+        <br>
+        <%= f.label :prowess_cont_any, "ウデマエ" %>
+        <label>
+          <%= f.check_box :prowess_cont_any, { multiple: true }, "S" %>S
+        </label>
+        <label>
+          <%= f.check_box :prowess_cont_any, { multiple: true }, "A" %>A
+        </label>
+        <label>
+          <%= f.check_box :prowess_cont_any, { multiple: true }, "B" %>B
+        </label>
+        <label>
+          <%= f.check_box :prowess_cont_any, { multiple: true }, "C" %>C
+        </label>
+        <br>
+        <%= f.submit "検索" %>
+      <% end %>
+
+      <div class="users">
+        <% if @results.present? %>
+          <%= render partial: "users/user", collection: @results , as: "user" %>
+        <% else %>
+          <p class="search-message">条件に一致するユーザーはいません。</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
