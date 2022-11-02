@@ -5,11 +5,33 @@
     <div class="title-container">
       <%= breadcrumbs separator: " &rsaquo; " %> 
       <h2>ユーザー一覧</h2>
-      <p>ユーザー一覧では、アカウント作成済みの全ユーザーを掲載しています。並び替えや絞り込み、テキスト検索が可能です。</p>
+      <p>ユーザー一覧では、アカウント作成済みの全ユーザーを掲載しています。ユーザー名検索やウデマエの絞り込み、並び替えが可能です。</p>
     </div>
   </div>
   <div class="main">
     <div class="main-container">
+
+      <%= search_form_for @q, url: search_users_path do |f| %>
+        <%= f.label :name_cont, "ユーザー名" %>
+        <%= f.search_field :name_cont %>
+        <br>
+        <%= f.label :prowess_cont_any, "ウデマエ" %>
+        <label>
+          <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "S" %>S
+        </label>
+        <label>
+          <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "A" %>A
+        </label>
+        <label>
+          <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "B" %>B
+        </label>
+        <label>
+          <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "C" %>C
+        </label>
+        <br>
+        <%= f.submit "検索" %>
+      <% end %>
+
       <div class="users">
         <%= render @users %>
       </div>
