@@ -75,3 +75,5 @@ gem 'gretel'
 gem 'devise'
 
 gem 'dotenv-rails'
+
+gem 'ransack'
