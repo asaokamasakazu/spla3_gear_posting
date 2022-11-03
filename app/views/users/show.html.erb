@@ -17,7 +17,7 @@
       <div class="title-container-first-line">
         <div class="title-container-first-line-left">
           <% if @user.image.present? %>
-            <%= image_tag @user.image, alt: "#{@user}のユーザーアイコン" %>
+            <%= image_tag @user.image, alt: "#{@user.name}のユーザーアイコン" %>
           <% else %>
             <%= image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン" %>
           <% end %>

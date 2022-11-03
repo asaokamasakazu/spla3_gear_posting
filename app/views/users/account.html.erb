@@ -26,7 +26,7 @@
         </div>
         <div class="account-line-right">
           <% if @user.image.present? %>
-            <%= image_tag @user.image, alt: "#{@user}のユーザーアイコン" %>
+            <%= image_tag @user.image, alt: "#{@user.name}のユーザーアイコン" %>
           <% else %>
             <%= image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン" %>
           <% end %>
