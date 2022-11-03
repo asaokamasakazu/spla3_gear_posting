@@ -71,7 +71,12 @@
             <%= f.label :email %>
           </div>
           <div class="account-line-right">
-            <%= f.email_field :email, autocomplete: "email" %>
+            <% if current_user.email == "guest@example.com" %>
+              <%= f.email_field :email, autocomplete: "email", disabled: true %><br>
+              <span class="account-line-supplement">※ ゲストユーザーの場合は変更できません</span>
+            <% else %>
+              <%= f.email_field :email, autocomplete: "email" %>
+            <% end %>
           </div>
         </div>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
