@@ -21,7 +21,7 @@
       </div>
       <div class="top-buttons-footer">
         <%= link_to "> ログインはこちら", new_user_session_path, class: "button top-button top-button-second", "data-turbolinks": false %>
-        <%= link_to "> ゲストログインはこちら", "#", class: "button top-button" %>
+        <%= link_to "> ゲストログインはこちら", users_guest_sign_in_path, method: :post, class: "button top-button" %>
       </div>
       <hr class="top-title-hr">
       <div class="top-search-area">
