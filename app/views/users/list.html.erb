@@ -10,28 +10,35 @@
   </div>
   <div class="main">
     <div class="main-container">
-
       <%= search_form_for @q, url: search_users_path do |f| %>
-        <%= f.label :name_cont, "ユーザー名" %>
-        <%= f.search_field :name_cont %>
-        <br>
-        <%= f.label :prowess_cont_any, "ウデマエ" %>
-        <label>
-          <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "S" %>S
-        </label>
-        <label>
-          <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "A" %>A
-        </label>
-        <label>
-          <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "B" %>B
-        </label>
-        <label>
-          <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "C" %>C
-        </label>
-        <br>
-        <%= f.submit "検索" %>
+        <div class="users-search-forms">
+          <div class="users-search-form">
+              <%= f.label :name_cont, "ユーザー名" %>
+              <%= f.search_field :name_cont, placeholder: "ユーザー名を入力" %>
+          </div>
+          <div class="users-search-form">
+            <%= f.label :prowess_cont_any, "ウデマエ" %>
+            <div class="label-in-label">
+            <label>
+              <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "S" %>S
+            </label>
+            <label>
+              <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "A" %>A
+            </label>
+            <label>
+              <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "B" %>B
+            </label>
+            <label>
+              <%= f.check_box :prowess_cont_any, { multiple: true, checked: true }, "C" %>C
+            </label>
+          </div>
+          </div>
+          <div class="users-search-submit">
+            <div class="users-search-hide-space"></div>
+            <%= f.submit "検索", class: "hover-transform" %>
+          </div>
+        </div>
       <% end %>
-
       <div class="users">
         <%= render @users %>
       </div>
