@@ -22,4 +22,12 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
+
+  def self.guest
+    find_or_create_by!(email: "guest@example.com") do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.password_confirmation = user.password
+      user.name = "ゲスト"
+    end
+  end
 end
