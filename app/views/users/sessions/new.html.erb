@@ -32,16 +32,14 @@
                 <%= f.password_field :password, autocomplete: "current-password", required: true, minlength: 6, id: "input_pass" %>
               </div>
               <div class="checkbox-and-label">
-                <% if devise_mapping.rememberable? %>
-                  <p>
-                    <%= check_box_tag :passview %>
-                    <%= label_tag :passview, "パスワードを表示する" %>
-                  </p>
-                  <p>
-                    <%= f.check_box :remember_me %>
-                    <%= f.label :remember_me %>
-                  </p>
-                <% end %>
+                <p>
+                  <%= check_box_tag :passview %>
+                  <%= label_tag :passview, "パスワードを表示する" %>
+                </p>
+                <p>
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </p>
               </div>
               <div class="actions">
                 <%= f.submit "ログインする", class: "hover-transform" %>
