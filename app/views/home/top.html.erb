@@ -1,3 +1,13 @@
+<div class="flash-blue flash-top">
+  <% if notice %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+</div>
+<div class="flash-red flash-top">
+  <% if alert %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
+</div>
 <div class="top">
   <div class="top-title-area">
     <div class="top-title-container">
@@ -7,23 +17,11 @@
       <p class="top-p">スプラトゥーン3 ギア編成投稿所では、君のイカしたギア編成を投稿できるぞ！</p>
       <p class="top-p">みんなの投稿を見て、イカしたギア編成を見つけたらお気に入り登録しておこう！</p>
       <div class="top-buttons-header">
-        <%= link_to "#" do %>
-          <div class="button top-button top-button-first">
-            <p>> 新規登録してギア編成を投稿する</p>
-          </div>
-        <% end %>
+        <%= link_to "> 新規登録してギア編成を投稿する", new_user_registration_path, class: "button top-button top-button-first", "data-turbolinks": false %>
       </div>
       <div class="top-buttons-footer">
-        <%= link_to "#" do %>
-          <div class="button top-button top-button-second">
-            <p>> ログインはこちら</p>
-          </div>
-        <% end %>
-        <%= link_to "#" do %>
-          <div class="button top-button">
-            <p>> ゲストログインはこちら</p>
-          </div>
-        <% end %>
+        <%= link_to "> ログインはこちら", new_user_session_path, class: "button top-button top-button-second", "data-turbolinks": false %>
+        <%= link_to "> ゲストログインはこちら", users_guest_sign_in_path, method: :post, class: "button top-button" %>
       </div>
       <hr class="top-title-hr">
       <div class="top-search-area">
@@ -711,158 +709,10 @@
   <div class="users-area">
     <div class="users-container">
       <h2>- 人気ユーザー -</h2>
-      <div class="users">
-        <div class="user">
-          <div class="user-container">
-            <div class="user-left">
-              <div class="user-icon">
-                <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-              </div>
-              <div class="user-info">
-                <div class="user-name">
-                  <%= link_to "ユーザー名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>投稿数 60</li>
-                    <li>被お気に入り数 300</li>
-                  </ul>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>ランク 160</li>
-                    <li>最高到達ウデマエ S+50</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="user-right">
-              <%= link_to "> プロフィールへ", "#", class: "hover-textdecoration" %>
-            </div>
-          </div>
-        </div>
-        <div class="user">
-          <div class="user-container">
-            <div class="user-left">
-              <div class="user-icon">
-                <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-              </div>
-              <div class="user-info">
-                <div class="user-name">
-                  <%= link_to "ユーザー名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>投稿数 60</li>
-                    <li>被お気に入り数 300</li>
-                  </ul>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>ランク 60</li>
-                    <li>最高到達ウデマエ 300</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="user-right">
-              <%= link_to "> プロフィールへ", "#", class: "hover-textdecoration" %>
-            </div>
-          </div>
-        </div>
-        <div class="user">
-          <div class="user-container">
-            <div class="user-left">
-              <div class="user-icon">
-                <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-              </div>
-              <div class="user-info">
-                <div class="user-name">
-                  <%= link_to "ユーザー名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>投稿数 60</li>
-                    <li>被お気に入り数 300</li>
-                  </ul>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>ランク 60</li>
-                    <li>最高到達ウデマエ 300</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="user-right">
-              <%= link_to "> プロフィールへ", "#", class: "hover-textdecoration" %>
-            </div>
-          </div>
-        </div>
-        <div class="user">
-          <div class="user-container">
-            <div class="user-left">
-              <div class="user-icon">
-                <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-              </div>
-              <div class="user-info">
-                <div class="user-name">
-                  <%= link_to "ユーザー名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>投稿数 60</li>
-                    <li>被お気に入り数 300</li>
-                  </ul>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>ランク 60</li>
-                    <li>最高到達ウデマエ 300</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="user-right">
-              <%= link_to "> プロフィールへ", "#", class: "hover-textdecoration" %>
-            </div>
-          </div>
-        </div>
-        <div class="user">
-          <div class="user-container">
-            <div class="user-left">
-              <div class="user-icon">
-                <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-              </div>
-              <div class="user-info">
-                <div class="user-name">
-                  <%= link_to "ユーザー名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>投稿数 60</li>
-                    <li>被お気に入り数 300</li>
-                  </ul>
-                </div>
-                <div class="user-achievements">
-                  <ul>
-                    <li>ランク 60</li>
-                    <li>最高到達ウデマエ 300</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="user-right">
-              <%= link_to "> プロフィールへ", "#", class: "hover-textdecoration" %>
-            </div>
-          </div>
-        </div>
+      <div class="users users-color-ye">
+        <%= render partial: "users/user", collection: @users %>
       </div>
-      <%= link_to "#" do %>
-        <div class="button top-button users-button">
-          <p>> 人気ユーザーをもっと見る</p>
-        </div>
-      <% end %>
+      <%= link_to "&gt; ユーザー一覧を見る".html_safe, list_users_path, class: "button users-button" %>
     </div>
   </div>
 

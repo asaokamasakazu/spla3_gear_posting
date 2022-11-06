@@ -1,0 +1,122 @@
+<% provide(:title, "アカウント編集") %>
+<% breadcrumb :users_edit %>
+<div class="whole">
+  <div class="flash-blue">
+    <% if notice %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+  </div>
+  <div class="flash-red">
+    <% if alert %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+  </div>
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>アカウント編集</h2>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "users/shared/error_messages", resource: resource %>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :image %>
+          </div>
+          <div class="account-line-right">
+            <%= f.file_field :image, class: "input-file" %>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :name %>
+            <span class="length-supplement">(20文字まで)</span>
+          </div>
+          <div class="account-line-right">
+            <%= f.text_field :name, autofocus: true, maxlength: 20 %>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :profile %>
+            <span class="length-supplement">(100文字まで)</span>
+          </div>
+          <div class="account-line-right">
+            <div class="FlexTextarea">
+              <div class="FlexTextarea__dummy" aria-hidden="true"></div>
+              <%= f.text_area :profile, class: "FlexTextarea__textarea", maxlength: 100 %>
+            </div>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :rank %>
+          </div>
+          <div class="account-line-right">
+            <%= f.number_field :rank %>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :prowess %>
+          </div>
+          <div class="account-line-right">
+            <%= f.select :prowess, ["未設定", "S+", "S", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-"] %>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :email %>
+          </div>
+          <div class="account-line-right">
+            <% if current_user.email == "guest@example.com" %>
+              <%= f.email_field :email, autocomplete: "email", disabled: true %><br>
+              <span class="account-line-supplement">※ ゲストユーザーの場合は変更できません</span>
+            <% else %>
+              <%= f.email_field :email, autocomplete: "email" %>
+            <% end %>
+          </div>
+        </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :password %>
+          </div>
+          <div class="account-line-right">
+            <%= f.password_field :password, autocomplete: "new-password", minlength: 6, id: "input_pass" %><br>
+            <span class="account-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
+          </div>
+        </div>
+        <div class="account-line">
+          <div class="account-line-left">
+            <%= f.label :password_confirmation %>
+          </div>
+          <div class="account-line-right">
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: 6, id: "input_pass_confirmation" %><br>
+            <span class="account-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
+          </div>
+        </div>
+        <div class="checkbox-and-label">
+          <p>
+            <%= check_box_tag :passview %>
+            <%= label_tag :passview, "パスワードを表示する" %>
+          </p>
+        </div>
+        <div class="account-actions">
+          <%= f.submit "更新する", class: "hover-transform" %>
+        </div>
+      <% end %>
+      <hr class="hr-black"">
+      <div class="under-forms">
+        <p>アカウント情報の編集ではなく、<%= link_to "ログアウト", destroy_user_session_path, class: "link-color-blue hover-textdecoration", method: :delete, data: { confirm: "ログアウトしてよろしいですか？" } %>をご希望ですか？</p>
+        <p>もしくは、<%= link_to "退会（アカウント削除）", registration_path(resource_name), class: "link-color-blue hover-textdecoration", method: :delete, data: { confirm: "アカウントを削除してよろしいですか？" } %>をご希望ですか？</p>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag 'users/adjust_textarea' %>
+<%= javascript_pack_tag 'users/show_password' %>

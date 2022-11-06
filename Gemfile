@@ -36,6 +36,7 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -71,3 +72,9 @@ gem "aws-sdk-s3", require: false
 gem 'pry-rails'
 
 gem 'gretel'
+
+gem 'devise'
+
+gem 'dotenv-rails'
+
+gem 'ransack'

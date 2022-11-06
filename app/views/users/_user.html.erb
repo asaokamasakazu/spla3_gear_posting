@@ -1,0 +1,33 @@
+<div class="user">
+  <div class="user-container">
+    <div class="user-left">
+      <div class="user-icon">
+        <% if user.image.present? %>
+          <%= link_to (image_tag user.image, alt: "#{user.name}のユーザーアイコン"), user_path(user), class: "hover-opacity" %>
+        <% else %>
+          <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), user_path(user), class: "hover-opacity" %>
+        <% end %>
+      </div>
+      <div class="user-info">
+        <div class="user-name">
+          <%= link_to user.name, user_path(user), class: "hover-textdecoration" %>
+        </div>
+        <div class="user-achievements">
+          <ul>
+            <li>投稿数 #</li>
+            <li>被お気に入り数 #</li>
+          </ul>
+        </div>
+        <div class="user-achievements">
+          <ul>
+            <li>ランク <%= user.rank.present? ? user.rank : "-" %></li>
+            <li>ウデマエ <%= user.prowess.present? ? user.prowess : "-" %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="user-right">
+      <%= link_to "&gt; プロフィールへ".html_safe, user_path(user), class: "hover-textdecoration" %>
+    </div>
+  </div>
+</div>

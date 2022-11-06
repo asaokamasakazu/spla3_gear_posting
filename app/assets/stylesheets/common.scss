@@ -2,6 +2,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  word-break: break-word;
 }
 html,
 body {
@@ -14,6 +15,9 @@ a {
   text-decoration: none;
   background-color: transparent;
 }
+.link-color-blue {
+  color: rgb(89, 89, 255);
+}
 li {
   list-style-type: none;
 }
@@ -22,6 +26,9 @@ hr {
   background-color: #eaedef;
   border: none;
   margin: 30px 0;
+}
+.hr-black {
+  background-color: #333;
 }
 table {
   border-collapse: collapse;
@@ -34,11 +41,34 @@ table {
   padding: 8px;
   font-size: 0.9rem;
   transition: all .3s;
-  color: #fff450;
   text-align: center;
 }
 .button:hover {
   transform: scale(1.03);
+}
+.input-file {
+  border: none !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+.FlexTextarea {
+  position: relative;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+.FlexTextarea__dummy {
+  overflow: hidden;
+  visibility: hidden;
+  min-height: 80px;
+  white-space: pre-wrap;
+}
+.FlexTextarea__textarea {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 100%;
+  resize: none;
 }
 .hover-textdecoration:hover {
   text-decoration: underline;
@@ -47,7 +77,10 @@ table {
   filter: brightness(1.4);
 }
 .hover-opacity:hover {
-  opacity: 0.6;
+  opacity: 0.8;
+}
+.hover-transform:hover {
+  transform: scale(1.03);
 }
 .hover-color-red:hover {
   color: rgb(245, 69, 98);
@@ -57,9 +90,15 @@ table {
     color: rgb(245, 69, 98);
   }
 }
+.font-weight-bold {
+  font-weight: bold;
+}
 .breadcrumbs {
   padding-bottom:18px;
   font-size: 0.85rem;
+  a {
+    color: #fff;
+  }
   a:hover {
     text-decoration: underline;
   }
@@ -75,15 +114,31 @@ table {
   padding: 30px 10px 25px;
   margin: 0 auto;
   color: #fff;
-  a {
-    color: #fff;
-  }
   h2 {
     font-size: 1.8rem;
   }
   p {
     font-size: 0.9rem;
   }
+}
+.flash-blue {
+  background-color: rgb(137, 137, 255);
+}
+.flash-red {
+  background-color: rgb(253, 90, 90);
+}
+.flash-blue,
+.flash-red {
+  p {
+      max-width: 970px;
+      padding: 7px 10px;
+      margin: 0 auto;
+      color: #fff;
+      font-size: 0.9rem;
+  }
+}
+.flash-top {
+  text-align: center;
 }
 .main {
   padding: 40px 10px;
@@ -94,6 +149,7 @@ table {
   padding: 20px 30px;
   border-radius: 7px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border-color: #333;
 }
 .main-container-h3 {
   font-size: 1.3rem;
@@ -101,6 +157,108 @@ table {
   margin-bottom: 10px;
   padding-left: 7px;
   border-left: 2px solid #333;
+}
+.forms-container {
+  padding-top: 15px;
+}
+.forms {
+  label {
+    font-size: 0.9rem;
+  }
+}
+.forms-supplement {
+  font-size: 0.9rem;
+}
+.field {
+  margin-bottom: 13px;
+  input {
+    margin-top: 2px;
+    width: 300px;
+    height: 35px;
+    padding: 8px;
+    border: 1px solid #333;
+  }
+  input:focus {
+    border-color: rgb(89, 89, 255);
+    box-shadow: 0 0 5px 0 rgb(89, 89, 255);
+    outline: 0;
+    transition: all .3s;
+  }
+}
+@media screen and (max-width: 520px) {
+  .field {
+    input {
+      width: 100%;
+    }
+  }
+}
+.required-message {
+  font-size: 0.8rem;
+  color: red;
+  display: none;
+}
+input:invalid + .required-message {
+  display: block;
+}
+.checkbox-and-label {
+  input {
+    width: 21px;
+    height: 21px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  label {
+    cursor: pointer;
+  }
+  p {
+    display: flex;
+    align-items: center;
+  }
+  p:nth-child(2) {
+    margin-top: 15px;
+  }
+}
+.actions {
+  margin-top: 25px;
+  input {
+    width: 300px;
+    padding: 8px 20px;
+    height: 40px;
+    border: 1px solid #333;
+    font-size: 0.9rem;
+    transition: all .3s;
+    text-align: center;
+    color: #fff450;
+    background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 520px) {
+  .actions {
+    input {
+      width: 100%;
+    }
+  }
+}
+.under-forms {
+  font-size: 0.8rem;
+}
+#error_explanation {
+  margin-bottom: 15px;
+  h2 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    padding: 0 5px;
+    width: fit-content;
+    background-color: red;
+    color: #fff;
+  }
+  li {
+    list-style: disc;
+    list-style-position:inside;
+    font-size: 0.9rem;
+    color: red;
+  }
 }
 
 /*=== FONT AWESOME ===*/

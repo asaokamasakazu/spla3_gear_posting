@@ -1,0 +1,374 @@
+/*=== COMMON ===*/
+.users {
+  margin: 7px 0;
+  padding-top: 5px;
+}
+.user {
+  padding: 10px 20px 7px 20px;
+  border-bottom: 1px solid;
+}
+@media screen and (max-width: 520px) {
+  .user {
+    padding: 7px 0 5px;
+  }
+}
+.user:first-child {
+  border-top: 1px solid;
+}
+.user-container {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-color: #fff450;
+}
+@media screen and (max-width: 520px) {
+  .user-container {
+    flex-direction: column;
+  }
+}
+.user-left {
+  display: flex;
+  align-items: center;
+}
+@media screen and (max-width: 520px) {
+  .user-left {
+    margin: 0 auto 0 0;
+  }
+}
+.user-icon {
+  height: 50px;
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+@media screen and (max-width: 520px) {
+  .user-icon {
+    height: 40px;
+    img {
+      width: 40px;
+    }
+  }
+}
+.user-info {
+  text-align: left;
+  padding-left: 20px;
+}
+@media screen and (max-width: 700px) {
+  .user-info {
+    padding-left: 7px;
+  }
+}
+.user-name {
+  font-weight: bold;
+}
+.user-achievements {
+  font-size: 0.8rem;
+  ul {
+    display: flex;
+  }
+  li {
+    margin-right: 13px;
+  }
+}
+@media screen and (max-width: 520px) {
+.user-achievements {
+  font-size: 0.75rem;
+}
+}
+.user-right {
+  font-size: 0.9rem;
+}
+@media screen and (max-width: 700px) {
+  .user-right {
+    font-size: 0.8rem;
+  }
+}
+.users-search-forms {
+  input {
+    border: 1px solid #333;
+  }
+  input[type="checkbox"] {
+    width: 21px;
+    height: 21px;
+    margin-right: 5px;
+  }
+  input:focus {
+    border-color: rgb(89, 89, 255);
+    box-shadow: 0 0 5px 0 rgb(89, 89, 255);
+    outline: 0;
+    transition: all .3s;
+  }
+  label {
+    display: flex;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+}
+.users-search-form {
+  input {
+    padding: 8px;
+  }
+}
+.users-search-submit {
+  input {
+    cursor: pointer;
+    color: #fff450;
+    background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+    font-size: 0.9rem;
+    transition: all .3s;
+    padding: 5px 10px;
+  }
+}
+@media screen and (max-width: 550px) {
+  input {
+    width: 100%;
+  }
+  .users-search-forms {
+    font-size: 0.85rem;
+  }
+  .users-search-form {
+    margin-bottom: 8px;
+  }
+  .label-in-label {
+    display: flex;
+  }
+}
+@media screen and (min-width: 551px) {
+  .users-search-forms {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+  .label-in-label {
+    display: flex;
+  }
+  .users-search-hide-space {
+    height: 21px;
+  }
+}
+@media screen and (min-width: 741px) {
+  .users-search-form {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+  }
+  .users-search-hide-space {
+    height: 0;
+  }
+}
+@media screen and (min-width: 851px) {
+  .users-search-submit {
+    width: 20%;
+    input {
+      width: 100%;
+    }
+  }
+}
+
+/*=== TOP ===*/
+.users-area {
+  text-align: center;
+  padding: 25px 10px;
+  background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+}
+.users-container {
+  border-radius: 7px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 20px 30px;
+  color: #fff450;
+  h2 {
+    font-size: 1.8rem;
+  }
+}
+@media screen and (max-width: 520px) {
+  .users-container {
+    padding: 20px 15px;
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+}
+.users-color-ye {
+  a {
+    color: #fff450;
+  }
+}
+.users-button {
+  width: 100%;
+  margin-top: 7px;
+  background-color: #fff450;
+  a {
+    color: #333;
+  }
+}
+
+/*=== USERS/SHOW ===*/
+.title-container-first-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title-container-first-line-left {
+  img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+@media screen and (max-width: 960px) {
+  .title-container-first-line-left {
+    img {
+      width: 75px;
+      height: 75px;
+    }
+  }
+}
+@media screen and (max-width: 520px) {
+  .title-container-first-line-left {
+    img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+.title-container-first-line-right {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.to-edit-profile-button {
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  padding: 8px;
+  transition: all .3s;
+  color: #333;
+  text-align: center;
+}
+.title-container-footer {
+  font-size: 0.9rem;
+  ul {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+}
+.vertical-border {
+  border-left: 1px solid #fff;
+}
+
+/*=== USERS/ACCOUNT USERS/EDIT ===*/
+.account-line-left {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+.account-line-right {
+  font-size: 0.95rem;
+  input,
+  select {
+    height: 35px;
+  }
+  input,
+  textarea {
+    padding: 8px;
+    border: 1px solid #333;
+  }
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: rgb(89, 89, 255);
+    box-shadow: 0 0 5px 0 rgb(89, 89, 255);
+    outline: 0;
+    transition: all .3s;
+  }
+  select {
+    padding: 8px 3px;
+    border: 1px solid #333;
+    width: 100px;
+  }
+  img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+.account-line-supplement {
+  font-size: 0.8rem;
+  color: red;
+}
+.length-supplement {
+  font-size: 0.8rem;
+}
+.account-actions {
+  margin-top: 25px;
+  input {
+    width: 100%;
+    padding: 8px 20px;
+    height: 40px;
+    border: 1px solid #333;
+    font-size: 0.9rem;
+    transition: all .3s;
+    text-align: center;
+    color: #fff450;
+    background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+    cursor: pointer;
+  }
+}
+@media screen and (max-width: 630px) {
+  .account-line {
+    margin-bottom: 13px;
+  }
+  .account-line-left {
+    width: 100%;
+    margin-bottom: 3px;
+  }
+  .account-line-right {
+    p,
+    input,
+    textarea {
+      width: 100%;
+    }
+  }
+}
+@media screen and (min-width: 631px) {
+  .account-line {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .account-line:nth-last-child(n+3) {
+    border-bottom: 1px solid #333;
+  }
+  .account-line-left {
+    width: 27%;
+  }
+  .account-line-right {
+    width: 73%;
+    input {
+      width: 68%;
+    }
+    textarea {
+      width: 68%;
+    }
+  }
+  .length-supplement {
+    display: block;
+  }
+  .checkbox-and-label {
+    margin-top: 20px;
+  }
+}
+
+/*=== USERS/SEARCH ===*/
+.search-message {
+  font-size: 0.9rem;
+}

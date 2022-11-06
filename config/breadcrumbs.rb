@@ -11,3 +11,33 @@ crumb :gear_powers_show do |gear_power|
   link gear_power.name, gear_power_path(gear_power)
   parent :gear_powers_index
 end
+
+crumb :users_new do
+  link "ユーザー登録", new_user_registration_path
+  parent :root
+end
+
+crumb :users_sign_in do
+  link "ログイン", new_user_session_path
+  parent :root
+end
+
+crumb :users_list do
+  link "ユーザー", list_users_path
+  parent :root
+end
+
+crumb :users_show do |user|
+  link user.name, user_path(user)
+  parent :users_list
+end
+
+crumb :users_account do
+  link "アカウント情報", account_users_path
+  parent :root
+end
+
+crumb :users_edit do
+  link "アカウント編集", edit_user_registration_path
+  parent :users_account
+end
