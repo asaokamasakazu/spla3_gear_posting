@@ -103,6 +103,36 @@ table {
     text-decoration: underline;
   }
 }
+.fixed_to_post_link {
+  position: fixed;
+  right: 40px;
+  bottom: 55px;
+  z-index: 100;
+  opacity:0.75;
+  background: repeating-linear-gradient(45deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+  border: 1px solid gray;
+  border-radius: 50px;
+  padding: 10px 20px;
+  color: #fff450;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: .3s;
+}
+@media screen and (max-width: 960px) {
+  .fixed_to_post_link {
+    right: 35px;
+    bottom: 35px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .fixed_to_post_link {
+    right: 17px;
+    bottom: 17px;
+  }
+}
+.fixed_to_post_link:hover{
+  opacity:1;
+}
 .whole {
   width: 100%;
 }
