@@ -1,0 +1,575 @@
+<% provide(:title, "新規投稿") %>
+<% breadcrumb :posts_new %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>新規投稿</h2>
+      <p>おすすめのギア編成や、作りたいギア編成を投稿できます。</p>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <h3 class="main-container-h3">ギア編成を投稿</h3>
+      <div class="forms-container">
+        <div class="forms">
+
+          <%= form_with model: @post do |f| %>
+          <%= render "shared/error_messages", obj: @post %>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :title, "タイトル" %>
+                <span class="length-supplement">(20文字まで)</span>
+              </div>
+              <div class="form-line-right">
+                <%= f.text_field :title, autofocus: true, required: true, maxlength: 20, placeholder: "編成タイトルを入力してください" %>
+                <div class="required-message">※ 入力必須です</div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :weapon, "おすすめブキ" %>
+              </div>
+              <div class="form-line-right">
+                <%= f.select :weapon,
+                  grouped_options_for_select(Post::SELECT_WEAPON_OPTIONS),
+                  { prompt: "ブキを選んでください" },
+                  required: true
+                %>
+                <div class="required-message-select">※ 選択必須です</div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :battle, "おすすめバトル" %>
+              </div>
+              <div class="form-line-right">
+                <%= f.select :battle,
+                  ["ナワバリバトル", "ガチエリア", "ガチヤグラ", "ガチホコ", "ガチアサリ"],
+                  { prompt: "バトルを選んでください" },
+                  required: true
+                %>
+                <div class="required-message-select">※ 選択必須です</div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :comment, "コメント" %>
+                <span class="length-supplement">(250文字まで)</span>
+              </div>
+              <div class="form-line-right">
+                <div class="FlexTextarea">
+                  <div class="FlexTextarea__dummy" aria-hidden="true"></div>
+                  <%= f.text_area :comment, class: "FlexTextarea__textarea", maxlength: 250, placeholder: "編成のポイントやおすすめの立ち回りを入力してください" %>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :head_main, "アタマのメインパワー" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-head-main">
+                  <%= f.radio_button :head_main, "1" %>
+                  <label for="post_head_main_1" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "2" %>
+                  <label for="post_head_main_2" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "3" %>
+                  <label for="post_head_main_3" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "4" %>
+                  <label for="post_head_main_4" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "5" %>
+                  <label for="post_head_main_5" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "6" %>
+                  <label for="post_head_main_6" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "7" %>
+                  <label for="post_head_main_7" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "8" %>
+                  <label for="post_head_main_8" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "9" %>
+                  <label for="post_head_main_9" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "10" %>
+                  <label for="post_head_main_10" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "11" %>
+                  <label for="post_head_main_11" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "12" %>
+                  <label for="post_head_main_12" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "13" %>
+                  <label for="post_head_main_13" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "14" %>
+                  <label for="post_head_main_14" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "15" %>
+                  <label for="post_head_main_15" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "16" %>
+                  <label for="post_head_main_16" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "17" %>
+                  <label for="post_head_main_17" class="hover-brightness"></label>
+                  <%= f.radio_button :head_main, "18" %>
+                  <label for="post_head_main_18" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-head-main">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :head_sub1, "アタマのサブパワー1" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-head-sub1">
+                  <%= f.radio_button :head_sub1, "1" %>
+                  <label for="post_head_sub1_1" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "2" %>
+                  <label for="post_head_sub1_2" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "3" %>
+                  <label for="post_head_sub1_3" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "4" %>
+                  <label for="post_head_sub1_4" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "5" %>
+                  <label for="post_head_sub1_5" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "6" %>
+                  <label for="post_head_sub1_6" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "7" %>
+                  <label for="post_head_sub1_7" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "8" %>
+                  <label for="post_head_sub1_8" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "9" %>
+                  <label for="post_head_sub1_9" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "10" %>
+                  <label for="post_head_sub1_10" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "11" %>
+                  <label for="post_head_sub1_11" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "12" %>
+                  <label for="post_head_sub1_12" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "13" %>
+                  <label for="post_head_sub1_13" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "14" %>
+                  <label for="post_head_sub1_14" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub1, "27" %>
+                  <label for="post_head_sub1_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-head-sub1">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :head_sub2, "アタマのサブパワー2" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-head-sub2">
+                  <%= f.radio_button :head_sub2, "1" %>
+                  <label for="post_head_sub2_1" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "2" %>
+                  <label for="post_head_sub2_2" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "3" %>
+                  <label for="post_head_sub2_3" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "4" %>
+                  <label for="post_head_sub2_4" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "5" %>
+                  <label for="post_head_sub2_5" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "6" %>
+                  <label for="post_head_sub2_6" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "7" %>
+                  <label for="post_head_sub2_7" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "8" %>
+                  <label for="post_head_sub2_8" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "9" %>
+                  <label for="post_head_sub2_9" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "10" %>
+                  <label for="post_head_sub2_10" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "11" %>
+                  <label for="post_head_sub2_11" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "12" %>
+                  <label for="post_head_sub2_12" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "13" %>
+                  <label for="post_head_sub2_13" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "14" %>
+                  <label for="post_head_sub2_14" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub2, "27" %>
+                  <label for="post_head_sub2_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-head-sub2">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :head_sub3, "アタマのサブパワー3" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-head-sub3">
+                  <%= f.radio_button :head_sub3, "1" %>
+                  <label for="post_head_sub3_1" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "2" %>
+                  <label for="post_head_sub3_2" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "3" %>
+                  <label for="post_head_sub3_3" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "4" %>
+                  <label for="post_head_sub3_4" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "5" %>
+                  <label for="post_head_sub3_5" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "6" %>
+                  <label for="post_head_sub3_6" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "7" %>
+                  <label for="post_head_sub3_7" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "8" %>
+                  <label for="post_head_sub3_8" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "9" %>
+                  <label for="post_head_sub3_9" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "10" %>
+                  <label for="post_head_sub3_10" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "11" %>
+                  <label for="post_head_sub3_11" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "12" %>
+                  <label for="post_head_sub3_12" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "13" %>
+                  <label for="post_head_sub3_13" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "14" %>
+                  <label for="post_head_sub3_14" class="hover-brightness"></label>
+                  <%= f.radio_button :head_sub3, "27" %>
+                  <label for="post_head_sub3_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-head-sub3">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :body_main, "フクのメインパワー" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-body-main">
+                  <%= f.radio_button :body_main, "1" %>
+                  <label for="post_body_main_1" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "2" %>
+                  <label for="post_body_main_2" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "3" %>
+                  <label for="post_body_main_3" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "4" %>
+                  <label for="post_body_main_4" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "5" %>
+                  <label for="post_body_main_5" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "6" %>
+                  <label for="post_body_main_6" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "7" %>
+                  <label for="post_body_main_7" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "8" %>
+                  <label for="post_body_main_8" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "9" %>
+                  <label for="post_body_main_9" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "10" %>
+                  <label for="post_body_main_10" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "11" %>
+                  <label for="post_body_main_11" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "12" %>
+                  <label for="post_body_main_12" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "13" %>
+                  <label for="post_body_main_13" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "14" %>
+                  <label for="post_body_main_14" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "19" %>
+                  <label for="post_body_main_19" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "20" %>
+                  <label for="post_body_main_20" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "21" %>
+                  <label for="post_body_main_21" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "22" %>
+                  <label for="post_body_main_22" class="hover-brightness"></label>
+                  <%= f.radio_button :body_main, "23" %>
+                  <label for="post_body_main_23" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-body-main">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :body_sub1, "フクのサブパワー1" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-body-sub1">
+                  <%= f.radio_button :body_sub1, "1" %>
+                  <label for="post_body_sub1_1" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "2" %>
+                  <label for="post_body_sub1_2" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "3" %>
+                  <label for="post_body_sub1_3" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "4" %>
+                  <label for="post_body_sub1_4" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "5" %>
+                  <label for="post_body_sub1_5" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "6" %>
+                  <label for="post_body_sub1_6" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "7" %>
+                  <label for="post_body_sub1_7" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "8" %>
+                  <label for="post_body_sub1_8" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "9" %>
+                  <label for="post_body_sub1_9" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "10" %>
+                  <label for="post_body_sub1_10" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "11" %>
+                  <label for="post_body_sub1_11" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "12" %>
+                  <label for="post_body_sub1_12" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "13" %>
+                  <label for="post_body_sub1_13" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "14" %>
+                  <label for="post_body_sub1_14" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub1, "27" %>
+                  <label for="post_body_sub1_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-body-sub1">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :body_sub2, "フクのサブパワー2" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-body-sub2">
+                  <%= f.radio_button :body_sub2, "1" %>
+                  <label for="post_body_sub2_1" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "2" %>
+                  <label for="post_body_sub2_2" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "3" %>
+                  <label for="post_body_sub2_3" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "4" %>
+                  <label for="post_body_sub2_4" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "5" %>
+                  <label for="post_body_sub2_5" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "6" %>
+                  <label for="post_body_sub2_6" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "7" %>
+                  <label for="post_body_sub2_7" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "8" %>
+                  <label for="post_body_sub2_8" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "9" %>
+                  <label for="post_body_sub2_9" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "10" %>
+                  <label for="post_body_sub2_10" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "11" %>
+                  <label for="post_body_sub2_11" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "12" %>
+                  <label for="post_body_sub2_12" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "13" %>
+                  <label for="post_body_sub2_13" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "14" %>
+                  <label for="post_body_sub2_14" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub2, "27" %>
+                  <label for="post_body_sub2_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-body-sub2">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :body_sub3, "フクのサブパワー3" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-body-sub3">
+                  <%= f.radio_button :body_sub3, "1" %>
+                  <label for="post_body_sub3_1" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "2" %>
+                  <label for="post_body_sub3_2" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "3" %>
+                  <label for="post_body_sub3_3" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "4" %>
+                  <label for="post_body_sub3_4" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "5" %>
+                  <label for="post_body_sub3_5" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "6" %>
+                  <label for="post_body_sub3_6" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "7" %>
+                  <label for="post_body_sub3_7" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "8" %>
+                  <label for="post_body_sub3_8" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "9" %>
+                  <label for="post_body_sub3_9" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "10" %>
+                  <label for="post_body_sub3_10" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "11" %>
+                  <label for="post_body_sub3_11" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "12" %>
+                  <label for="post_body_sub3_12" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "13" %>
+                  <label for="post_body_sub3_13" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "14" %>
+                  <label for="post_body_sub3_14" class="hover-brightness"></label>
+                  <%= f.radio_button :body_sub3, "27" %>
+                  <label for="post_body_sub3_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-body-sub3">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :shoes_main, "クツのメインパワー" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-shoes-main">
+                  <%= f.radio_button :shoes_main, "1" %>
+                  <label for="post_shoes_main_1" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "2" %>
+                  <label for="post_shoes_main_2" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "3" %>
+                  <label for="post_shoes_main_3" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "4" %>
+                  <label for="post_shoes_main_4" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "5" %>
+                  <label for="post_shoes_main_5" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "6" %>
+                  <label for="post_shoes_main_6" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "7" %>
+                  <label for="post_shoes_main_7" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "8" %>
+                  <label for="post_shoes_main_8" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "9" %>
+                  <label for="post_shoes_main_9" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "10" %>
+                  <label for="post_shoes_main_10" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "11" %>
+                  <label for="post_shoes_main_11" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "12" %>
+                  <label for="post_shoes_main_12" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "13" %>
+                  <label for="post_shoes_main_13" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "14" %>
+                  <label for="post_shoes_main_14" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "24" %>
+                  <label for="post_shoes_main_24" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "25" %>
+                  <label for="post_shoes_main_25" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_main, "26" %>
+                  <label for="post_shoes_main_26" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-shoes-main">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :shoes_sub1, "クツのサブパワー1" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-shoes-sub1">
+                  <%= f.radio_button :shoes_sub1, "1" %>
+                  <label for="post_shoes_sub1_1" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "2" %>
+                  <label for="post_shoes_sub1_2" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "3" %>
+                  <label for="post_shoes_sub1_3" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "4" %>
+                  <label for="post_shoes_sub1_4" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "5" %>
+                  <label for="post_shoes_sub1_5" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "6" %>
+                  <label for="post_shoes_sub1_6" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "7" %>
+                  <label for="post_shoes_sub1_7" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "8" %>
+                  <label for="post_shoes_sub1_8" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "9" %>
+                  <label for="post_shoes_sub1_9" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "10" %>
+                  <label for="post_shoes_sub1_10" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "11" %>
+                  <label for="post_shoes_sub1_11" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "12" %>
+                  <label for="post_shoes_sub1_12" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "13" %>
+                  <label for="post_shoes_sub1_13" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "14" %>
+                  <label for="post_shoes_sub1_14" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub1, "27" %>
+                  <label for="post_shoes_sub1_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-shoes-sub1">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :shoes_sub2, "クツのサブパワー2" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-shoes-sub2">
+                  <%= f.radio_button :shoes_sub2, "1" %>
+                  <label for="post_shoes_sub2_1" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "2" %>
+                  <label for="post_shoes_sub2_2" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "3" %>
+                  <label for="post_shoes_sub2_3" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "4" %>
+                  <label for="post_shoes_sub2_4" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "5" %>
+                  <label for="post_shoes_sub2_5" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "6" %>
+                  <label for="post_shoes_sub2_6" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "7" %>
+                  <label for="post_shoes_sub2_7" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "8" %>
+                  <label for="post_shoes_sub2_8" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "9" %>
+                  <label for="post_shoes_sub2_9" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "10" %>
+                  <label for="post_shoes_sub2_10" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "11" %>
+                  <label for="post_shoes_sub2_11" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "12" %>
+                  <label for="post_shoes_sub2_12" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "13" %>
+                  <label for="post_shoes_sub2_13" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "14" %>
+                  <label for="post_shoes_sub2_14" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub2, "27" %>
+                  <label for="post_shoes_sub2_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-shoes-sub2">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :shoes_sub3, "クツのサブパワー3" %>
+              </div>
+              <div class="form-line-right">
+                <div class="radio-gear-power" id="radio-shoes-sub3">
+                  <%= f.radio_button :shoes_sub3, "1" %>
+                  <label for="post_shoes_sub3_1" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "2" %>
+                  <label for="post_shoes_sub3_2" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "3" %>
+                  <label for="post_shoes_sub3_3" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "4" %>
+                  <label for="post_shoes_sub3_4" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "5" %>
+                  <label for="post_shoes_sub3_5" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "6" %>
+                  <label for="post_shoes_sub3_6" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "7" %>
+                  <label for="post_shoes_sub3_7" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "8" %>
+                  <label for="post_shoes_sub3_8" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "9" %>
+                  <label for="post_shoes_sub3_9" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "10" %>
+                  <label for="post_shoes_sub3_10" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "11" %>
+                  <label for="post_shoes_sub3_11" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "12" %>
+                  <label for="post_shoes_sub3_12" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "13" %>
+                  <label for="post_shoes_sub3_13" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "14" %>
+                  <label for="post_shoes_sub3_14" class="hover-brightness"></label>
+                  <%= f.radio_button :shoes_sub3, "27" %>
+                  <label for="post_shoes_sub3_27" class="hover-brightness"></label>
+                  <div class="required-message-radio" id="message-shoes-sub3">※ 選択必須です</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-line-submit">
+              <%= f.submit "投稿する", class: "hover-transform" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag 'users/adjust_textarea' %>
+<%= javascript_pack_tag 'posts/required_radio_message_off' %>
