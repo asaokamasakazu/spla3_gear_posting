@@ -1,5 +1,21 @@
 ja:
   activerecord:
+    models:
+      post: 投稿
+    attributes:
+      post:
+        head_main: アタマのメインパワー
+        head_sub1: アタマのサブパワー1
+        head_sub2: アタマのサブパワー2
+        head_sub3: アタマのサブパワー3
+        body_main: フクのメインパワー
+        body_sub1: フクのサブパワー1
+        body_sub2: フクのサブパワー2
+        body_sub3: フクのサブパワー3
+        shoes_main: クツのメインパワー
+        shoes_sub1: クツのサブパワー1
+        shoes_sub2: クツのサブパワー2
+        shoes_sub3: クツのサブパワー3
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
