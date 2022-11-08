@@ -626,7 +626,7 @@ RSpec.describe "Users", type: :system do
             expect(current_path).to eq user_path(new_user_id)
           end
 
-          it "ログイン成功後に正しいフラッシュを表示していること" do
+          it "新規投稿成功後に正しいフラッシュを表示していること" do
             expect(page).to have_content "アカウント登録が完了しました。"
           end
         end
@@ -661,7 +661,7 @@ RSpec.describe "Users", type: :system do
             expect(User.all.count).to eq 1
           end
 
-          it "ログイン失敗後の、入力していた情報の引継ぎが正しいこと" do
+          it "新規投稿失敗後の、入力していた情報の引継ぎが正しいこと" do
             fill_in "user[name]", with: "テストさん"
             fill_in "user[email]", with: "sample_email@sample.com"
             fill_in "user[password]", with: "sample_password"
