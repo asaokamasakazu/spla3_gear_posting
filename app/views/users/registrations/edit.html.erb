@@ -35,7 +35,12 @@
             <span class="length-supplement">(20文字まで)</span>
           </div>
           <div class="form-line-right">
-            <%= f.text_field :name, autofocus: true, maxlength: 20 %>
+            <% if current_user.email == "guest@example.com" %>
+              <%= f.text_field :name, disabled: true %><br>
+              <span class="form-line-supplement">※ ゲストユーザーの場合は変更できません</span>
+            <% else %>
+              <%= f.text_field :name, autofocus: true, maxlength: 20 %>
+            <% end %>
           </div>
         </div>
         <div class="form-line">
