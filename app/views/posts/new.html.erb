@@ -32,7 +32,7 @@
               </div>
               <div class="form-line-right">
                 <%= f.select :weapon,
-                  grouped_options_for_select(Post::SELECT_WEAPON_OPTIONS),
+                  grouped_options_for_select(Post::SELECT_WEAPON_OPTIONS, @post.weapon),
                   { prompt: "ブキを選んでください" },
                   required: true
                 %>
