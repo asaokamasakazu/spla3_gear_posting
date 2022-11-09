@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :profile, { length: { maximum: 100 } }
 
   has_one_attached :image
+  has_many :posts, dependent: :destroy
 
   def update_without_current_password(params, *options)
     params.delete(:current_password)

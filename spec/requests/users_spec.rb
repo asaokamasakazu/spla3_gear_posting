@@ -63,7 +63,7 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET /account" do
-    let!(:user) { create(:user, prowess: "A+") }
+    let(:user) { create(:user, prowess: "A+") }
 
     before do
       sign_in user
@@ -88,7 +88,7 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET /edit" do
-    let!(:user) { create(:user, prowess: "A+") }
+    let(:user) { create(:user, prowess: "A+") }
 
     before do
       sign_in user

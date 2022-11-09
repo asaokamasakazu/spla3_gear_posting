@@ -41,3 +41,8 @@ crumb :users_edit do
   link "アカウント編集", edit_user_registration_path
   parent :users_account
 end
+
+crumb :posts_new do
+  link "新規投稿", new_post_path
+  parent :root
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_28_025638) do
+ActiveRecord::Schema.define(version: 2022_11_06_095550) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -55,6 +55,29 @@ ActiveRecord::Schema.define(version: 2022_10_28_025638) do
     t.index ["name"], name: "index_gear_powers_on_name", unique: true
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.string "weapon"
+    t.string "battle"
+    t.string "comment"
+    t.integer "head_main"
+    t.integer "head_sub1"
+    t.integer "head_sub2"
+    t.integer "head_sub3"
+    t.integer "body_main"
+    t.integer "body_sub1"
+    t.integer "body_sub2"
+    t.integer "body_sub3"
+    t.integer "shoes_main"
+    t.integer "shoes_sub1"
+    t.integer "shoes_sub2"
+    t.integer "shoes_sub3"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -73,4 +96,5 @@ ActiveRecord::Schema.define(version: 2022_10_28_025638) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "posts", "users"
 end
