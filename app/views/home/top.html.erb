@@ -710,7 +710,7 @@
     <div class="users-container">
       <h2>- 人気ユーザー -</h2>
       <div class="users users-color-ye">
-        <%= render partial: "users/user", collection: @users %>
+        <%= render @users %>
       </div>
       <%= link_to "&gt; ユーザー一覧を見る".html_safe, list_users_path, class: "button users-button" %>
     </div>
