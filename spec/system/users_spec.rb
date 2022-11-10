@@ -223,14 +223,12 @@ RSpec.describe "Users", type: :system do
 
   describe "#show" do
     let(:user) { create(:user, prowess: "A+") }
-    let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
-    let!(:post2) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
-
-    before do
-      visit user_path(user)
-    end
 
     describe "パンくずのテスト" do
+      before do
+        visit user_path(user)
+      end
+
       it "パンくずを正しく表示していること" do
         within ".breadcrumbs" do
           expect(page).to have_css "i.fa-solid"
@@ -258,6 +256,12 @@ RSpec.describe "Users", type: :system do
     end
 
     describe "ユーザー情報部分のテスト" do
+      let!(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+
+      before do
+        visit user_path(user)
+      end
+
       it "ユーザーのアイコンを表示していること" do
         within ".title-container" do
           expect(page).to have_selector "img[src$='user_image_default_ye.png']"
@@ -300,7 +304,38 @@ RSpec.describe "Users", type: :system do
     end
 
     describe "投稿部分のテスト" do
-      # posts作成後に記述する
+      context "投稿がない場合" do
+        it "投稿がないことを示す文章を表示していること" do
+          visit user_path(user)
+          expect(page).to have_content "まだ投稿はありません。"
+        end
+
+        it "マイページなら投稿するボタンを表示していること" do
+          sign_in user
+          visit user_path(user)
+          within ".main-container" do
+            expect(page).to have_content "＋投稿する"
+          end
+        end
+
+        it "マイページではないなら投稿するボタンを表示していないこと" do
+          visit user_path(user)
+          within ".main-container" do
+            expect(page).not_to have_content "＋投稿する"
+          end
+        end
+      end
+
+      context "投稿がある場合" do
+        let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+        let!(:post2) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+
+        it "これまでの投稿を表示していること" do
+          visit user_path(user)
+          expect(page).to have_content post1.title
+          expect(page).to have_content post2.title
+        end
+      end
     end
   end
 
