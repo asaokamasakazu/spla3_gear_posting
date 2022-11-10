@@ -132,4 +132,106 @@ RSpec.describe "Posts", type: :system do
       end
     end
   end
+
+  describe "#index" do
+    let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
+    let!(:post2) { create(:post, weapon: "スプラシューター", battle: "ナワバリバトル", head_main: 1) }
+    let!(:gear_power) { create(:gear_power1) }
+
+    before do
+      visit posts_path
+    end
+
+    describe "パンくずのテスト" do
+      it "パンくずを正しく表示していること" do
+        within ".breadcrumbs" do
+          expect(page).to have_css "i.fa-solid"
+          expect(page).to have_css "i.fa-house"
+          expect(page).to have_content "Home"
+          expect(page).to have_content "投稿"
+          expect(page).to have_css "span.current"
+        end
+      end
+
+      it "パンくずで正しく遷移すること" do
+        within ".breadcrumbs" do
+          click_link "Home"
+          expect(current_path).to eq root_path
+        end
+      end
+    end
+
+    describe "一覧部分のテスト" do
+      it "投稿の各情報を表示していること" do
+        expect(page).to have_content post1.user.name
+        expect(page).to have_content post1.created_at.to_s(:custom_no_year)
+        expect(page).to have_content post1.title
+        expect(page).to have_content post1.weapon
+        expect(page).to have_content post1.battle
+        expect(page).to have_content post2.user.name
+        expect(page).to have_content post2.created_at.to_s(:custom_no_year)
+        expect(page).to have_content post2.title
+        expect(page).to have_content post2.weapon
+        expect(page).to have_content post2.battle
+      end
+
+      it "ユーザーのアイコンを表示していること" do
+        expect(page).to have_selector "img[src$='user_image_default_bk.png']"
+      end
+
+      it "ギアパワーの各アイコンを表示していること" do
+        expect(page).to have_selector "img[src$='gear_power_#{post1.head_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.head_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.head_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.head_sub3}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.body_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.body_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.body_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.body_sub3}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.shoes_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.shoes_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.shoes_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post1.shoes_sub3}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.head_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.head_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.head_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.head_sub3}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.body_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.body_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.body_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.body_sub3}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.shoes_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.shoes_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.shoes_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post2.shoes_sub3}.png']"
+      end
+
+      it "ユーザーのアイコンをクリックするとユーザー詳細ページへ遷移すること" do
+        click_link "デフォルトユーザーアイコン", match: :first
+        expect(current_path).to eq user_path(post2.user)
+      end
+
+      it "ユーザーの名前をクリックするとユーザー詳細ページへ遷移すること" do
+        click_link post2.user.name
+        expect(current_path).to eq user_path(post2.user)
+      end
+
+      it "投稿のタイトルをクリックすると投稿詳細ページへ遷移すること" do
+        click_link post2.title
+        expect(current_path).to eq post_path(post2)
+      end
+
+      it "編成詳細へをクリックすると投稿詳細ページへ遷移すること" do
+        click_link "> 編成詳細へ", match: :first
+        expect(current_path).to eq post_path(post2)
+      end
+
+      it "ギアパワーのアイコンをクリックするとギアパワー詳細ページへ遷移すること" do
+        within ".post:first-child" do
+          click_link "ギアパワー", match: :first
+          expect(current_path).to eq gear_power_path(post2.head_main)
+        end
+      end
+    end
+  end
 end
