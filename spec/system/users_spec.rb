@@ -223,6 +223,8 @@ RSpec.describe "Users", type: :system do
 
   describe "#show" do
     let(:user) { create(:user, prowess: "A+") }
+    let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+    let!(:post2) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
 
     before do
       visit user_path(user)
@@ -270,7 +272,7 @@ RSpec.describe "Users", type: :system do
         within ".title-container-footer" do
           expect(page).to have_content user.rank
           expect(page).to have_content user.prowess
-          # posts作成後に投稿数と被お気に入り数の有無を追加する
+          expect(page).to have_content user.posts.count
         end
       end
 
