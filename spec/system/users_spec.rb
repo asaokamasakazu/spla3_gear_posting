@@ -16,6 +16,7 @@ RSpec.describe "Users", type: :system do
     let!(:user1) { create(:user, name: "サンプル1", prowess: "A+") }
     let!(:user2) { create(:user, name: "サンプル2", prowess: "B-") }
     let!(:user3) { create(:user, name: "ゲスト1", prowess: "C") }
+    let!(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
 
     before do
       visit list_users_path
@@ -49,7 +50,7 @@ RSpec.describe "Users", type: :system do
       it "ユーザーの各情報を表示していること" do
         expect(page).to have_content user1.rank
         expect(page).to have_content user1.prowess
-        # posts作成後に投稿数と被お気に入り数の有無を追加する
+        expect(page).to have_content user1.posts.count
       end
 
       it "ユーザーのアイコンを表示していること" do
