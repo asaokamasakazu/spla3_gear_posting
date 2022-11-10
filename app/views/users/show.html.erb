@@ -27,7 +27,7 @@
           <li>
             投稿数<br>
             <span class="font-weight-bold">
-              <%= @posts_count %>
+              <%= @user.posts.count %>
             </span>
           </li>
           <div class="vertical-border"></div>
@@ -60,8 +60,8 @@
     <div class="main-container">
       <h3 class="main-container-h3"><%= @user.name %>の投稿</h3>
       <div class="posts">
-        <% if @posts.present? %>
-          <%= render @posts %>
+        <% if @user.posts.present? %>
+          <%= render partial: "posts/post", collection: @user.posts, as: "post" %>
         <% else %>
           <div class="no-post-message">
             <p>まだ投稿はありません。</p>
