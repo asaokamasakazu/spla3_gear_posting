@@ -46,3 +46,8 @@ crumb :posts_new do
   link "新規投稿", new_post_path
   parent :root
 end
+
+crumb :posts_index do
+  link "投稿", posts_path
+  parent :root
+end

@@ -1,3 +1,4 @@
+/*=== 汎用 ===*/
 * {
   margin: 0px;
   padding: 0px;
@@ -133,6 +134,8 @@ table {
 .fixed_to_post_link:hover{
   opacity:1;
 }
+
+/*=== 汎用テンプレート ===*/
 .whole {
   width: 100%;
 }
@@ -187,6 +190,25 @@ table {
   margin-bottom: 10px;
   padding-left: 7px;
   border-left: 2px solid #333;
+}
+
+/*=== 汎用フォーム ===*/
+#error_explanation {
+  margin-bottom: 15px;
+  h2 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    padding: 0 5px;
+    width: fit-content;
+    background-color: red;
+    color: #fff;
+  }
+  li {
+    list-style: disc;
+    list-style-position:inside;
+    font-size: 0.9rem;
+    color: red;
+  }
 }
 .forms-container {
   padding-top: 15px;
@@ -380,23 +402,6 @@ select:invalid + .required-message-select {
 }
 .under-forms {
   font-size: 0.8rem;
-}
-#error_explanation {
-  margin-bottom: 15px;
-  h2 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    padding: 0 5px;
-    width: fit-content;
-    background-color: red;
-    color: #fff;
-  }
-  li {
-    list-style: disc;
-    list-style-position:inside;
-    font-size: 0.9rem;
-    color: red;
-  }
 }
 
 /*=== FONT AWESOME ===*/

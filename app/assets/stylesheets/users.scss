@@ -264,6 +264,34 @@
 .vertical-border {
   border-left: 1px solid #fff;
 }
+.no-post-message {
+  display: flex;
+  align-items: center;
+  margin: 50px 0;
+  font-size: 0.9rem;
+  p {
+    margin-right: 10px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .no-post-message {
+    flex-direction: column;
+    margin: 20px 0;
+    p {
+      margin: 0 0 10px;
+    }
+  }
+}
+.to-new-post-button {
+  background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+  border: 1px solid #333;
+  border-radius: 50px;
+  padding: 8px 15px;
+  transition: all .3s;
+  color: #fff450;
+  text-align: center;
+  font-weight: bold;
+}
 
 /*=== USERS/SEARCH ===*/
 .search-message {

@@ -21,7 +21,7 @@ RSpec.describe "Users", type: :request do
     it "ユーザーの各情報を取得していること" do
       expect(response.body).to include user1.rank.to_s
       expect(response.body).to include user1.prowess
-      # posts作成後に投稿数と被お気に入り数の有無を追加する
+      expect(response.body).to include user1.posts.count.to_s
     end
 
     it "ユーザーのアイコン画像を取得していること" do
@@ -31,6 +31,8 @@ RSpec.describe "Users", type: :request do
 
   describe "GET /show" do
     let(:user) { create(:user, prowess: "A+") }
+    let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+    let!(:post2) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
 
     before do
       sign_in user
@@ -50,11 +52,12 @@ RSpec.describe "Users", type: :request do
       expect(response.body).to include user.rank.to_s
       expect(response.body).to include user.prowess
       expect(response.body).to include user.profile
-      # posts作成後に投稿数と被お気に入り数の有無を追加する
+      expect(response.body).to include user.posts.count.to_s
     end
 
     it "これまでの投稿を取得していること" do
-      # posts作成後に記述する
+      expect(response.body).to include post1.title
+      expect(response.body).to include post2.title
     end
 
     it "ユーザーのアイコン画像を取得していること" do

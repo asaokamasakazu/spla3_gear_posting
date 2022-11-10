@@ -1,16 +1,7 @@
 <% provide(:title, "アカウント編集") %>
 <% breadcrumb :users_edit %>
 <div class="whole">
-  <div class="flash-blue">
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-  </div>
-  <div class="flash-red">
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-  </div>
+  <%= render "shared/flash_messages" %>
   <div class="title">
     <div class="title-container">
       <%= breadcrumbs separator: " &rsaquo; " %> 
@@ -35,7 +26,12 @@
             <span class="length-supplement">(20文字まで)</span>
           </div>
           <div class="form-line-right">
-            <%= f.text_field :name, autofocus: true, maxlength: 20 %>
+            <% if current_user.email == "guest@example.com" %>
+              <%= f.text_field :name, disabled: true %><br>
+              <span class="form-line-supplement">※ ゲストユーザーの場合は変更できません</span>
+            <% else %>
+              <%= f.text_field :name, autofocus: true, maxlength: 20 %>
+            <% end %>
           </div>
         </div>
         <div class="form-line">
@@ -63,7 +59,7 @@
             <%= f.label :prowess %>
           </div>
           <div class="form-line-right">
-            <%= f.select :prowess, ["未設定", "S+", "S", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-"] %>
+            <%= f.select :prowess, [["未設定", ""], "S+", "S", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-"] %>
           </div>
         </div>
         <div class="form-line">

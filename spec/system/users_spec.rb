@@ -16,6 +16,7 @@ RSpec.describe "Users", type: :system do
     let!(:user1) { create(:user, name: "サンプル1", prowess: "A+") }
     let!(:user2) { create(:user, name: "サンプル2", prowess: "B-") }
     let!(:user3) { create(:user, name: "ゲスト1", prowess: "C") }
+    let!(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
 
     before do
       visit list_users_path
@@ -49,7 +50,7 @@ RSpec.describe "Users", type: :system do
       it "ユーザーの各情報を表示していること" do
         expect(page).to have_content user1.rank
         expect(page).to have_content user1.prowess
-        # posts作成後に投稿数と被お気に入り数の有無を追加する
+        expect(page).to have_content user1.posts.count
       end
 
       it "ユーザーのアイコンを表示していること" do
@@ -223,11 +224,11 @@ RSpec.describe "Users", type: :system do
   describe "#show" do
     let(:user) { create(:user, prowess: "A+") }
 
-    before do
-      visit user_path(user)
-    end
-
     describe "パンくずのテスト" do
+      before do
+        visit user_path(user)
+      end
+
       it "パンくずを正しく表示していること" do
         within ".breadcrumbs" do
           expect(page).to have_css "i.fa-solid"
@@ -255,6 +256,12 @@ RSpec.describe "Users", type: :system do
     end
 
     describe "ユーザー情報部分のテスト" do
+      let!(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+
+      before do
+        visit user_path(user)
+      end
+
       it "ユーザーのアイコンを表示していること" do
         within ".title-container" do
           expect(page).to have_selector "img[src$='user_image_default_ye.png']"
@@ -269,7 +276,7 @@ RSpec.describe "Users", type: :system do
         within ".title-container-footer" do
           expect(page).to have_content user.rank
           expect(page).to have_content user.prowess
-          # posts作成後に投稿数と被お気に入り数の有無を追加する
+          expect(page).to have_content user.posts.count
         end
       end
 
@@ -297,7 +304,38 @@ RSpec.describe "Users", type: :system do
     end
 
     describe "投稿部分のテスト" do
-      # posts作成後に記述する
+      context "投稿がない場合" do
+        it "投稿がないことを示す文章を表示していること" do
+          visit user_path(user)
+          expect(page).to have_content "まだ投稿はありません。"
+        end
+
+        it "マイページなら投稿するボタンを表示していること" do
+          sign_in user
+          visit user_path(user)
+          within ".main-container" do
+            expect(page).to have_content "＋投稿する"
+          end
+        end
+
+        it "マイページではないなら投稿するボタンを表示していないこと" do
+          visit user_path(user)
+          within ".main-container" do
+            expect(page).not_to have_content "＋投稿する"
+          end
+        end
+      end
+
+      context "投稿がある場合" do
+        let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+        let!(:post2) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+
+        it "これまでの投稿を表示していること" do
+          visit user_path(user)
+          expect(page).to have_content post1.title
+          expect(page).to have_content post2.title
+        end
+      end
     end
   end
 

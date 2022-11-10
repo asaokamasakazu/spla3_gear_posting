@@ -1,16 +1,7 @@
 <% provide(:title, "アカウント情報") %>
 <% breadcrumb :users_account %>
 <div class="whole">
-  <div class="flash-blue">
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-  </div>
-  <div class="flash-red">
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-  </div>
+  <%= render "shared/flash_messages" %>
   <div class="title">
     <div class="title-container">
       <%= breadcrumbs separator: " &rsaquo; " %> 
