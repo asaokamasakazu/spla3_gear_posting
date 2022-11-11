@@ -75,7 +75,7 @@ table {
   text-decoration: underline;
 }
 .hover-brightness:hover {
-  filter: brightness(1.4);
+  filter: brightness(1.3);
 }
 .hover-opacity:hover {
   opacity: 0.8;
@@ -93,6 +93,11 @@ table {
 }
 .font-weight-bold {
   font-weight: bold;
+}
+.radius-50 {
+  img {
+    border-radius: 50%;
+  }
 }
 .breadcrumbs {
   padding-bottom:18px;
@@ -154,6 +159,13 @@ table {
     font-size: 0.9rem;
   }
 }
+@media screen and (max-width: 520px) {
+  .title-container {
+    h2 {
+      font-size: 1.6rem;
+    }
+  }
+}
 .flash-blue {
   background-color: rgb(137, 137, 255);
 }
@@ -184,12 +196,23 @@ table {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   border-color: #333;
 }
+@media screen and (max-width: 520px) {
+  .main-container {
+    padding: 20px 15px;
+  }
+}
 .main-container-h3 {
   font-size: 1.3rem;
-  line-height: 1.3rem;
+  line-height: 1.6rem;
   margin-bottom: 10px;
   padding-left: 7px;
   border-left: 2px solid #333;
+}
+@media screen and (max-width: 520px) {
+  .main-container-h3 {
+    font-size: 1.15rem;
+    line-height: 1.5rem;
+  }
 }
 
 /*=== 汎用フォーム ===*/
@@ -402,6 +425,59 @@ select:invalid + .required-message-select {
 }
 .under-forms {
   font-size: 0.8rem;
+}
+
+/*=== 汎用テーブル ===*/
+.common-table {
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  table {
+    width: 100%;
+  }
+  th,
+  td {
+    padding: 7px;
+    border: 1px solid #333;
+  }
+  th {
+    width: 15%;
+    background-color: rgba($color: #333, $alpha: 0.3);
+  }
+  img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    display: block;
+    margin-right: 5px;
+  }
+}
+@media screen and (max-width: 960px) {
+  .common-table {
+    th {
+      width: 20%;
+    }
+  }
+}
+@media screen and (max-width: 520px) {
+  .common-table {
+    font-size: 0.85rem;
+    th {
+      width: 25%;
+    }
+  }
+}
+@media screen and (max-width: 430px) {
+  .common-table {
+    font-size: 0.8rem;
+    th {
+      width: 20%;
+    }
+  .in-td-gp 
+    img {
+      width: 35px;
+      height: 35px;
+    }
+  }
 }
 
 /*=== FONT AWESOME ===*/
