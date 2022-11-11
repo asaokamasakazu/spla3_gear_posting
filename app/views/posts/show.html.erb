@@ -1,2 +1,205 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<% provide(:title, @post.title) %>
+<% breadcrumb :posts_show, @post %>
+<div class="whole">
+  <%= render "shared/flash_messages" %>
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2><%= @post.title %></h2>
+      <div class="title-footer">
+        <div class="button-under-title">
+          <%= link_to "#", class: "bookmark-button hover-opacity" do %>
+            <i class="far fa-bookmark font-awesome-size-105"></i>
+            #件
+          <% end %>
+        </div>
+        <% if @post.user == current_user %>
+          <div class="button-under-title">
+            <%= link_to "編集する", edit_post_path(@post), class: "edit-button hover-opacity" %>
+          </div>
+          <div class="button-under-title">
+            <%= link_to "削除する", post_path(@post), class: "destroy-button hover-opacity", method: :delete, data: { confirm: "投稿を削除してよろしいですか？" } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <h3 class="main-container-h3">投稿情報</h3>
+      <div class="common-table">
+        <table>
+          <tr>
+            <th>投稿者</th>
+            <td>
+              <%= link_to user_path(@post.user), class: "in-td-row radius-50 hover-textdecoration hover-opacity" do %>
+                <% if @post.user.image.present? %>
+                  <%= image_tag @post.user.image, alt: "#{@post.user.name}のユーザーアイコン" %>
+                <% else %>
+                  <%= image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン" %>
+                <% end %>
+                <%= @post.user.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>投稿日時</th>
+            <td>
+              <%= @post.created_at.to_s(:custom_with_year) %>
+              <% if @post.created_at != @post.updated_at %>
+                <br>
+                ※<%= @post.updated_at.to_s(:custom_with_year) %>に更新
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <h3 class="main-container-h3">おすすめブキ・バトル</h3>
+      <div class="common-table">
+        <table>
+          <tr>
+            <th>ブキ</th>
+            <td><%= @post.weapon %></td>
+          </tr>
+          <tr>
+            <th>バトル</th>
+            <td>
+              <div class="in-td-row">
+                <% if @post.battle == "ナワバリバトル" %>
+                  <%= image_tag "/battles/1.png", alt: "ナワバリバトル" %>
+                  ナワバリバトル
+                <% elsif @post.battle == "ガチエリア" %>
+                  <%= image_tag "/battles/2.png", alt: "ガチエリア" %>
+                  ガチエリア
+                <% elsif @post.battle == "ガチヤグラ" %>
+                  <%= image_tag "/battles/3.png", alt: "ガチヤグラ" %>
+                  ガチヤグラ
+                <% elsif @post.battle == "ガチホコ" %>
+                  <%= image_tag "/battles/4.png", alt: "ガチホコ" %>
+                  ガチホコ
+                <% elsif @post.battle == "ガチアサリ" %>
+                  <%= image_tag "/battles/5.png", alt: "ガチアサリ" %>
+                  ガチアサリ
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <h3 class="main-container-h3">採用しているギアパワー</h3>
+      <div class="common-table">
+        <table>
+          <tr>
+            <th>アタマ</th>
+            <td>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-main">メイン</span>
+                <%= link_to gear_power_path(@post.head_main), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.head_main}.png", alt: @head_main.name %>
+                  <%= @head_main.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ1</span>
+                <%= link_to gear_power_path(@post.head_sub1), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.head_sub1}.png", alt: @head_sub1.name %>
+                  <%= @head_sub1.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ2</span>
+                <%= link_to gear_power_path(@post.head_sub2), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.head_sub2}.png", alt: @head_sub2.name %>
+                  <%= @head_sub2.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ3</span>
+                <%= link_to gear_power_path(@post.head_sub3), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.head_sub3}.png", alt: @head_sub3.name %>
+                  <%= @head_sub3.name %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>フク</th>
+            <td>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-main">メイン</span>
+                <%= link_to gear_power_path(@post.body_main), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.body_main}.png", alt: @body_main.name %>
+                  <%= @body_main.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ1</span>
+                <%= link_to gear_power_path(@post.body_sub1), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.body_sub1}.png", alt: @body_sub1.name %>
+                  <%= @body_sub1.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ2</span>
+                <%= link_to gear_power_path(@post.body_sub2), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.body_sub2}.png", alt: @body_sub2.name %>
+                  <%= @body_sub2.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ3</span>
+                <%= link_to gear_power_path(@post.body_sub3), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.body_sub3}.png", alt: @body_sub3.name %>
+                  <%= @body_sub3.name %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>クツ</th>
+            <td>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-main">メイン</span>
+                <%= link_to gear_power_path(@post.shoes_main), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.shoes_main}.png", alt: @shoes_main.name %>
+                  <%= @shoes_main.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ1</span>
+                <%= link_to gear_power_path(@post.shoes_sub1), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.shoes_sub1}.png", alt: @shoes_sub1.name %>
+                  <%= @shoes_sub1.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ2</span>
+                <%= link_to gear_power_path(@post.shoes_sub2), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.shoes_sub2}.png", alt: @shoes_sub2.name %>
+                  <%= @shoes_sub2.name %>
+                <% end %>
+              </div>
+              <div class="in-td-row in-td-gp">
+                <span class="in-td-label-sub">サブ3</span>
+                <%= link_to gear_power_path(@post.shoes_sub3), class: "in-td-row hover-textdecoration hover-brightness" do %>
+                  <%= image_tag "/gear_powers/gear_power_#{@post.shoes_sub3}.png", alt: @shoes_sub3.name %>
+                  <%= @shoes_sub3.name %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <h3 class="main-container-h3">編成のポイント</h3>
+      <div class="post-show-comment">
+        <% if @post.comment.blank? %>
+          <p>記入していません。</p>
+        <% else %>
+          <p><%= @post.comment %></p>
+        <% end %>
+      </div>
+      <%= link_to "&lt; 投稿一覧に戻る".html_safe, posts_path, class: "button top-button posts-button" %>
+    </div>
+  </div>
+</div>
+<%= link_to "＋投稿する", new_post_path, class: "fixed_to_post_link" %>

@@ -31,6 +31,7 @@
     width: 35px;
     height: 35px;
     object-fit: cover;
+    border-radius: 50%;
   }
 }
 .post-user-info {
@@ -270,4 +271,94 @@ input[type="radio"][value="26"]+label::before {
 }
 input[type="radio"][value="27"]+label::before {
   background-image: url("/gear_powers/gear_power_27.png");
+}
+
+/*=== POSTS/SHOW ===*/
+.title-footer {
+  display: flex;
+  align-items: center;
+}
+.button-under-title {
+  width: fit-content;
+  margin-top: 15px;
+  a {
+    transition: all .3s;
+    display: block;
+  }
+}
+.bookmark-button,
+.edit-button,
+.destroy-button {
+  border-radius: 3px;
+  padding: 6px 8px;
+  margin-right: 10px;
+  color: #fff;
+  font-size: 0.9rem;
+}
+.bookmark-button {
+  display: flex;
+  align-items: center;
+  background-color: #2db68f;
+  border: 1px solid #2db68f;
+}
+.edit-button {
+  background-color: rgb(100, 100, 255);
+  border: 1px solid rgb(100, 100, 255);
+}
+.destroy-button {
+  background-color: rgb(253, 90, 90);
+  border: 1px solid rgb(253, 90, 90);
+}
+@media screen and (max-width: 520px) {
+  .bookmark-button,
+  .edit-button,
+  .destroy-button {
+    padding: 3px 6px;
+  }
+}
+.in-td-row {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+.in-td-gp {
+  margin-bottom: 3px;
+}
+.in-td-gp:last-child {
+  margin-bottom: 0;
+}
+.in-td-label-main,
+.in-td-label-sub {
+  width: 45px;
+  text-align: center;
+  padding: 1px 2px;
+  margin-right: 5px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.in-td-label-main {
+  border: 2px solid rgb(111, 111, 243);
+  color: rgb(111, 111, 243);
+}
+.in-td-label-sub {
+  border: 2px solid rgb(90, 90, 90);
+  color: rgb(90, 90, 90);
+}
+@media screen and (max-width: 520px) {
+  .in-td-label-main,
+  .in-td-label-sub {
+    width: 40px;
+    padding: 1px;
+    font-size: 0.7rem;
+  }
+}
+.post-show-comment {
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+}
+@media screen and (max-width: 520px) {
+  .post-show-comment {
+    font-size: 0.85rem;
+  }
 }

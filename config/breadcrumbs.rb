@@ -51,3 +51,8 @@ crumb :posts_index do
   link "投稿", posts_path
   parent :root
 end
+
+crumb :posts_show do |post|
+  link post.title, post_path(post)
+  parent :posts_index
+end

@@ -135,8 +135,8 @@ RSpec.describe "Posts", type: :system do
 
   describe "#index" do
     let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
-    let!(:post2) { create(:post, weapon: "スプラシューター", battle: "ナワバリバトル", head_main: 1) }
-    let!(:gear_power) { create(:gear_power1) }
+    let!(:post2) { create(:post, weapon: "スプラシューター", battle: "ナワバリバトル") }
+    let!(:gear_powers) { create_list(:gear_power1, 27) }
 
     before do
       visit posts_path
@@ -162,6 +162,10 @@ RSpec.describe "Posts", type: :system do
     end
 
     describe "一覧部分のテスト" do
+      it "総投稿数を表示していること" do
+        expect(page).to have_content "総投稿数：2件"
+      end
+
       it "投稿の各情報を表示していること" do
         expect(page).to have_content post1.user.name
         expect(page).to have_content post1.created_at.to_s(:custom_no_year)
@@ -230,6 +234,184 @@ RSpec.describe "Posts", type: :system do
         within ".post:first-child" do
           click_link "ギアパワー", match: :first
           expect(current_path).to eq gear_power_path(post2.head_main)
+        end
+      end
+    end
+  end
+
+  describe "#show" do
+    let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
+    let(:updated_post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", updated_at: "1/1") }
+    let!(:gear_powers) { create_list(:gear_power1, 27) }
+    let!(:head_main) { GearPower.find(post.head_main) }
+    let!(:head_sub1) { GearPower.find(post.head_sub1) }
+    let!(:head_sub2) { GearPower.find(post.head_sub2) }
+    let!(:head_sub3) { GearPower.find(post.head_sub3) }
+    let!(:body_main) { GearPower.find(post.body_main) }
+    let!(:body_sub1) { GearPower.find(post.body_sub1) }
+    let!(:body_sub2) { GearPower.find(post.body_sub2) }
+    let!(:body_sub3) { GearPower.find(post.body_sub3) }
+    let!(:shoes_main) { GearPower.find(post.shoes_main) }
+    let!(:shoes_sub1) { GearPower.find(post.shoes_sub1) }
+    let!(:shoes_sub2) { GearPower.find(post.shoes_sub2) }
+    let!(:shoes_sub3) { GearPower.find(post.shoes_sub3) }
+
+    before do
+      visit post_path(post)
+    end
+
+    describe "パンくずのテスト" do
+      it "パンくずを正しく表示していること" do
+        within ".breadcrumbs" do
+          expect(page).to have_css "i.fa-solid"
+          expect(page).to have_css "i.fa-house"
+          expect(page).to have_content "Home"
+          expect(page).to have_content "投稿"
+          expect(page).to have_content post.title
+          expect(page).to have_css "span.current"
+        end
+      end
+
+      it "パンくずのHomeをクリックするとトップページへ遷移すること" do
+        within ".breadcrumbs" do
+          click_link "Home"
+          expect(current_path).to eq root_path
+        end
+      end
+
+      it "パンくずの投稿をクリックすると投稿一覧へ遷移すること" do
+        within ".breadcrumbs" do
+          click_link "投稿"
+          expect(current_path).to eq posts_path
+        end
+      end
+    end
+
+    describe "投稿内容のテスト" do
+      it "投稿タイトルを表示していること" do
+        expect(page).to have_selector "h2", text: post.title
+      end
+
+      it "投稿者を表示していること" do
+        expect(page).to have_content post.user.name
+        expect(page).to have_selector "img[src$='user_image_default_bk.png']"
+      end
+
+      it "投稿者の遷移先が正しいこと" do
+        click_link post.user.name
+        expect(current_path).to eq user_path(post.user)
+      end
+
+      it "投稿日時を表示していること" do
+        expect(page).to have_content post.created_at.to_s(:custom_with_year)
+      end
+
+      context "投稿を更新していない場合" do
+        it "更新日時を表示していないこと" do
+          expect(page).not_to have_content "に更新"
+        end
+      end
+
+      context "投稿を更新している場合" do
+        it "更新日時を表示していること" do
+          visit post_path(updated_post)
+          expect(page).to have_content "に更新"
+        end
+      end
+
+      it "おすすめブキを表示していること" do
+        expect(page).to have_content post.weapon
+      end
+
+      it "おすすめバトルを表示していること" do
+        expect(page).to have_content post.battle
+        expect(page).to have_selector "img[src$='3.png']"
+      end
+
+      it "ギアパワーを表示していること" do
+        expect(page).to have_content head_main.name
+        expect(page).to have_content head_sub1.name
+        expect(page).to have_content head_sub2.name
+        expect(page).to have_content head_sub3.name
+        expect(page).to have_content body_main.name
+        expect(page).to have_content body_sub1.name
+        expect(page).to have_content body_sub2.name
+        expect(page).to have_content body_sub3.name
+        expect(page).to have_content shoes_main.name
+        expect(page).to have_content shoes_sub1.name
+        expect(page).to have_content shoes_sub2.name
+        expect(page).to have_content shoes_sub3.name
+        expect(page).to have_selector "img[src$='gear_power_#{post.head_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.head_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.head_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.head_sub3}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.body_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.body_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.body_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.body_sub3}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.shoes_main}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.shoes_sub1}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.shoes_sub2}.png']"
+        expect(page).to have_selector "img[src$='gear_power_#{post.shoes_sub3}.png']"
+      end
+
+      it "ギアパワーの遷移先が正しいこと" do
+        click_link head_main.name, match: :first
+        expect(current_path).to eq gear_power_path(head_main)
+      end
+
+      it "コメントを表示していること" do
+        expect(page).to have_content post.comment
+      end
+    end
+
+    describe "編集ボタンと削除ボタンのテスト" do
+      context "ログインしていない場合" do
+        it "編集と削除ボタンを表示していないこと" do
+          expect(page).not_to have_content "編集する"
+          expect(page).not_to have_content "削除する"
+        end
+      end
+
+      context "ログイン済みの場合" do
+        before do
+          sign_in post.user
+        end
+
+        it "自身の投稿ではないなら編集と削除ボタンを表示していないこと" do
+          visit post_path(updated_post)
+          expect(page).not_to have_content "編集する"
+          expect(page).not_to have_content "削除する"
+        end
+
+        it "自身の投稿なら編集ボタンと削除ボタンを表示していること" do
+          visit post_path(post)
+          expect(page).to have_content "編集する"
+          expect(page).to have_content "削除する"
+        end
+
+        it "編集ボタンの遷移先が正しいこと" do
+          visit post_path(post)
+          click_link "編集する"
+          expect(current_path).to eq edit_post_path(post)
+        end
+
+        it "削除ボタンの遷移先が正しいこと" do
+          visit post_path(post)
+          click_link "削除する"
+          expect(current_path).to eq posts_path
+        end
+
+        it "削除ボタン後のフラッシュが正しいこと" do
+          visit post_path(post)
+          click_link "削除する"
+          expect(page).to have_content "投稿を削除しました。"
+        end
+
+        it "削除ボタンで投稿を削除できること" do
+          visit post_path(post)
+          click_link "削除する"
+          expect(Post.all.count).to eq 0
         end
       end
     end
