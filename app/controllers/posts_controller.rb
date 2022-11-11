@@ -42,6 +42,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    if @post.user == current_user
+      @post.destroy
+      flash[:notice] = "投稿を削除しました。"
+      redirect_to posts_path
+    else
+      flash[:alert] = "投稿者としてログインしていない場合は削除できません。"
+      redirect_to post_path(@post)
+    end
   end
 
   private
