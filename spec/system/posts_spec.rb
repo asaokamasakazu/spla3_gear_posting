@@ -237,7 +237,7 @@ RSpec.describe "Posts", type: :system do
 
   describe "#show" do
     let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
-    let(:updated_post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", updated_at: "1月1日") }
+    let(:updated_post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", updated_at: "1/1") }
     let!(:gear_powers) { create_list(:gear_power1, 27) }
     let!(:head_main) { GearPower.find(post.head_main) }
     let!(:head_sub1) { GearPower.find(post.head_sub1) }
