@@ -135,8 +135,8 @@ RSpec.describe "Posts", type: :system do
 
   describe "#index" do
     let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
-    let!(:post2) { create(:post, weapon: "スプラシューター", battle: "ナワバリバトル", head_main: 1) }
-    let!(:gear_power) { create(:gear_power1) }
+    let!(:post2) { create(:post, weapon: "スプラシューター", battle: "ナワバリバトル") }
+    let!(:gear_powers) { create_list(:gear_power1, 27) }
 
     before do
       visit posts_path
