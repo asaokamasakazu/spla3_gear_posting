@@ -162,6 +162,10 @@ RSpec.describe "Posts", type: :system do
     end
 
     describe "一覧部分のテスト" do
+      it "総投稿数を表示していること" do
+        expect(page).to have_content "総投稿数：2件"
+      end
+
       it "投稿の各情報を表示していること" do
         expect(page).to have_content post1.user.name
         expect(page).to have_content post1.created_at.to_s(:custom_no_year)

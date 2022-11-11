@@ -23,6 +23,10 @@ RSpec.describe "Posts", type: :request do
       expect(response).to have_http_status(:success)
     end
 
+    it "総投稿数を取得していること" do
+      expect(response.body).to include "総投稿数：2件"
+    end
+
     it "投稿の各情報を取得していること" do
       expect(response.body).to include post1.user.name
       expect(response.body).to include post1.created_at.to_s(:custom_no_year)
