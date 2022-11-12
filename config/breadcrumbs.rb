@@ -56,3 +56,8 @@ crumb :posts_show do |post|
   link post.title, post_path(post)
   parent :posts_index
 end
+
+crumb :posts_edit do |post|
+  link "投稿編集", edit_post_path(post)
+  parent :posts_show, post
+end
