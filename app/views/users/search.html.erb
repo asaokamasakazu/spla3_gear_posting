@@ -13,25 +13,25 @@
       <%= search_form_for @q, url: search_users_path do |f| %>
         <div class="users-search-forms">
           <div class="users-search-form">
-              <%= f.label :name_cont, "ユーザー名" %>
-              <%= f.search_field :name_cont, placeholder: "ユーザー名を入力" %>
+            <%= f.label :name_cont, "ユーザー名" %>
+            <%= f.search_field :name_cont, placeholder: "ユーザー名を入力" %>
           </div>
           <div class="users-search-form">
             <%= f.label :prowess_cont_any, "ウデマエ" %>
             <div class="label-in-label">
-            <label>
-              <%= f.check_box :prowess_cont_any, { multiple: true }, "S" %>S
-            </label>
-            <label>
-              <%= f.check_box :prowess_cont_any, { multiple: true }, "A" %>A
-            </label>
-            <label>
-              <%= f.check_box :prowess_cont_any, { multiple: true }, "B" %>B
-            </label>
-            <label>
-              <%= f.check_box :prowess_cont_any, { multiple: true }, "C" %>C
-            </label>
-          </div>
+              <label>
+                <%= f.check_box :prowess_cont_any, { multiple: true }, "S" %>S
+              </label>
+              <label>
+                <%= f.check_box :prowess_cont_any, { multiple: true }, "A" %>A
+              </label>
+              <label>
+                <%= f.check_box :prowess_cont_any, { multiple: true }, "B" %>B
+              </label>
+              <label>
+                <%= f.check_box :prowess_cont_any, { multiple: true }, "C" %>C
+              </label>
+            </div>
           </div>
           <div class="users-search-submit">
             <div class="users-search-hide-space"></div>
