@@ -40,10 +40,7 @@
             <span class="length-supplement">(100文字まで)</span>
           </div>
           <div class="form-line-right">
-            <div class="FlexTextarea">
-              <div class="FlexTextarea__dummy" aria-hidden="true"></div>
-              <%= f.text_area :profile, class: "FlexTextarea__textarea", maxlength: 100 %>
-            </div>
+            <%= f.text_area :profile, maxlength: 100 %>
           </div>
         </div>
         <div class="form-line">
@@ -114,5 +111,4 @@
     </div>
   </div>
 </div>
-<%= javascript_pack_tag 'users/adjust_textarea' %>
 <%= javascript_pack_tag 'users/show_password' %>

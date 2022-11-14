@@ -58,10 +58,7 @@
                 <span class="length-supplement">(250文字まで)</span>
               </div>
               <div class="form-line-right">
-                <div class="FlexTextarea">
-                  <div class="FlexTextarea__dummy" aria-hidden="true"></div>
-                  <%= f.text_area :comment, class: "FlexTextarea__textarea", maxlength: 250, placeholder: "編成のポイントやおすすめの立ち回りを入力してください" %>
-                </div>
+                <%= f.text_area :comment, maxlength: 250, placeholder: "編成のポイントやおすすめの立ち回りを入力してください" %>
               </div>
             </div>
             <div class="form-line">
@@ -571,5 +568,4 @@
     </div>
   </div>
 </div>
-<%= javascript_pack_tag 'users/adjust_textarea' %>
 <%= javascript_pack_tag 'posts/required_radio_message_off' %>

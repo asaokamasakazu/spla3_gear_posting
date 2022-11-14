@@ -34,6 +34,13 @@ hr {
 table {
   border-collapse: collapse;
 }
+textarea {
+  font-family : "Arial", "Hiragino Kaku Gothic ProN";
+  font-size : 13.3px;
+  min-height: 200px;
+  display: block;
+  resize: vertical;
+}
 .button {
   width: fit-content;
   display: inline-block;
@@ -51,25 +58,6 @@ table {
   border: none !important;
   padding: 0 !important;
   height: auto !important;
-}
-.FlexTextarea {
-  position: relative;
-  font-size: 0.9rem;
-  line-height: 1.8;
-}
-.FlexTextarea__dummy {
-  overflow: hidden;
-  visibility: hidden;
-  min-height: 80px;
-  white-space: pre-wrap;
-}
-.FlexTextarea__textarea {
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  height: 100%;
-  resize: none;
 }
 .hover-textdecoration:hover {
   text-decoration: underline;

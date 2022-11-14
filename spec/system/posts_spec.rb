@@ -101,7 +101,7 @@ RSpec.describe "Posts", type: :system do
             expect(page).to have_content "アタマのサブパワー1を入力してください。"
           end
 
-          it "新規投稿後の、入力していた情報の引継ぎが正しいこと" do
+          it "新規投稿失敗後の、入力していた情報の引継ぎが正しいこと" do
             expect(page).to have_xpath "//input[@id='post_title'][@value='テストタイトル']"
             expect(page).to have_select "post[weapon]", selected: "スプラシューター"
             expect(page).to have_select "post[battle]", selected: "ガチヤグラ"
@@ -411,6 +411,175 @@ RSpec.describe "Posts", type: :system do
         it "削除ボタンで投稿を削除できること" do
           visit post_path(post)
           click_link "削除する"
+          expect(Post.all.count).to eq 0
+        end
+      end
+    end
+  end
+
+  describe "#edit" do
+    let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
+    let!(:gear_powers) { create_list(:gear_power1, 27) }
+
+    context "まだログインしていない場合" do
+      before do
+        visit edit_post_path(post)
+      end
+
+      it "投稿編集ページに遷移したらログインページへリダイレクトすること" do
+        expect(current_path).to eq new_user_session_path
+      end
+
+      it "リダイレクト後に正しいフラッシュを表示していること" do
+        expect(page).to have_content "アカウント登録もしくはログインしてください。"
+      end
+    end
+
+    context "すでにログインしている場合" do
+      before do
+        sign_in post.user
+        visit edit_post_path(post)
+      end
+
+      describe "パンくずのテスト" do
+        it "パンくずを正しく表示していること" do
+          within ".breadcrumbs" do
+            expect(page).to have_css "i.fa-solid"
+            expect(page).to have_css "i.fa-house"
+            expect(page).to have_content "Home"
+            expect(page).to have_content "投稿"
+            expect(page).to have_content post.title
+            expect(page).to have_content "投稿編集"
+            expect(page).to have_css "span.current"
+          end
+        end
+
+        it "パンくずのHomeをクリックするとトップページへ遷移すること" do
+          within ".breadcrumbs" do
+            click_link "Home"
+            expect(current_path).to eq root_path
+          end
+        end
+
+        it "パンくずの投稿をクリックすると投稿一覧へ遷移すること" do
+          within ".breadcrumbs" do
+            click_link "投稿"
+            expect(current_path).to eq posts_path
+          end
+        end
+
+        it "パンくずの投稿タイトルをクリックすると投稿詳細へ遷移すること" do
+          within ".breadcrumbs" do
+            click_link post.title
+            expect(current_path).to eq post_path(post)
+          end
+        end
+      end
+
+      describe "投稿情報部分のテスト" do
+        context "更新に成功する場合" do
+          it "更新後に投稿詳細ページへリダイレクトすること" do
+            click_button "更新する"
+            expect(current_path).to eq post_path(post)
+          end
+
+          it "リダイレクト後に正しいフラッシュを表示していること" do
+            click_button "更新する"
+            expect(page).to have_content "投稿を編集しました。"
+          end
+
+          it "登録済みの情報がフォームに表示されていること" do
+            within ".main-container" do
+              expect(page).to have_xpath "//input[@id='post_title'][@value='#{post.title}']"
+              expect(page).to have_select "post[weapon]", selected: "わかばシューター"
+              expect(page).to have_select "post[battle]", selected: "ガチヤグラ"
+              expect(page).to have_content post.comment
+              expect(page).to have_checked_field with: "#{post.head_main}", visible: false
+              expect(page).to have_checked_field with: "#{post.head_sub1}", visible: false
+              expect(page).to have_checked_field with: "#{post.head_sub2}", visible: false
+              expect(page).to have_checked_field with: "#{post.head_sub3}", visible: false
+              expect(page).to have_checked_field with: "#{post.body_main}", visible: false
+              expect(page).to have_checked_field with: "#{post.body_sub1}", visible: false
+              expect(page).to have_checked_field with: "#{post.body_sub2}", visible: false
+              expect(page).to have_checked_field with: "#{post.body_sub3}", visible: false
+              expect(page).to have_checked_field with: "#{post.shoes_main}", visible: false
+              expect(page).to have_checked_field with: "#{post.shoes_sub1}", visible: false
+              expect(page).to have_checked_field with: "#{post.shoes_sub2}", visible: false
+              expect(page).to have_checked_field with: "#{post.shoes_sub3}", visible: false
+            end
+          end
+
+          it "タイトルの変更ができること" do
+            fill_in "post[title]", with: "edited_title"
+            click_button "更新する"
+            expect(Post.find(post.id).title).to eq "edited_title"
+          end
+
+          it "おすすめブキの変更ができること" do
+            select "スプラシューター", from: "post[weapon]"
+            click_button "更新する"
+            expect(Post.find(post.id).weapon).to eq "スプラシューター"
+          end
+
+          it "おすすめバトルの変更ができること" do
+            select "ガチアサリ", from: "post[battle]"
+            click_button "更新する"
+            expect(Post.find(post.id).battle).to eq "ガチアサリ"
+          end
+
+          it "コメントの変更ができること" do
+            fill_in "post[comment]", with: "edited_comment"
+            click_button "更新する"
+            expect(Post.find(post.id).comment).to eq "edited_comment"
+          end
+
+          it "ギアパワーの変更ができること" do
+            find("label[for=post_head_main_1]").click
+            find("label[for=post_head_sub1_1]").click
+            find("label[for=post_head_sub2_1]").click
+            find("label[for=post_head_sub3_1]").click
+            click_button "更新する"
+            expect(Post.find(post.id).head_main).to eq 1
+            expect(Post.find(post.id).head_sub1).to eq 1
+            expect(Post.find(post.id).head_sub2).to eq 1
+            expect(Post.find(post.id).head_sub3).to eq 1
+          end
+        end
+
+        context "更新に失敗する場合" do
+          before do
+            fill_in "post[title]", with: ""
+            click_button "更新する"
+          end
+
+          it "更新失敗後の遷移先が正しいこと" do
+            expect(current_path).to eq post_path(post)
+          end
+
+          it "更新失敗後に正しいフラッシュを表示していること" do
+            expect(page).to have_content "投稿の編集に失敗しました。"
+          end
+
+          it "更新失敗後の、入力していた情報の引継ぎが正しいこと" do
+            expect(page).to have_xpath "//input[@id='post_title'][@value='']"
+          end
+        end
+      end
+
+      describe "投稿削除のテスト" do
+        before do
+          click_link "投稿の削除"
+        end
+
+        it "削除ボタンの遷移先が正しいこと" do
+          expect(current_path).to eq posts_path
+        end
+
+        it "削除ボタン後のフラッシュが正しいこと" do
+          expect(page).to have_content "投稿を削除しました。"
+        end
+
+        it "削除ボタンで投稿を削除できること" do
           expect(Post.all.count).to eq 0
         end
       end
