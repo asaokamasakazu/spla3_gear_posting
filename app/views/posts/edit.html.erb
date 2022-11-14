@@ -549,6 +549,10 @@
               <%= f.submit "更新する", class: "hover-transform" %>
             </div>
           <% end %>
+          <hr class="hr-black"">
+          <div class="under-forms">
+            <p>投稿の編集ではなく、<%= link_to "投稿の削除", post_path(@post), class: "link-color-blue hover-textdecoration", method: :delete, data: { confirm: "投稿を削除してよろしいですか？" } %>をご希望ですか？</p>
+          </div>
         </div>
       </div>
     </div>
