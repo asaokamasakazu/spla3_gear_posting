@@ -160,4 +160,24 @@ RSpec.describe "Posts", type: :request do
       expect(response.body).to include post.comment
     end
   end
+
+  describe "GET /edit" do
+    let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
+
+    before do
+      sign_in post.user
+      get edit_post_path(post)
+    end
+
+    it "正常なレスポンスを返すこと" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "投稿の各情報を取得していること" do
+      expect(response.body).to include post.title
+      expect(response.body).to include post.weapon
+      expect(response.body).to include post.battle
+      expect(response.body).to include post.comment
+    end
+  end
 end
