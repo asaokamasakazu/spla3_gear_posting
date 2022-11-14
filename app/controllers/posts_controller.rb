@@ -45,8 +45,8 @@ class PostsController < ApplicationController
       flash[:notice] = "投稿を編集しました。"
       redirect_to post_path(@post)
     else
-      flash.now[:notice] = "投稿の編集に失敗しました。"
-      render edit_post_path(@post)
+      flash.now[:alert] = "投稿の編集に失敗しました。"
+      render :edit
     end
   end
 
