@@ -4,6 +4,10 @@ ja:
       post: 投稿
     attributes:
       post:
+        title: タイトル
+        weapon: おすすめブキ
+        battle: おすすめバトル
+        comment: コメント
         head_main: アタマのメインパワー
         head_sub1: アタマのサブパワー1
         head_sub2: アタマのサブパワー2
