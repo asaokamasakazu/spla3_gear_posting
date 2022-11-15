@@ -1,4 +1,4 @@
-<% provide(:title, "投稿") %>
+<% provide(:title, "投稿検索結果") %>
 <% breadcrumb :posts_index %>
 <div class="whole">
   <%= render "shared/flash_messages" %>
@@ -7,7 +7,7 @@
       <%= breadcrumbs separator: " &rsaquo; " %> 
       <h2>投稿一覧</h2>
       <p>投稿一覧では、他のユーザーが投稿したギア編成を見ることができます。投稿を絞り込む場合は、検索機能をお使いください。</p>
-      <p>総投稿数：<%= @posts.count %>件</p>
+      <p>検索結果：<%= @results.count %>件</p>
     </div>
   </div>
   <div class="main">
@@ -24,19 +24,19 @@
                 <%= f.label :user_prowess_cont_any, "投稿者ウデマエ", class: "parent-label" %>
                 <div class="label-in-label">
                   <label>
-                    <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "S" %>S
+                    <%= f.check_box :user_prowess_cont_any, { multiple: true }, "S" %>S
                   </label>
                   <label>
-                    <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "A" %>A
+                    <%= f.check_box :user_prowess_cont_any, { multiple: true }, "A" %>A
                   </label>
                   <label>
-                    <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "B" %>B
+                    <%= f.check_box :user_prowess_cont_any, { multiple: true }, "B" %>B
                   </label>
                   <label>
-                    <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "C" %>C
+                    <%= f.check_box :user_prowess_cont_any, { multiple: true }, "C" %>C
                   </label>
                   <label>
-                    <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "未設定" %>未設定
+                    <%= f.check_box :user_prowess_cont_any, { multiple: true }, "未設定" %>未設定
                   </label>
                 </div>
               </div>
@@ -56,7 +56,11 @@
         </div>
       <% end %>
       <div class="posts">
-        <%= render @posts %>
+        <% if @results.present? %>
+          <%= render partial: "posts/post", collection: @results , as: "post" %>
+        <% else %>
+          <p class="search-message">条件に一致する検索はありません。</p>
+        <% end %>
       </div>
     </div>
   </div>
