@@ -166,7 +166,7 @@ RSpec.describe "Posts", type: :system do
 
     describe "一覧部分のテスト" do
       it "総投稿数を表示していること" do
-        expect(page).to have_content "総投稿数：2件"
+        expect(page).to have_content "総投稿数：3件"
       end
 
       it "投稿の各情報を表示していること" do
@@ -219,8 +219,8 @@ RSpec.describe "Posts", type: :system do
       end
 
       it "ユーザーの名前をクリックするとユーザー詳細ページへ遷移すること" do
-        click_link post2.user.name
-        expect(current_path).to eq user_path(post2.user)
+        click_link post1.user.name
+        expect(current_path).to eq user_path(post1.user)
       end
 
       it "投稿のタイトルをクリックすると投稿詳細ページへ遷移すること" do
@@ -230,13 +230,13 @@ RSpec.describe "Posts", type: :system do
 
       it "編成詳細へをクリックすると投稿詳細ページへ遷移すること" do
         click_link "> 編成詳細へ", match: :first
-        expect(current_path).to eq post_path(post2)
+        expect(current_path).to eq post_path(post3)
       end
 
       it "ギアパワーのアイコンをクリックするとギアパワー詳細ページへ遷移すること" do
         within ".post:first-child" do
           click_link "ギアパワー", match: :first
-          expect(current_path).to eq gear_power_path(post2.head_main)
+          expect(current_path).to eq gear_power_path(post3.head_main)
         end
       end
     end
