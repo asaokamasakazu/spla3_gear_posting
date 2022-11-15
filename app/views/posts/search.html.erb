@@ -57,7 +57,7 @@
       <% end %>
       <div class="posts">
         <% if @results.present? %>
-          <%= render partial: "posts/post", collection: @results , as: "post" %>
+          <%= render partial: "posts/post", collection: @results, as: "post" %>
         <% else %>
           <p class="search-message">条件に一致する検索はありません。</p>
         <% end %>
