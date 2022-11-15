@@ -312,6 +312,135 @@ RSpec.describe "Posts", type: :system do
     end
   end
 
+  describe "#search" do
+    let(:user1) { create(:user, name: "ユーザー1", prowess: "A+") }
+    let(:user2) { create(:user, name: "ユーザー2", prowess: "B-") }
+    let!(:post1) { create(:post, title: "タイトル1", weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
+    let!(:post2) { create(:post, title: "タイトル2", weapon: "スプラシューター", battle: "ナワバリバトル", user: user2) }
+    let!(:post3) { create(:post, weapon: "わかばシューター", battle: "ナワバリバトル", user: user2) }
+    let!(:gear_powers) { create_list(:gear_power1, 27) }
+
+    before do
+      visit search_posts_path
+    end
+
+    describe "パンくずのテスト" do
+      it "パンくずを正しく表示していること" do
+        within ".breadcrumbs" do
+          expect(page).to have_css "i.fa-solid"
+          expect(page).to have_css "i.fa-house"
+          expect(page).to have_content "Home"
+          expect(page).to have_content "投稿"
+          expect(page).to have_css "span.current"
+        end
+      end
+
+      it "パンくずで正しく遷移すること" do
+        within ".breadcrumbs" do
+          click_link "Home"
+          expect(current_path).to eq root_path
+        end
+      end
+    end
+
+    describe "検索機能のテスト" do
+      it "ダイレクトで訪れた場合は全投稿を表示していること" do
+        expect(page).to have_content post1.title
+        expect(page).to have_content post2.title
+        expect(page).to have_content post3.title
+      end
+
+      it "デフォルトの状態で検索すると投稿が表示されないこと" do
+        click_button "検索"
+        expect(page).not_to have_content post1.title
+        expect(page).not_to have_content post2.title
+        expect(page).not_to have_content post3.title
+      end
+
+      it "検索後の遷移先が正しいこと" do
+        click_button "検索"
+        expect(current_path).to eq search_posts_path
+      end
+
+      it "キーワード検索でユーザー名ベースで投稿を絞り込めること" do
+        fill_in "q[title_or_user_name_cont]", with: "ユーザー1"
+        check "S"
+        check "A"
+        check "B"
+        check "C"
+        check "未設定"
+        click_button "検索"
+        expect(page).to have_content user1.name
+        expect(page).not_to have_content user2.name
+      end
+
+      it "キーワード検索で投稿タイトルベースで投稿を絞り込めること" do
+        fill_in "q[title_or_user_name_cont]", with: "タイトル1"
+        check "S"
+        check "A"
+        check "B"
+        check "C"
+        check "未設定"
+        click_button "検索"
+        expect(page).to have_content post1.title
+        expect(page).not_to have_content post2.title
+      end
+
+      it "ウデマエ検索で投稿を絞り込めること" do
+        check "S"
+        check "A"
+        check "C"
+        check "未設定"
+        click_button "検索"
+        expect(page).to have_content user1.name
+        expect(page).not_to have_content user2.name
+      end
+
+      it "ブキ検索で投稿を絞り込めること" do
+        select "スプラシューター", from: "q[weapon_eq]"
+        check "S"
+        check "A"
+        check "B"
+        check "C"
+        check "未設定"
+        click_button "検索"
+        expect(page).to have_content post2.title
+        expect(page).not_to have_content post1.title
+        expect(page).not_to have_content post3.title
+      end
+
+      it "バトル検索で投稿を絞り込めること" do
+        select "ガチヤグラ", from: "q[battle_eq]"
+        check "S"
+        check "A"
+        check "B"
+        check "C"
+        check "未設定"
+        click_button "検索"
+        expect(page).to have_content post1.title
+        expect(page).not_to have_content post2.title
+        expect(page).not_to have_content post3.title
+      end
+
+      it "2つ以上の検索を併用してユーザーを絞り込めること" do
+        check "S"
+        check "B"
+        check "C"
+        check "未設定"
+        select "わかばシューター", from: "q[weapon_eq]"
+        click_button "検索"
+        expect(page).to have_content post3.title
+        expect(page).not_to have_content post1.title
+        expect(page).not_to have_content post2.title
+      end
+
+      it "該当するユーザーがいなかった場合に、メッセージが表示されること" do
+        click_button "検索"
+        expect(page).to have_content "条件に一致する検索はありません。"
+      end
+    end
+  end
+
   describe "#show" do
     let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
     let(:updated_post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", updated_at: "1/1") }
