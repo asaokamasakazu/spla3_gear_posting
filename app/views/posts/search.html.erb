@@ -42,7 +42,7 @@
               </div>
               <div class="posts-search-form">
                 <%= f.label :weapon_eq, "ブキ", class: "parent-label" %>
-                <%= f.select :weapon_eq, grouped_options_for_select(Post::SELECT_WEAPON_OPTIONS, @q.weapon_eq), { prompt: "未選択" } %>
+                <%= f.select :weapon_eq, grouped_options_for_select(Post::SELECT_WEAPON_OPTIONS_FOR_SEARCH, @q.weapon_eq) %>
               </div>
               <div class="posts-search-form">
                 <%= f.label :battle_eq, "バトル", class: "parent-label" %>
