@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  attribute :prowess, :string, default: "未設定"
+
   validates :name, { presence: true, length: { maximum: 20 } }
   validates :rank, { numericality: true, allow_nil: true }
+  validates :prowess, { presence: true }
   validates :profile, { length: { maximum: 100 } }
 
   has_one_attached :image
