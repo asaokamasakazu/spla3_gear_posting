@@ -46,7 +46,7 @@
               </div>
               <div class="posts-search-form">
                 <%= f.label :battle_eq, "バトル", class: "parent-label" %>
-                <%= f.select :battle_eq, ["ナワバリバトル", "ガチエリア", "ガチヤグラ", "ガチホコ", "ガチアサリ"], { prompt: "未選択" } %>
+                <%= f.select :battle_eq, [["未選択", ""], "ナワバリバトル", "ガチエリア", "ガチヤグラ", "ガチホコ", "ガチアサリ"] %>
               </div>
             </div>
             <div class="posts-search-submit">
