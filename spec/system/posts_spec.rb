@@ -137,8 +137,8 @@ RSpec.describe "Posts", type: :system do
     let(:user1) { create(:user, name: "ユーザー1", prowess: "A+") }
     let(:user2) { create(:user, name: "ユーザー2", prowess: "B-") }
     let!(:post1) { create(:post, title: "タイトル1", weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
-    let!(:post2) { create(:post, title: "タイトル2", weapon: "スプラシューター", battle: "ナワバリバトル", user: user2) }
-    let!(:post3) { create(:post, weapon: "わかばシューター", battle: "ナワバリバトル", user: user2) }
+    let!(:post2) { create(:post, title: "タイトル2", weapon: "スプラシューター", battle: "ガチホコ", user: user2) }
+    let!(:post3) { create(:post, weapon: "わかばシューター", battle: "ガチホコ", user: user2) }
     let!(:gear_powers) { create_list(:gear_power1, 27) }
 
     before do
@@ -316,8 +316,8 @@ RSpec.describe "Posts", type: :system do
     let(:user1) { create(:user, name: "ユーザー1", prowess: "A+") }
     let(:user2) { create(:user, name: "ユーザー2", prowess: "B-") }
     let!(:post1) { create(:post, title: "タイトル1", weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
-    let!(:post2) { create(:post, title: "タイトル2", weapon: "スプラシューター", battle: "ナワバリバトル", user: user2) }
-    let!(:post3) { create(:post, weapon: "わかばシューター", battle: "ナワバリバトル", user: user2) }
+    let!(:post2) { create(:post, title: "タイトル2", weapon: "スプラシューター", battle: "ガチホコ", user: user2) }
+    let!(:post3) { create(:post, weapon: "わかばシューター", battle: "ガチホコ", user: user2) }
     let!(:gear_powers) { create_list(:gear_power1, 27) }
 
     before do
