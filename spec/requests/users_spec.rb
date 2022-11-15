@@ -29,6 +29,34 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe "GET /search" do
+    let!(:user1) { create(:user, prowess: "A+") }
+    let!(:user2) { create(:user, prowess: "B-") }
+
+    before do
+      get search_users_path
+    end
+
+    it "正常なレスポンスを返すこと" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "ユーザーを全件取得していること" do
+      expect(response.body).to include user1.name
+      expect(response.body).to include user2.name
+    end
+
+    it "ユーザーの各情報を取得していること" do
+      expect(response.body).to include user1.rank.to_s
+      expect(response.body).to include user1.prowess
+      expect(response.body).to include user1.posts.count.to_s
+    end
+
+    it "ユーザーのアイコン画像を取得していること" do
+      expect(response.body).to include "user_image_default_ye.png"
+    end
+  end
+
   describe "GET /show" do
     let(:user) { create(:user, prowess: "A+") }
     let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
