@@ -122,6 +122,7 @@ RSpec.describe "Users", type: :system do
         uncheck "A"
         uncheck "B"
         uncheck "C"
+        uncheck "未設定"
         perform_search
         expect(page).to have_content "条件に一致するユーザーはいません。"
       end
@@ -180,6 +181,7 @@ RSpec.describe "Users", type: :system do
         check "A"
         check "B"
         check "C"
+        check "未設定"
         perform_search
         expect(page).to have_content user1.name
         expect(page).to have_content user2.name
@@ -190,6 +192,7 @@ RSpec.describe "Users", type: :system do
         check "S"
         check "A"
         check "C"
+        check "未設定"
         perform_search
         expect(page).to have_content user1.name
         expect(page).to have_content user3.name
@@ -201,6 +204,7 @@ RSpec.describe "Users", type: :system do
         check "S"
         check "A"
         check "C"
+        check "未設定"
         perform_search
         expect(page).to have_content user1.name
         expect(page).not_to have_content user2.name
