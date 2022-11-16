@@ -17,6 +17,7 @@ class Post < ApplicationRecord
   validates :shoes_sub3, { presence: true }
 
   belongs_to :user
+  has_many :favorites, dependent: :destroy
 
   SELECT_WEAPON_OPTIONS = [
     [
