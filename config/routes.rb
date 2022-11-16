@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection do
       get "search"
     end
+    resources :favorites, only: [:create, :destroy]
   end
   devise_for :users, controllers: {
     sessions: "users/sessions",
@@ -19,5 +20,5 @@ Rails.application.routes.draw do
     end
   end
   resources :gear_powers, only: [:index, :show]
-  root :to => "home#top"
+  root "home#top"
 end
