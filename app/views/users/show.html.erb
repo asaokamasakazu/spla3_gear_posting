@@ -34,7 +34,11 @@
           <li>
             被お気に入り数<br>
             <span class="font-weight-bold">
-              #
+              <% sum = 0 %>
+              <% @user.posts.each do |post| %>
+                <% sum += post.favorites.count %>
+              <% end %>
+              <%= sum %>
             </span>
           </li>
           <div class="vertical-border"></div>
