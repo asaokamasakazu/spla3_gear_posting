@@ -57,22 +57,43 @@
     </div>
   </div>
   <div class="main">
+    <div class="toggle-radio">
+      <%= radio_button_tag "toggle", "posts", checked: "checked" %>
+      <%= label_tag "toggle_posts", "投稿" %>
+      <%= radio_button_tag "toggle", "favorites" %>
+      <%= label_tag "toggle_favorites", "お気に入り" %>
+    </div>
     <div class="main-container">
-      <h3 class="main-container-h3"><%= @user.name %>の投稿</h3>
-      <div class="posts">
-        <% if @user.posts.present? %>
-          <%= render partial: "posts/post", collection: @user.posts, as: "post" %>
-        <% else %>
-          <div class="no-post-message">
-            <p>まだ投稿はありません。</p>
-            <% if @user === current_user %>
-              <%= link_to "＋投稿する", new_post_path, class: "to-new-post-button hover-transform" %>
-            <% end %>
-          </div>
-        <% end %>
+      <div class="toggle toggle-posts">
+        <h3 class="main-container-h3"><%= @user.name %>の投稿</h3>
+        <div class="posts">
+          <% if @user.posts.present? %>
+            <%= render partial: "posts/post", collection: @user.posts, as: "post" %>
+          <% else %>
+            <div class="no-post-message">
+              <p>まだ投稿はありません。</p>
+              <% if @user === current_user %>
+                <%= link_to "＋投稿する", new_post_path, class: "to-new-post-button hover-transform" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="toggle toggle-favorites">
+        <h3 class="main-container-h3"><%= @user.name %>のお気に入り</h3>
+        <div class="posts">
+          <% if @user.favorites.present? %>
+            <%= render partial: "posts/favorited_post", collection: @user.favorites.order(created_at: :desc), as: "favorite" %>
+          <% else %>
+            <div class="no-post-message">
+              <p>まだお気に入りはありません。</p>
+            </div>
+          <% end %>
+        </div>
       </div>
       <%= link_to "&lt; ユーザー一覧に戻る".html_safe, list_users_path, class: "button top-button posts-button" %>
     </div>
   </div>
 </div>
 <%= link_to "＋投稿する", new_post_path, class: "fixed_to_post_link" %>
+<%= javascript_pack_tag 'users/toggle' %>
