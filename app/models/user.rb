@@ -35,4 +35,8 @@ class User < ApplicationRecord
       user.name = "ゲスト"
     end
   end
+
+  def already_favorited?(post)
+    favorites.exists?(post_id: post.id)
+  end
 end
