@@ -15,7 +15,14 @@
         <div class="user-achievements">
           <ul>
             <li>投稿数 <%= user.posts.count %></li>
-            <li>被お気に入り数 #</li>
+            <li>
+              被お気に入り数
+              <% sum = 0 %>
+              <% user.posts.each do |post| %>
+                <% sum += post.favorites.count %>
+              <% end %>
+              <%= sum %>
+            </li>
           </ul>
         </div>
         <div class="user-achievements">
