@@ -78,12 +78,9 @@
       </div>
     </div>
     <div class="post-footer">
-      <%= link_to "#" do %>
-        <div class="post-bookmark hover-color-red hover-i-color-red">
-          <i class="far fa-bookmark font-awesome-color-black font-awesome-size-105"></i>
-          <p>#件</p>
-        </div>
-      <% end %>
+      <div class="favorite_button_<%= post.id %>">
+        <%= render "favorites/favorite", post: post %>
+      </div>
       <div class="post-to-show">
         <%= link_to "&gt; 編成詳細へ".html_safe, post_path(post), class: "hover-textdecoration" %>
       </div>

@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
   describe "GET /list" do
-    let!(:user1) { create(:user, prowess: "A+") }
-    let!(:user2) { create(:user, prowess: "B-") }
+    let(:user1) { create(:user, prowess: "A+") }
+    let(:user2) { create(:user, prowess: "B-") }
+    let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
+    let!(:favorite) { create(:favorite, user: user2, post: post) }
 
     before do
       get list_users_path
@@ -21,7 +23,8 @@ RSpec.describe "Users", type: :request do
     it "ユーザーの各情報を取得していること" do
       expect(response.body).to include user1.rank.to_s
       expect(response.body).to include user1.prowess
-      expect(response.body).to include user1.posts.count.to_s
+      expect(response.body).to include "投稿数 1"
+      expect(response.body).to include "被お気に入り数 1"
     end
 
     it "ユーザーのアイコン画像を取得していること" do
@@ -30,8 +33,10 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET /search" do
-    let!(:user1) { create(:user, prowess: "A+") }
-    let!(:user2) { create(:user, prowess: "B-") }
+    let(:user1) { create(:user, prowess: "A+") }
+    let(:user2) { create(:user, prowess: "B-") }
+    let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
+    let!(:favorite) { create(:favorite, user: user2, post: post) }
 
     before do
       get search_users_path
@@ -49,7 +54,8 @@ RSpec.describe "Users", type: :request do
     it "ユーザーの各情報を取得していること" do
       expect(response.body).to include user1.rank.to_s
       expect(response.body).to include user1.prowess
-      expect(response.body).to include user1.posts.count.to_s
+      expect(response.body).to include "投稿数 1"
+      expect(response.body).to include "被お気に入り数 1"
     end
 
     it "ユーザーのアイコン画像を取得していること" do
@@ -59,8 +65,11 @@ RSpec.describe "Users", type: :request do
 
   describe "GET /show" do
     let(:user) { create(:user, prowess: "A+") }
-    let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+    let(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
     let!(:post2) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+    let(:post3) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
+    let!(:favorite1) { create(:favorite, user: post3.user, post: post1) }
+    let!(:favorite2) { create(:favorite, user: user, post: post3) }
 
     before do
       sign_in user
@@ -80,12 +89,15 @@ RSpec.describe "Users", type: :request do
       expect(response.body).to include user.rank.to_s
       expect(response.body).to include user.prowess
       expect(response.body).to include user.profile
-      expect(response.body).to include user.posts.count.to_s
     end
 
-    it "これまでの投稿を取得していること" do
+    it "自身の投稿を取得していること" do
       expect(response.body).to include post1.title
       expect(response.body).to include post2.title
+    end
+
+    it "自身がお気に入りした投稿を取得していること" do
+      expect(response.body).to include post3.title
     end
 
     it "ユーザーのアイコン画像を取得していること" do

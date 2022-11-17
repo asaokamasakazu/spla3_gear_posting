@@ -1,0 +1,7 @@
+<% if post.favorites.present? %>
+  <ul>
+    <%= render partial: "posts/user_who_favorited", collection: post.favorites.order(created_at: :desc), as: "favorite" %>
+  </ul>
+<% else %>
+  <p>まだお気に入りされていません。</p>
+<% end %>

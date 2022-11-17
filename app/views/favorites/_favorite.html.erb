@@ -1,0 +1,18 @@
+<% if user_signed_in? %>
+  <% if current_user.already_favorited?(post) %>
+    <%= link_to post_favorite_path(post, post), method: :delete, remote: true, class: "bookmark-button hover-opacity" do %>
+      <i class="fas fa-bookmark font-awesome-size-105"></i>
+      <%= post.favorites.count %>件
+    <% end %>
+  <% else %>
+    <%= link_to post_favorites_path(post), method: :post, remote: true, class: "bookmark-button hover-opacity" do %>
+      <i class="far fa-bookmark font-awesome-size-105"></i>
+      <%= post.favorites.count %>件
+    <% end %>
+  <% end %>
+<% else %>
+  <%= link_to post_favorites_path(post), method: :post, remote: true, class: "bookmark-button hover-opacity" do %>
+    <i class="far fa-bookmark font-awesome-size-105"></i>
+    <%= post.favorites.count %>件
+  <% end %>
+<% end %>

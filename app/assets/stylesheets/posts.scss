@@ -149,13 +149,8 @@
   justify-content: space-between;
   align-items: center;
   font-size: 0.9rem;
-}
-.post-bookmark {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  p {
-    margin-left: 3px;
+  i {
+    margin-right: 4px;
   }
 }
 .posts-search {
@@ -255,107 +250,136 @@
     width: 68%;
   }
 }
-input[type="radio"] {
-  display: none;
-}
-input[type="radio"]+label::before {
-  content: "";
-  display: inline-block;
-  background-size: contain;
-  width: 40px;
-  height: 40px;
-  opacity: 0.7;
-}
-input[type="radio"]:hover+label::before {
-  opacity: 1;
-}
-input[type="radio"]:checked+label::before {
-  border: 4px solid rgb(89, 89, 255);
-  border-radius: 50%;
-  box-sizing: border-box;
-  box-shadow: 0 0 10px 0 rgba(89, 89, 255, 0.9);
-  opacity: 1;
+.radio-gear-power {
+  input[type="radio"] {
+    display: none;
+  }
+  input[type="radio"]+label::before {
+    content: "";
+    display: inline-block;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    opacity: 0.7;
+  }
+  input[type="radio"]:hover+label::before {
+    opacity: 1;
+  }
+  input[type="radio"]:checked+label::before {
+    border: 4px solid rgb(89, 89, 255);
+    border-radius: 50%;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0 rgba(89, 89, 255, 0.9);
+    opacity: 1;
+  }
 }
 input[type="radio"][value="1"]+label::before {
   background-image: url("/gear_powers/gear_power_1.png");
+  cursor: pointer;
 }
 input[type="radio"][value="2"]+label::before {
   background-image: url("/gear_powers/gear_power_2.png");
+  cursor: pointer;
 }
 input[type="radio"][value="3"]+label::before {
   background-image: url("/gear_powers/gear_power_3.png");
+  cursor: pointer;
 }
 input[type="radio"][value="4"]+label::before {
   background-image: url("/gear_powers/gear_power_4.png");
+  cursor: pointer;
 }
 input[type="radio"][value="5"]+label::before {
   background-image: url("/gear_powers/gear_power_5.png");
+  cursor: pointer;
 }
 input[type="radio"][value="6"]+label::before {
   background-image: url("/gear_powers/gear_power_6.png");
+  cursor: pointer;
 }
 input[type="radio"][value="7"]+label::before {
   background-image: url("/gear_powers/gear_power_7.png");
+  cursor: pointer;
 }
 input[type="radio"][value="8"]+label::before {
   background-image: url("/gear_powers/gear_power_8.png");
+  cursor: pointer;
 }
 input[type="radio"][value="9"]+label::before {
   background-image: url("/gear_powers/gear_power_9.png");
+  cursor: pointer;
 }
 input[type="radio"][value="10"]+label::before {
   background-image: url("/gear_powers/gear_power_10.png");
+  cursor: pointer;
 }
 input[type="radio"][value="11"]+label::before {
   background-image: url("/gear_powers/gear_power_11.png");
+  cursor: pointer;
 }
 input[type="radio"][value="12"]+label::before {
   background-image: url("/gear_powers/gear_power_12.png");
+  cursor: pointer;
 }
 input[type="radio"][value="13"]+label::before {
   background-image: url("/gear_powers/gear_power_13.png");
+  cursor: pointer;
 }
 input[type="radio"][value="14"]+label::before {
   background-image: url("/gear_powers/gear_power_14.png");
+  cursor: pointer;
 }
 input[type="radio"][value="15"]+label::before {
   background-image: url("/gear_powers/gear_power_15.png");
+  cursor: pointer;
 }
 input[type="radio"][value="16"]+label::before {
   background-image: url("/gear_powers/gear_power_16.png");
+  cursor: pointer;
 }
 input[type="radio"][value="17"]+label::before {
   background-image: url("/gear_powers/gear_power_17.png");
+  cursor: pointer;
 }
 input[type="radio"][value="18"]+label::before {
   background-image: url("/gear_powers/gear_power_18.png");
+  cursor: pointer;
 }
 input[type="radio"][value="19"]+label::before {
   background-image: url("/gear_powers/gear_power_19.png");
+  cursor: pointer;
 }
 input[type="radio"][value="20"]+label::before {
   background-image: url("/gear_powers/gear_power_20.png");
+  cursor: pointer;
 }
 input[type="radio"][value="21"]+label::before {
   background-image: url("/gear_powers/gear_power_21.png");
+  cursor: pointer;
 }
 input[type="radio"][value="22"]+label::before {
   background-image: url("/gear_powers/gear_power_22.png");
+  cursor: pointer;
 }
 input[type="radio"][value="23"]+label::before {
   background-image: url("/gear_powers/gear_power_23.png");
+  cursor: pointer;
 }
 input[type="radio"][value="24"]+label::before {
   background-image: url("/gear_powers/gear_power_24.png");
+  cursor: pointer;
 }
 input[type="radio"][value="25"]+label::before {
   background-image: url("/gear_powers/gear_power_25.png");
+  cursor: pointer;
 }
 input[type="radio"][value="26"]+label::before {
   background-image: url("/gear_powers/gear_power_26.png");
+  cursor: pointer;
 }
 input[type="radio"][value="27"]+label::before {
   background-image: url("/gear_powers/gear_power_27.png");
+  cursor: pointer;
 }
 
 /*=== POSTS/SHOW ===*/
@@ -367,7 +391,6 @@ input[type="radio"][value="27"]+label::before {
   width: fit-content;
   margin-top: 15px;
   a {
-    transition: all .3s;
     display: block;
   }
 }
@@ -379,6 +402,7 @@ input[type="radio"][value="27"]+label::before {
   margin-right: 10px;
   color: #fff;
   font-size: 0.9rem;
+  transition: all .3s;
 }
 .bookmark-button {
   display: flex;
@@ -444,6 +468,58 @@ input[type="radio"][value="27"]+label::before {
 }
 @media screen and (max-width: 520px) {
   .post-show-comment {
+    font-size: 0.85rem;
+  }
+}
+.post-show-favorited {
+  margin-bottom: 10px;
+  h3 {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    margin-right: 10px;
+    padding-left: 7px;
+    border-left: 2px solid #333;
+  }
+  a {
+    transition: all .3s;
+  }
+  i {
+    margin-right: 4px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .post-show-favorited {
+    h3 {
+      font-size: 1.15rem;
+      line-height: 1.5rem;
+      margin-bottom: 10px;
+    }
+    a {
+      width: fit-content;
+    }
+  }
+}
+@media screen and (min-width: 521px) {
+  .post-show-favorited {
+    display: flex;
+    align-items: center;
+  }
+}
+.post-show-favorited-container {
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  li {
+    margin-bottom: 5px;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 5px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .post-show-favorited-container {
     font-size: 0.85rem;
   }
 }

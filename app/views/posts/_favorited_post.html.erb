@@ -1,0 +1,89 @@
+<div class="post">
+  <div class="post-container">
+    <div class="post-header">
+      <div class="post-header-user">
+        <div class="post-user-icon">
+          <% if favorite.post.user.image.present? %>
+            <%= link_to (image_tag favorite.post.user.image, alt: "#{favorite.post.user.name}のユーザーアイコン"), user_path(favorite.post.user), class: "hover-opacity" %>
+          <% else %>
+            <%= link_to (image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン"), user_path(favorite.post.user), class: "hover-opacity" %>
+          <% end %>
+        </div>
+        <div class="post-user-info">
+          <%= link_to favorite.post.user.name, user_path(favorite.post.user), class: "hover-textdecoration" %>
+          <p class="post-user-time"><%= favorite.post.created_at.to_s(:custom_no_year) %></p>
+        </div>
+      </div>
+      <div class="post-header-title">
+        <div class="post-title">
+          <%= link_to favorite.post.title, post_path(favorite.post), class: "hover-textdecoration" %>
+        </div>
+        <div class="post-recommend">
+          <p>おすすめブキ：<%= favorite.post.weapon %></p>
+          <p>おすすめバトル：<%= favorite.post.battle %></p>
+        </div>
+      </div>
+    </div>
+    <div class="post-center">
+      <div class="post-center-one">
+        <div class="post-gearcategory">
+          <i class="fa-solid fa-hat-cowboy font-awesome-color-black"></i>
+          <p>アタマ</p>
+        </div>
+        <hr class="post-hr">
+        <div class="post-gearpowers">
+          <div class="post-main-gearpower">
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.head_main}.png", alt: "ギアパワー"), gear_power_path(favorite.post.head_main), class: "hover-brightness" %>
+          </div>
+          <div class="post-sub-gearpowers">
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.head_sub1}.png", alt: "ギアパワー"), gear_power_path(favorite.post.head_sub1), class: "hover-brightness" %>
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.head_sub2}.png", alt: "ギアパワー"), gear_power_path(favorite.post.head_sub2), class: "hover-brightness" %>
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.head_sub3}.png", alt: "ギアパワー"), gear_power_path(favorite.post.head_sub3), class: "hover-brightness" %>
+          </div>
+        </div>
+      </div>
+      <div class="post-center-one">
+        <div class="post-gearcategory">
+          <i class="fa-solid fa-shirt font-awesome-color-black"></i>
+          <p>フク</p>
+        </div>
+        <hr class="post-hr">
+        <div class="post-gearpowers">
+          <div class="post-main-gearpower">
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.body_main}.png", alt: "ギアパワー"), gear_power_path(favorite.post.body_main), class: "hover-brightness" %>
+          </div>
+          <div class="post-sub-gearpowers">
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.body_sub1}.png", alt: "ギアパワー"), gear_power_path(favorite.post.body_sub1), class: "hover-brightness" %>
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.body_sub2}.png", alt: "ギアパワー"), gear_power_path(favorite.post.body_sub2), class: "hover-brightness" %>
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.body_sub3}.png", alt: "ギアパワー"), gear_power_path(favorite.post.body_sub3), class: "hover-brightness" %>
+          </div>
+        </div>
+      </div>
+      <div class="post-center-one">
+        <div class="post-gearcategory">
+          <i class="fa-solid fa-shoe-prints font-awesome-color-black"></i>
+          <p>クツ</p>
+        </div>
+        <hr class="post-hr">
+        <div class="post-gearpowers">
+          <div class="post-main-gearpower">
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.shoes_main}.png", alt: "ギアパワー"), gear_power_path(favorite.post.shoes_main), class: "hover-brightness" %>
+          </div>
+          <div class="post-sub-gearpowers">
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.shoes_sub1}.png", alt: "ギアパワー"), gear_power_path(favorite.post.shoes_sub1), class: "hover-brightness" %>
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.shoes_sub2}.png", alt: "ギアパワー"), gear_power_path(favorite.post.shoes_sub2), class: "hover-brightness" %>
+            <%= link_to (image_tag "/gear_powers/gear_power_#{favorite.post.shoes_sub3}.png", alt: "ギアパワー"), gear_power_path(favorite.post.shoes_sub3), class: "hover-brightness" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post-footer">
+      <div class="favorite_button_<%= favorite.post.id %>">
+        <%= render "favorites/favorite", post: favorite.post %>
+      </div>
+      <div class="post-to-show">
+        <%= link_to "&gt; 編成詳細へ".html_safe, post_path(favorite.post), class: "hover-textdecoration" %>
+      </div>
+    </div>
+  </div>
+</div>

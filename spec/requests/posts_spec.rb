@@ -12,8 +12,9 @@ RSpec.describe "Posts", type: :request do
   end
 
   describe "GET /index" do
-    let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
+    let(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
     let!(:post2) { create(:post, weapon: "スプラシューター", battle: "ナワバリバトル") }
+    let!(:favorite) { create(:favorite, user: post1.user, post: post1) }
 
     before do
       get posts_path
@@ -69,6 +70,11 @@ RSpec.describe "Posts", type: :request do
       expect(response.body).to include "gear_power_#{post2.shoes_sub1}.png"
       expect(response.body).to include "gear_power_#{post2.shoes_sub2}.png"
       expect(response.body).to include "gear_power_#{post2.shoes_sub3}.png"
+    end
+
+    it "お気に入り数を取得していること" do
+      expect(response.body).to include "0件"
+      expect(response.body).to include "1件"
     end
   end
 
@@ -148,6 +154,8 @@ RSpec.describe "Posts", type: :request do
     let!(:shoes_sub1) { GearPower.find(post.shoes_sub1) }
     let!(:shoes_sub2) { GearPower.find(post.shoes_sub2) }
     let!(:shoes_sub3) { GearPower.find(post.shoes_sub3) }
+    let(:user) { create(:user) }
+    let!(:favorite) { create(:favorite, user: user, post: post) }
 
     before do
       get post_path(post)
@@ -219,6 +227,14 @@ RSpec.describe "Posts", type: :request do
 
     it "コメントを取得していること" do
       expect(response.body).to include post.comment
+    end
+
+    it "お気に入り数を取得していること" do
+      expect(response.body).to include "1件"
+    end
+
+    it "お気に入りしたユーザーを取得していること" do
+      expect(response.body).to include user.name
     end
   end
 
