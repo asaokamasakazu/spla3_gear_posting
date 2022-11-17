@@ -78,24 +78,9 @@
       </div>
     </div>
     <div class="post-footer">
-      <% if user_signed_in? %>
-        <% if current_user.already_favorited?(post) %>
-          <%= link_to post_favorite_path(post, post), method: :delete, class: "bookmark-button hover-opacity" do %>
-            <i class="fas fa-bookmark font-awesome-size-105"></i>
-            <%= post.favorites.count %>件
-          <% end %>
-        <% else %>
-          <%= link_to post_favorites_path(post), method: :post, class: "bookmark-button hover-opacity" do %>
-            <i class="far fa-bookmark font-awesome-size-105"></i>
-            <%= post.favorites.count %>件
-          <% end %>
-        <% end %>
-      <% else %>
-        <%= link_to post_favorites_path(post), method: :post, class: "bookmark-button hover-opacity" do %>
-          <i class="far fa-bookmark font-awesome-size-105"></i>
-          <%= post.favorites.count %>件
-        <% end %>
-      <% end %>
+      <div class="favorite_button_<%= post.id %>">
+        <%= render "favorites/favorite", post: post %>
+      </div>
       <div class="post-to-show">
         <%= link_to "&gt; 編成詳細へ".html_safe, post_path(post), class: "hover-textdecoration" %>
       </div>
