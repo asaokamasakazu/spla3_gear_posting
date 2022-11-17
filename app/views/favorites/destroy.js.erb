@@ -1,0 +1,2 @@
+$('.favorite_button_<%= @post.id %>').html("<%= j(render 'favorites/favorite', post: @post) %>");
+$('.post-show-favorited-container').html("<%= j(render 'posts/users_who_favorited', post: @post) %>");
