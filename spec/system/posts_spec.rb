@@ -136,10 +136,11 @@ RSpec.describe "Posts", type: :system do
   describe "#index" do
     let(:user1) { create(:user, name: "ユーザー1", prowess: "A+") }
     let(:user2) { create(:user, name: "ユーザー2", prowess: "B-") }
-    let!(:post1) { create(:post, title: "タイトル1", weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
+    let(:post1) { create(:post, title: "タイトル1", weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
     let!(:post2) { create(:post, title: "タイトル2", weapon: "スプラシューター", battle: "ガチホコ", user: user2) }
     let!(:post3) { create(:post, weapon: "わかばシューター", battle: "ガチホコ", user: user2) }
     let!(:gear_powers) { create_list(:gear_power1, 27) }
+    let!(:favorite) { create(:favorite, user: user1, post: post1) }
 
     before do
       visit posts_path
@@ -215,7 +216,7 @@ RSpec.describe "Posts", type: :system do
 
       it "ユーザーのアイコンをクリックするとユーザー詳細ページへ遷移すること" do
         click_link "デフォルトユーザーアイコン", match: :first
-        expect(current_path).to eq user_path(post2.user)
+        expect(current_path).to eq user_path(post1.user)
       end
 
       it "ユーザーの名前をクリックするとユーザー詳細ページへ遷移すること" do
@@ -230,13 +231,85 @@ RSpec.describe "Posts", type: :system do
 
       it "編成詳細へをクリックすると投稿詳細ページへ遷移すること" do
         click_link "> 編成詳細へ", match: :first
-        expect(current_path).to eq post_path(post3)
+        expect(current_path).to eq post_path(post1)
       end
 
       it "ギアパワーのアイコンをクリックするとギアパワー詳細ページへ遷移すること" do
         within ".post:first-child" do
           click_link "ギアパワー", match: :first
-          expect(current_path).to eq gear_power_path(post3.head_main)
+          expect(current_path).to eq gear_power_path(post1.head_main)
+        end
+      end
+    end
+
+    describe "お気に入り機能のテスト" do
+      context "未ログインの場合" do
+        it "お気に入りボタンを押すとログイン画面にリダイレクトすること" do
+          click_link "1件"
+          expect(current_path).to eq new_user_session_path
+        end
+
+        it "リダイレクト後に正しいフラッシュを表示していること" do
+          click_link "1件"
+          expect(page).to have_content "アカウント登録もしくはログインしてください。"
+        end
+      end
+
+      context "ログイン済みの場合" do
+        before do
+          sign_in user1
+          visit posts_path
+        end
+
+        it "お気に入りボタンを正しく表示していること" do
+          within ".main-container" do
+            expect(page.all(".fas").count).to eq 1
+            expect(page.all(".far").count).to eq 2
+          end
+        end
+
+        context "お気に入りしていないボタンの場合", js: true do
+          it "ボタンを押すとお気に入りできること" do
+            click_link "0件", match: :first
+            visit current_path
+            expect(Favorite.all.count).to eq 2
+          end
+
+          it "ボタンを押すとお気に入り済みマークに切り替わること" do
+            click_link "0件", match: :first
+            visit current_path
+            expect(page.all(".fas").count).to eq 2
+            expect(page.all(".far").count).to eq 1
+          end
+
+          it "ボタンを押すと表示されるカウントが1増えること" do
+            click_link "0件", match: :first
+            visit current_path
+            expect(page).to have_content("1件", count: 2)
+            expect(page).to have_content("0件", count: 1)
+          end
+        end
+
+        context "お気に入りしているボタンの場合", js: true do
+          it "ボタンを押すとお気に入り解除できること" do
+            click_link "1件"
+            visit current_path
+            expect(Favorite.all.count).to eq 0
+          end
+
+          it "ボタンを押すと未お気に入りマークに切り替わること" do
+            click_link "1件"
+            visit current_path
+            expect(page.all(".fas").count).to eq 0
+            expect(page.all(".far").count).to eq 3
+          end
+
+          it "ボタンを押すと表示されるカウントが1減ること" do
+            click_link "1件"
+            visit current_path
+            expect(page).to have_content("1件", count: 0)
+            expect(page).to have_content("0件", count: 3)
+          end
         end
       end
     end
@@ -457,6 +530,7 @@ RSpec.describe "Posts", type: :system do
     let!(:shoes_sub1) { GearPower.find(post.shoes_sub1) }
     let!(:shoes_sub2) { GearPower.find(post.shoes_sub2) }
     let!(:shoes_sub3) { GearPower.find(post.shoes_sub3) }
+    let!(:favorite) { create(:favorite, user: post.user, post: post) }
 
     before do
       visit post_path(post)
@@ -500,7 +574,7 @@ RSpec.describe "Posts", type: :system do
       end
 
       it "投稿者の遷移先が正しいこと" do
-        click_link post.user.name
+        click_link post.user.name, match: :first
         expect(current_path).to eq user_path(post.user)
       end
 
@@ -614,6 +688,92 @@ RSpec.describe "Posts", type: :system do
           visit post_path(post)
           click_link "削除する"
           expect(Post.all.count).to eq 0
+        end
+      end
+    end
+
+    describe "お気に入り機能のテスト" do
+      context "未ログインの場合" do
+        it "お気に入りボタンを押すとログイン画面にリダイレクトすること" do
+          click_link "1件", match: :first
+          expect(current_path).to eq new_user_session_path
+        end
+
+        it "リダイレクト後に正しいフラッシュを表示していること" do
+          click_link "1件", match: :first
+          expect(page).to have_content "アカウント登録もしくはログインしてください。"
+        end
+      end
+
+      context "ログイン済みの場合", js: true do
+        before do
+          sign_in updated_post.user
+          visit post_path(post)
+        end
+
+        it "お気に入りボタンを2箇所表示していること" do
+          within ".title-container" do
+            expect(page.all(".far").count).to eq 1
+          end
+          within ".main-container" do
+            expect(page.all(".far").count).to eq 1
+          end
+        end
+
+        it "ボタンを押すとお気に入りできること" do
+          click_link "1件", match: :first
+          visit current_path
+          expect(Favorite.all.count).to eq 2
+        end
+
+        it "ボタンを2度押すとお気に入り解除できること" do
+          click_link "1件", match: :first
+          click_link "2件", match: :first
+          visit current_path
+          expect(Favorite.all.count).to eq 1
+        end
+
+        it "ボタンを押すとお気に入り済みマークに切り替わること" do
+          click_link "1件", match: :first
+          visit current_path
+          expect(page.all(".fas").count).to eq 2
+        end
+
+        it "ボタンを2度押すと未お気に入りマークに切り替わること" do
+          click_link "1件", match: :first
+          click_link "2件", match: :first
+          visit current_path
+          expect(page.all(".far").count).to eq 2
+        end
+
+        it "ボタンを押すと表示されるカウントが1増えること" do
+          click_link "1件", match: :first
+          visit current_path
+          expect(page).to have_content "2件"
+        end
+
+        it "ボタンを2度押すと表示されるカウントが1減ること" do
+          click_link "1件", match: :first
+          click_link "2件", match: :first
+          visit current_path
+          expect(page).to have_content "1件"
+        end
+
+        it "ボタンを押すとお気に入りしたユーザーに加わること" do
+          click_link "1件", match: :first
+          visit current_path
+          within ".post-show-favorited-container" do
+            expect(page).to have_content updated_post.user.name
+          end
+        end
+
+        it "ボタンを2度押すとお気に入りしたユーザーから消えること" do
+          click_link "1件", match: :first
+          click_link "2件", match: :first
+          visit current_path
+          within ".post-show-favorited-container" do
+            expect(page).not_to have_content updated_post.user.name
+          end
         end
       end
     end
