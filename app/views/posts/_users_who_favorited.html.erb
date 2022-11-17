@@ -1,10 +1,7 @@
-<li>
-  <%= link_to user_path(favorite.user), class: "in-td-row radius-50 hover-textdecoration hover-opacity" do %>
-    <% if favorite.user.image.present? %>
-      <%= image_tag favorite.user.image, alt: "#{favorite.user.name}のユーザーアイコン" %>
-    <% else %>
-      <%= image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン" %>
-    <% end %>
-    <%= favorite.user.name %>
-  <% end %>
-</li>
+<% if post.favorites.present? %>
+  <ul>
+    <%= render partial: "posts/user_who_favorited", collection: post.favorites.order(created_at: :desc), as: "favorite" %>
+  </ul>
+<% else %>
+  <p>まだお気に入りされていません。</p>
+<% end %>

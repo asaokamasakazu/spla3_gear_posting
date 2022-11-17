@@ -8,24 +8,9 @@
       <h2><%= @post.title %></h2>
       <div class="title-footer">
         <div class="button-under-title">
-          <% if user_signed_in? %>
-            <% if current_user.already_favorited?(@post) %>
-              <%= link_to post_favorite_path(@post, @post), method: :delete, class: "bookmark-button hover-opacity" do %>
-                <i class="fas fa-bookmark font-awesome-size-105"></i>
-                <%= @post.favorites.count %>件
-              <% end %>
-            <% else %>
-              <%= link_to post_favorites_path(@post), method: :post, class: "bookmark-button hover-opacity" do %>
-                <i class="far fa-bookmark font-awesome-size-105"></i>
-                <%= @post.favorites.count %>件
-              <% end %>
-            <% end %>
-          <% else %>
-            <%= link_to post_favorites_path(@post), method: :post, class: "bookmark-button hover-opacity" do %>
-              <i class="far fa-bookmark font-awesome-size-105"></i>
-              <%= @post.favorites.count %>件
-            <% end %>
-          <% end %>
+          <div class="favorite_button_<%= @post.id %>">
+            <%= render "favorites/favorite", post: @post %>
+          </div>
         </div>
         <% if @post.user == current_user %>
           <div class="button-under-title">
@@ -214,33 +199,12 @@
       </div>
       <div class="post-show-favorited">
         <h3>お気に入りしたユーザー</h3>
-        <% if user_signed_in? %>
-          <% if current_user.already_favorited?(@post) %>
-            <%= link_to post_favorite_path(@post), method: :delete, class: "bookmark-button hover-opacity" do %>
-              <i class="fas fa-bookmark font-awesome-size-105"></i>
-              <%= @post.favorites.count %>件
-            <% end %>
-          <% else %>
-            <%= link_to post_favorites_path(@post), method: :post, class: "bookmark-button hover-opacity" do %>
-              <i class="far fa-bookmark font-awesome-size-105"></i>
-              <%= @post.favorites.count %>件
-            <% end %>
-          <% end %>
-        <% else %>
-          <%= link_to post_favorites_path(@post), method: :post, class: "bookmark-button hover-opacity" do %>
-            <i class="far fa-bookmark font-awesome-size-105"></i>
-            <%= @post.favorites.count %>件
-          <% end %>
-        <% end %>
+        <div class="favorite_button_<%= @post.id %>">
+          <%= render "favorites/favorite", post: @post %>
+        </div>
       </div>
       <div class="post-show-favorited-container">
-        <% if @post.favorites.present? %>
-          <ul>
-            <%= render partial: "posts/users_who_favorited", collection: @post.favorites.order(created_at: :desc), as: "favorite" %>
-          </ul>
-        <% else %>
-          <p>まだお気に入りされていません。</p>
-        <% end %>
+        <%= render "posts/users_who_favorited", post: @post %>
       </div>
       <%= link_to "&lt; 投稿一覧に戻る".html_safe, posts_path, class: "button top-button posts-button" %>
     </div>
