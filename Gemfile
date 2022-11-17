@@ -78,3 +78,5 @@ gem 'devise'
 gem 'dotenv-rails'
 
 gem 'ransack'
+
+gem 'jquery-rails'
