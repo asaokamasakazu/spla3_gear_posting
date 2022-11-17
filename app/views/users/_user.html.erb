@@ -16,12 +16,11 @@
           <ul>
             <li>投稿数 <%= user.posts.count %></li>
             <li>
-              被お気に入り数
               <% sum = 0 %>
               <% user.posts.each do |post| %>
                 <% sum += post.favorites.count %>
               <% end %>
-              <%= sum %>
+              被お気に入り数 <%= sum %>
             </li>
           </ul>
         </div>
