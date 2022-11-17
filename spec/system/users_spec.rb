@@ -15,8 +15,9 @@ RSpec.describe "Users", type: :system do
   describe "#list" do
     let!(:user1) { create(:user, name: "サンプル1", prowess: "A+") }
     let!(:user2) { create(:user, name: "サンプル2", prowess: "B-") }
-    let!(:user3) { create(:user, name: "ゲスト1", prowess: "C") }
-    let!(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user1) }
+    let(:user3) { create(:user, name: "ゲスト1", prowess: "C") }
+    let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user3) }
+    let!(:favorite) { create(:favorite, user: user3, post: post) }
 
     before do
       visit list_users_path
@@ -50,7 +51,8 @@ RSpec.describe "Users", type: :system do
       it "ユーザーの各情報を表示していること" do
         expect(page).to have_content user1.rank
         expect(page).to have_content user1.prowess
-        expect(page).to have_content user1.posts.count
+        expect(page).to have_content "投稿数 1"
+        expect(page).to have_content "被お気に入り数 1"
       end
 
       it "ユーザーのアイコンを表示していること" do
@@ -226,7 +228,13 @@ RSpec.describe "Users", type: :system do
   end
 
   describe "#show" do
-    let(:user) { create(:user, prowess: "A+") }
+    let(:user) { create(:user, rank: "3", prowess: "A+") }
+    let(:no_post_user) { create(:user) }
+    let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+    let(:post2) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
+    let(:post3) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
+    let!(:favorite1) { create(:favorite, user: user, post: post2) }
+    let!(:favorite2) { create(:favorite, user: user, post: post3) }
 
     describe "パンくずのテスト" do
       before do
@@ -260,8 +268,6 @@ RSpec.describe "Users", type: :system do
     end
 
     describe "ユーザー情報部分のテスト" do
-      let!(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
-
       before do
         visit user_path(user)
       end
@@ -280,7 +286,8 @@ RSpec.describe "Users", type: :system do
         within ".title-container-footer" do
           expect(page).to have_content user.rank
           expect(page).to have_content user.prowess
-          expect(page).to have_content user.posts.count
+          expect(page).to have_content "2" # 投稿数
+          expect(page).to have_content "1" # 被お気に入り数
         end
       end
 
@@ -307,23 +314,47 @@ RSpec.describe "Users", type: :system do
       end
     end
 
+    describe "トグルのテスト", js: true do
+      before do
+        visit user_path(user)
+      end
+
+      it "初期状態では投稿側が表示され、お気に入り側が表示されていないこと" do
+        expect(page).to have_content post1.title
+        expect(page).not_to have_content post3.title
+      end
+
+      it "お気に入りをクリックすると表示が切り替わること" do
+        find('label[for=toggle_favorites]').click
+        expect(page).not_to have_content post1.title
+        expect(page).to have_content post3.title
+      end
+
+      it "お気に入りクリック後に投稿をクリックすると表示が再度切り替わること" do
+        find('label[for=toggle_favorites]').click
+        find('label[for=toggle_posts]').click
+        expect(page).to have_content post1.title
+        expect(page).not_to have_content post3.title
+      end
+    end
+
     describe "投稿部分のテスト" do
       context "投稿がない場合" do
         it "投稿がないことを示す文章を表示していること" do
-          visit user_path(user)
+          visit user_path(no_post_user)
           expect(page).to have_content "まだ投稿はありません。"
         end
 
         it "マイページなら投稿するボタンを表示していること" do
-          sign_in user
-          visit user_path(user)
+          sign_in no_post_user
+          visit user_path(no_post_user)
           within ".main-container" do
             expect(page).to have_content "＋投稿する"
           end
         end
 
         it "マイページではないなら投稿するボタンを表示していないこと" do
-          visit user_path(user)
+          visit user_path(no_post_user)
           within ".main-container" do
             expect(page).not_to have_content "＋投稿する"
           end
@@ -331,9 +362,6 @@ RSpec.describe "Users", type: :system do
       end
 
       context "投稿がある場合" do
-        let!(:post1) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
-        let!(:post2) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ", user: user) }
-
         it "これまでの投稿を表示していること" do
           visit user_path(user)
           expect(page).to have_content post1.title
