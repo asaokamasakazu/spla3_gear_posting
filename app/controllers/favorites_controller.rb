@@ -12,6 +12,8 @@ class FavoritesController < ApplicationController
     favorite.destroy
   end
 
+  private
+
   # ajax通信ではdeviseのauthenticate_user!が使えないため独自に定義
   def authenticate_user
     if current_user.nil?
