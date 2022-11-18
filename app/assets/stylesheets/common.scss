@@ -509,13 +509,16 @@ header {
 
 /*=== FOOTER ===*/
 footer {
-  text-align: center;
   width: 100%;
   background-color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   letter-spacing: 0.5px;
   border-top: 1px solid #eee;
-  padding: 15px 0;
+  padding: 15px 10px;
   position: sticky;
   top: 100vh;
+}
+.footer-container {
+  max-width: 950px;
+  margin:  0 auto;
 }
