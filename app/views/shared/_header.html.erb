@@ -1,7 +1,9 @@
 <header>
   <div class="header-container">
     <div class="header-left">
-      <%= link_to "HOME", root_path %>
+      <%= link_to root_path, class: "header-home" do %>
+        <i class="fa-solid fa-house"></i>
+      <% end %>
       <%= link_to "投稿", posts_path %>
       <%= link_to "ユーザー", list_users_path %>
       <%= link_to "ギアパワー", gear_powers_path %>
@@ -9,10 +11,22 @@
     <div class="header-right">
       <% if current_user.present? %>
         <%= link_to "投稿する", new_post_path, "data-turbolinks": false %>
-        <%= link_to current_user.name, user_path(current_user) %>
-        <%= link_to "設定", account_users_path %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしてよろしいですか？" } %>
-        <%= link_to "退会", registration_path(current_user), method: :delete, data: { confirm: "アカウントを削除してよろしいですか？" } %>
+        <span class="nav_toggle">
+          <% if current_user.image.present? %>
+            <%= image_tag current_user.image, alt: "#{current_user.name}のユーザーアイコン" %>
+          <% else %>
+            <%= image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン" %>
+          <% end %>
+          <%= current_user.name %><i class="fas fa-caret-down header-triangle"></i>
+        </span>
+        <nav class="nav">
+          <ul>
+            <li class="nav_menu_li"><%= link_to "マイページ", user_path(current_user) %></li>
+            <li class="nav_menu_li"><%= link_to "設定", account_users_path %></li>
+            <li class="nav_menu_li"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしてよろしいですか？" } %></li>
+            <li class="nav_menu_li"><%= link_to "退会", registration_path(current_user), method: :delete, data: { confirm: "アカウントを削除してよろしいですか？" } %></li>
+          </ul>
+        </nav>
       <% else %>
         <%= link_to "ログイン", new_user_session_path, "data-turbolinks": false %>
         <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
