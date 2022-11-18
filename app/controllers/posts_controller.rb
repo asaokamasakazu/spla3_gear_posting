@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, { only: [:new, :create, :edit, :update, :destroy] }
-  before_action :set_q, { only: [:search, :index] }
   before_action :ensure_correct_user, { only: [:edit, :update] }
 
   def new
@@ -65,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def search
-    @results = @q.result.order(created_at: :desc)
+    @results = @q_post.result.order(created_at: :desc)
   end
 
   private
@@ -89,10 +88,6 @@ class PostsController < ApplicationController
       :shoes_sub2,
       :shoes_sub3
     ).merge(user_id: current_user.id)
-  end
-
-  def set_q
-    @q = Post.ransack(params[:q])
   end
 
   def ensure_correct_user

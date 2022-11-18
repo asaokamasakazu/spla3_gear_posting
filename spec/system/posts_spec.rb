@@ -316,34 +316,44 @@ RSpec.describe "Posts", type: :system do
 
     describe "検索機能のテスト" do
       it "検索後の遷移先が正しいこと" do
-        click_button "検索"
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(current_path).to eq search_posts_path
       end
 
       it "キーワード検索でユーザー名ベースで投稿を絞り込めること" do
-        fill_in "q[title_or_user_name_cont]", with: "ユーザー1"
-        click_button "検索"
+        within ".main-container" do
+          fill_in "q[title_or_user_name_or_weapon_or_battle_cont]", with: "ユーザー1"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).not_to have_content user2.name
       end
 
       it "キーワード検索で投稿タイトルベースで投稿を絞り込めること" do
-        fill_in "q[title_or_user_name_cont]", with: "タイトル1"
-        click_button "検索"
+        within ".main-container" do
+          fill_in "q[title_or_user_name_or_weapon_or_battle_cont]", with: "タイトル1"
+          click_button "検索"
+        end
         expect(page).to have_content post1.title
         expect(page).not_to have_content post2.title
       end
 
       it "ウデマエ検索で投稿を絞り込めること" do
-        uncheck "B"
-        click_button "検索"
+        within ".main-container" do
+          uncheck "B"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).not_to have_content user2.name
       end
 
       it "ブキ検索で投稿を絞り込めること" do
         select "スプラシューター", from: "q[weapon_eq]"
-        click_button "検索"
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).to have_content post2.title
         expect(page).not_to have_content post1.title
         expect(page).not_to have_content post3.title
@@ -351,35 +361,43 @@ RSpec.describe "Posts", type: :system do
 
       it "バトル検索で投稿を絞り込めること" do
         select "ガチヤグラ", from: "q[battle_eq]"
-        click_button "検索"
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).to have_content post1.title
         expect(page).not_to have_content post2.title
         expect(page).not_to have_content post3.title
       end
 
       it "2つ以上の検索を併用してユーザーを絞り込めること" do
-        uncheck "A"
         select "わかばシューター", from: "q[weapon_eq]"
-        click_button "検索"
+        within ".main-container" do
+          uncheck "A"
+          click_button "検索"
+        end
         expect(page).to have_content post3.title
         expect(page).not_to have_content post1.title
         expect(page).not_to have_content post2.title
       end
 
       it "デフォルトの状態で検索すると投稿が全件表示されること" do
-        click_button "検索"
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).to have_content post1.title
         expect(page).to have_content post2.title
         expect(page).to have_content post3.title
       end
 
       it "該当するユーザーがいなかった場合に、メッセージが表示されること" do
-        uncheck "S"
-        uncheck "A"
-        uncheck "B"
-        uncheck "C"
-        uncheck "未設定"
-        click_button "検索"
+        within ".main-container" do
+          uncheck "S"
+          uncheck "A"
+          uncheck "B"
+          uncheck "C"
+          uncheck "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content "条件に一致する検索はありません。"
       end
     end
@@ -424,59 +442,71 @@ RSpec.describe "Posts", type: :system do
       end
 
       it "デフォルトの状態で検索すると投稿が表示されないこと" do
-        click_button "検索"
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).not_to have_content post1.title
         expect(page).not_to have_content post2.title
         expect(page).not_to have_content post3.title
       end
 
       it "検索後の遷移先が正しいこと" do
-        click_button "検索"
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(current_path).to eq search_posts_path
       end
 
       it "キーワード検索でユーザー名ベースで投稿を絞り込めること" do
-        fill_in "q[title_or_user_name_cont]", with: "ユーザー1"
-        check "S"
-        check "A"
-        check "B"
-        check "C"
-        check "未設定"
-        click_button "検索"
+        within ".main-container" do
+          fill_in "q[title_or_user_name_or_weapon_or_battle_cont]", with: "ユーザー1"
+          check "S"
+          check "A"
+          check "B"
+          check "C"
+          check "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).not_to have_content user2.name
       end
 
       it "キーワード検索で投稿タイトルベースで投稿を絞り込めること" do
-        fill_in "q[title_or_user_name_cont]", with: "タイトル1"
-        check "S"
-        check "A"
-        check "B"
-        check "C"
-        check "未設定"
-        click_button "検索"
+        within ".main-container" do
+          fill_in "q[title_or_user_name_or_weapon_or_battle_cont]", with: "タイトル1"
+          check "S"
+          check "A"
+          check "B"
+          check "C"
+          check "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content post1.title
         expect(page).not_to have_content post2.title
       end
 
       it "ウデマエ検索で投稿を絞り込めること" do
-        check "S"
-        check "A"
-        check "C"
-        check "未設定"
-        click_button "検索"
+        within ".main-container" do
+          check "S"
+          check "A"
+          check "C"
+          check "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).not_to have_content user2.name
       end
 
       it "ブキ検索で投稿を絞り込めること" do
         select "スプラシューター", from: "q[weapon_eq]"
-        check "S"
-        check "A"
-        check "B"
-        check "C"
-        check "未設定"
-        click_button "検索"
+        within ".main-container" do
+          check "S"
+          check "A"
+          check "B"
+          check "C"
+          check "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content post2.title
         expect(page).not_to have_content post1.title
         expect(page).not_to have_content post3.title
@@ -484,31 +514,37 @@ RSpec.describe "Posts", type: :system do
 
       it "バトル検索で投稿を絞り込めること" do
         select "ガチヤグラ", from: "q[battle_eq]"
-        check "S"
-        check "A"
-        check "B"
-        check "C"
-        check "未設定"
-        click_button "検索"
+        within ".main-container" do
+          check "S"
+          check "A"
+          check "B"
+          check "C"
+          check "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content post1.title
         expect(page).not_to have_content post2.title
         expect(page).not_to have_content post3.title
       end
 
       it "2つ以上の検索を併用してユーザーを絞り込めること" do
-        check "S"
-        check "B"
-        check "C"
-        check "未設定"
-        select "わかばシューター", from: "q[weapon_eq]"
-        click_button "検索"
+        within ".main-container" do
+          check "S"
+          check "B"
+          check "C"
+          check "未設定"
+          select "わかばシューター", from: "q[weapon_eq]"
+          click_button "検索"
+        end
         expect(page).to have_content post3.title
         expect(page).not_to have_content post1.title
         expect(page).not_to have_content post2.title
       end
 
       it "該当するユーザーがいなかった場合に、メッセージが表示されること" do
-        click_button "検索"
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).to have_content "条件に一致する検索はありません。"
       end
     end

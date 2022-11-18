@@ -76,28 +76,28 @@ RSpec.describe "Users", type: :system do
     end
 
     describe "検索機能のテスト" do
-      def perform_search
-        within ".users-search-forms" do
+      it "検索後の遷移先が正しいこと" do
+        within ".main-container" do
           click_button "検索"
         end
-      end
-
-      it "検索後の遷移先が正しいこと" do
-        perform_search
         expect(current_path).to eq search_users_path
       end
 
       it "ユーザー名検索でユーザーを絞り込めること" do
         fill_in "q[name_cont]", with: "サンプル"
-        perform_search
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).to have_content user2.name
         expect(page).not_to have_content user3.name
       end
 
       it "ウデマエ検索でユーザーを絞り込めること" do
-        uncheck "B"
-        perform_search
+        within ".main-container" do
+          uncheck "B"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).to have_content user3.name
         expect(page).not_to have_content user2.name
@@ -105,27 +105,33 @@ RSpec.describe "Users", type: :system do
 
       it "ユーザー名検索とウデマエ検索を併用してユーザーを絞り込めること" do
         fill_in "q[name_cont]", with: "サンプル"
-        uncheck "B"
-        perform_search
+        within ".main-container" do
+          uncheck "B"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).not_to have_content user2.name
         expect(page).not_to have_content user3.name
       end
 
       it "デフォルトの状態で検索するとユーザーが全件表示されること" do
-        perform_search
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).to have_content user2.name
         expect(page).to have_content user3.name
       end
 
       it "該当するユーザーがいなかった場合に、メッセージが表示されること" do
-        uncheck "S"
-        uncheck "A"
-        uncheck "B"
-        uncheck "C"
-        uncheck "未設定"
-        perform_search
+        within ".main-container" do
+          uncheck "S"
+          uncheck "A"
+          uncheck "B"
+          uncheck "C"
+          uncheck "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content "条件に一致するユーザーはいません。"
       end
     end
@@ -160,12 +166,6 @@ RSpec.describe "Users", type: :system do
     end
 
     describe "検索機能のテスト" do
-      def perform_search
-        within ".users-search-forms" do
-          click_button "検索"
-        end
-      end
-
       it "ダイレクトで訪れた場合は全ユーザーを表示していること" do
         expect(page).to have_content user1.name
         expect(page).to have_content user2.name
@@ -173,29 +173,35 @@ RSpec.describe "Users", type: :system do
       end
 
       it "検索後の遷移先が正しいこと" do
-        perform_search
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(current_path).to eq search_users_path
       end
 
       it "ユーザー名検索でユーザーを絞り込めること" do
         fill_in "q[name_cont]", with: "サンプル"
-        check "S"
-        check "A"
-        check "B"
-        check "C"
-        check "未設定"
-        perform_search
+        within ".main-container" do
+          check "S"
+          check "A"
+          check "B"
+          check "C"
+          check "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).to have_content user2.name
         expect(page).not_to have_content user3.name
       end
 
       it "ウデマエ検索でユーザーを絞り込めること" do
-        check "S"
-        check "A"
-        check "C"
-        check "未設定"
-        perform_search
+        within ".main-container" do
+          check "S"
+          check "A"
+          check "C"
+          check "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).to have_content user3.name
         expect(page).not_to have_content user2.name
@@ -203,25 +209,31 @@ RSpec.describe "Users", type: :system do
 
       it "ユーザー名検索とウデマエ検索を併用してユーザーを絞り込めること" do
         fill_in "q[name_cont]", with: "サンプル"
-        check "S"
-        check "A"
-        check "C"
-        check "未設定"
-        perform_search
+        within ".main-container" do
+          check "S"
+          check "A"
+          check "C"
+          check "未設定"
+          click_button "検索"
+        end
         expect(page).to have_content user1.name
         expect(page).not_to have_content user2.name
         expect(page).not_to have_content user3.name
       end
 
       it "デフォルトの状態で検索するとユーザーが表示されないこと" do
-        perform_search
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).not_to have_content user1.name
         expect(page).not_to have_content user2.name
         expect(page).not_to have_content user3.name
       end
 
       it "該当するユーザーがいなかった場合に、メッセージが表示されること" do
-        perform_search
+        within ".main-container" do
+          click_button "検索"
+        end
         expect(page).to have_content "条件に一致するユーザーはいません。"
       end
     end
