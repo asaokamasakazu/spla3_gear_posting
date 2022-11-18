@@ -4,9 +4,22 @@
       <%= link_to root_path, class: "header-home" do %>
         <i class="fa-solid fa-house"></i>
       <% end %>
-      <%= link_to "投稿", posts_path %>
-      <%= link_to "ユーザー", list_users_path %>
-      <%= link_to "ギアパワー", gear_powers_path %>
+      <%= link_to "投稿", posts_path, class: "pc-tb-only" %>
+      <%= link_to "ユーザー", list_users_path, class: "pc-tb-only" %>
+      <%= link_to "ギアパワー", gear_powers_path, class: "pc-tb-only" %>
+
+      <span class="nav_toggle_sp">
+        メニュー
+        <i class="fas fa-caret-down header-triangle"></i>
+      </span>
+      <nav class="nav_sp">
+        <ul>
+          <li class="nav_menu_li"><%= link_to "投稿", posts_path %></li>
+          <li class="nav_menu_li"><%= link_to "ユーザー", list_users_path %></li>
+          <li class="nav_menu_li"><%= link_to "ギアパワー", gear_powers_path %></li>
+        </ul>
+      </nav>
+
       <div class="header-search">
         <%= search_form_for @q_post, url: search_posts_path do |f| %>
           <div class="header-search-forms">
@@ -47,7 +60,8 @@
           <% else %>
             <%= image_tag "/user_image/user_image_default_bk.png", alt: "デフォルトユーザーアイコン" %>
           <% end %>
-          <%= current_user.name.truncate(10, omission: "…") %><i class="fas fa-caret-down header-triangle"></i>
+          <span class="header-user-name"><%= current_user.name.truncate(10, omission: "…") %></span>
+          <i class="fa-solid fa-caret-down header-triangle"></i>
         </span>
         <nav class="nav">
           <ul>
