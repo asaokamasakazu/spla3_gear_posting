@@ -782,6 +782,7 @@ RSpec.describe "Posts", type: :system do
   describe "#edit" do
     let(:post) { create(:post, weapon: "わかばシューター", battle: "ガチヤグラ") }
     let!(:gear_powers) { create_list(:gear_power1, 27) }
+    let(:guest_user) { create(:user, email: "guest@example.com") }
 
     context "まだログインしていない場合" do
       before do
@@ -797,7 +798,22 @@ RSpec.describe "Posts", type: :system do
       end
     end
 
-    context "すでにログインしている場合" do
+    context "非投稿者としてログインしている場合" do
+      before do
+        sign_in guest_user
+        visit edit_post_path(post)
+      end
+
+      it "投稿編集ページに遷移したら、編集権限がないため投稿一覧ページにリダイレクトすること" do
+        expect(current_path).to eq posts_path
+      end
+
+      it "リダイレクト後に正しいフラッシュを表示していること" do
+        expect(page).to have_content "権限がありません。編集を行うには、投稿者としてログインする必要があります。"
+      end
+    end
+
+    context "投稿者としてログインしている場合" do
       before do
         sign_in post.user
         visit edit_post_path(post)
