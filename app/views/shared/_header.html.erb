@@ -7,6 +7,36 @@
       <%= link_to "投稿", posts_path %>
       <%= link_to "ユーザー", list_users_path %>
       <%= link_to "ギアパワー", gear_powers_path %>
+      <div class="header-search">
+        <%= search_form_for @q_post, url: search_posts_path do |f| %>
+          <div class="header-search-forms">
+            <div class="header-search-form">
+              <%= f.search_field :title_or_user_name_or_weapon_or_battle_cont, placeholder: "キーワードで投稿を検索" %>
+              <i class="fa-solid fa-magnifying-glass font-awesome-color-black"></i>
+            </div>
+            <div class="header-hidden-form">
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "S" %>S
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "A" %>A
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "B" %>B
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "C" %>C
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "未設定" %>未設定
+              </label>
+            </div>
+            <div class="header-search-submit">
+              <%= f.submit "検索", class: "hover-opacity" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
     <div class="header-right">
       <% if current_user.present? %>
