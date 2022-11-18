@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, { only: [:new, :create, :edit, :update, :destroy] }
   before_action :set_q, { only: [:search, :index] }
+  before_action :ensure_correct_user, { only: [:edit, :update] }
 
   def new
     @post = Post.new
@@ -92,5 +93,13 @@ class PostsController < ApplicationController
 
   def set_q
     @q = Post.ransack(params[:q])
+  end
+
+  def ensure_correct_user
+    @post = Post.find(params[:id])
+    if current_user.id != @post.user_id
+      flash[:alert] = "権限がありません。編集を行うには、投稿者としてログインする必要があります。"
+      redirect_to posts_path
+    end
   end
 end
