@@ -12,13 +12,13 @@
   </div>
   <div class="main">
     <div class="main-container">
-      <%= search_form_for @q, url: search_posts_path do |f| %>
+      <%= search_form_for @q_post, url: search_posts_path do |f| %>
         <div class="posts-search">
           <div class="posts-search-container">
             <div>
               <div class="posts-search-form">
-                <%= f.label :title_or_user_name_cont, "キーワード", class: "parent-label" %>
-                <%= f.search_field :title_or_user_name_cont, placeholder: "投稿者、タイトル" %>
+                <%= f.label :title_or_user_name_or_weapon_or_battle_cont, "キーワード", class: "parent-label" %>
+                <%= f.search_field :title_or_user_name_or_weapon_or_battle_cont, placeholder: "投稿者、タイトル" %>
               </div>
               <div class="posts-search-form">
                 <%= f.label :user_prowess_cont_any, "投稿者ウデマエ", class: "parent-label" %>
