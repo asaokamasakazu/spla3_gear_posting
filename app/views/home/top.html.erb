@@ -24,15 +24,38 @@
       <% end %>
       <hr class="top-title-hr">
       <div class="top-search-area">
-        <h2>＼ブキ名で投稿を検索／</h2>
-        <div class="top-search-form">
-          <input type="text" placeholder="ブキ名を入力">
-          <i class="fa-solid fa-magnifying-glass font-awesome-color-black"></i>
-        </div>
+        <h2>＼キーワードで投稿を検索／</h2>
+        <%= search_form_for @q_post, url: search_posts_path do |f| %>
+          <div class="top-search-forms">
+            <div class="top-search-form">
+              <%= f.search_field :title_or_user_name_or_weapon_or_battle_cont, placeholder: "投稿名、投稿者、ブキ、バトル" %>
+              <i class="fa-solid fa-magnifying-glass font-awesome-color-black"></i>
+            </div>
+            <div class="top-hidden-form">
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "S" %>S
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "A" %>A
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "B" %>B
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "C" %>C
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "未設定" %>未設定
+              </label>
+            </div>
+            <div class="top-search-submit">
+              <%= f.submit "検索", class: "hover-opacity" %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
-
   <div class="posts-area">
     <div class="posts-container">
       <h2>- 人気投稿 -</h2>
