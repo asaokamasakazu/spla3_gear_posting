@@ -1,12 +1,5 @@
-<div class="flash-blue flash-top">
-  <% if notice %>
-    <p class="notice"><%= notice %></p>
-  <% end %>
-</div>
-<div class="flash-red flash-top">
-  <% if alert %>
-    <p class="alert"><%= alert %></p>
-  <% end %>
+<div class="flash-top">
+  <%= render "shared/flash_messages" %>
 </div>
 <div class="top">
   <div class="top-title-area">
@@ -16,706 +9,83 @@
       <h1 class="top-h1-tb">ギア編成投稿所</h1>
       <p class="top-p">スプラトゥーン3 ギア編成投稿所では、君のイカしたギア編成を投稿できるぞ！</p>
       <p class="top-p">みんなの投稿を見て、イカしたギア編成を見つけたらお気に入り登録しておこう！</p>
-      <div class="top-buttons-header">
-        <%= link_to "> 新規登録してギア編成を投稿する", new_user_registration_path, class: "button top-button top-button-first", "data-turbolinks": false %>
-      </div>
-      <div class="top-buttons-footer">
-        <%= link_to "> ログインはこちら", new_user_session_path, class: "button top-button top-button-second", "data-turbolinks": false %>
-        <%= link_to "> ゲストログインはこちら", users_guest_sign_in_path, method: :post, class: "button top-button" %>
-      </div>
+      <% if user_signed_in? %>
+        <div class="top-buttons-header">
+          <%= link_to "> ギア編成を投稿する", new_post_path, class: "button top-button top-button-first", "data-turbolinks": false %>
+        </div>
+      <% else %>
+        <div class="top-buttons-header">
+          <%= link_to "> 新規登録してギア編成を投稿する", new_user_registration_path, class: "button top-button top-button-first", "data-turbolinks": false %>
+        </div>
+        <div class="top-buttons-footer">
+          <%= link_to "> ログインはこちら", new_user_session_path, class: "button top-button top-button-second", "data-turbolinks": false %>
+          <%= link_to "> ゲストログインはこちら", users_guest_sign_in_path, method: :post, class: "button top-button" %>
+        </div>
+      <% end %>
       <hr class="top-title-hr">
       <div class="top-search-area">
-        <h2>＼ブキ名で投稿を検索／</h2>
-        <div class="top-search-form">
-          <input type="text" placeholder="ブキ名を入力">
-          <i class="fa-solid fa-magnifying-glass font-awesome-color-black"></i>
-        </div>
+        <h2>＼キーワードで投稿を検索／</h2>
+        <%= search_form_for @q_post, url: search_posts_path do |f| %>
+          <div class="top-search-forms">
+            <div class="top-search-form">
+              <%= f.search_field :title_or_user_name_or_weapon_or_battle_cont, placeholder: "投稿名、投稿者、ブキ、バトル" %>
+              <i class="fa-solid fa-magnifying-glass font-awesome-color-black"></i>
+            </div>
+            <div class="top-hidden-form">
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "S" %>S
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "A" %>A
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "B" %>B
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "C" %>C
+              </label>
+              <label>
+                <%= f.check_box :user_prowess_cont_any, { multiple: true, checked: true }, "未設定" %>未設定
+              </label>
+            </div>
+            <div class="top-search-submit">
+              <%= f.submit "検索", class: "hover-opacity" %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
-
   <div class="posts-area">
     <div class="posts-container">
-      <h2>- 人気投稿 -</h2>
-      <div class="posts">
-        <div class="post">
-          <div class="post-container">
-            <div class="post-header-pc">
-              <div class="post-left">
-                <div class="post-title">
-                  <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="post-recommend">
-                  <p>おすすめブキ：シャープマーカー</p>
-                  <p>おすすめエリア：ガチエリア</p>
-                </div>
-              </div>
-              <div class="post-right">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-user-info">
-                  <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                  <p class="post-user-time">10月20日(木)15:15</p>
-                </div>
-              </div>
-            </div>
-            <div class="post-header-sp">
-              <div class="post-header-sp-user">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-header-sp-text">
-                  <div class="post-user-info">
-                    <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                    <p class="post-user-time">10月20日(木)</p>
-                  </div>
-                  <div class="post-recommend">
-                    <p>おすすめブキ：シャープマーカー</p>
-                    <p>おすすめエリア：ガチエリア</p>
-                  </div>
-                </div>
-              </div>
-              <div class="post-title">
-                <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-            <div class="post-center">
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-hat-cowboy font-awesome-color-black"></i>
-                  <p>アタマ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shirt font-awesome-color-black"></i>
-                  <p>フク</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shoe-prints font-awesome-color-black"></i>
-                  <p>クツ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="post-footer">
-              <%= link_to "#" do %>
-                <div class="post-bookmark hover-color-red hover-i-color-red">
-                  <i class="far fa-bookmark font-awesome-color-black font-awesome-size-105"></i>
-                  <p>17件</p>
-                </div>
-              <% end %>
-              <div class="post-to-show">
-                <%= link_to "> 編成詳細へ", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="post">
-          <div class="post-container">
-            <div class="post-header-pc">
-              <div class="post-left">
-                <div class="post-title">
-                  <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="post-recommend">
-                  <p>おすすめブキ：シャープマーカー</p>
-                  <p>おすすめエリア：ガチエリア</p>
-                </div>
-              </div>
-              <div class="post-right">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-user-info">
-                  <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                  <p class="post-user-time">10月20日(木)15:15</p>
-                </div>
-              </div>
-            </div>
-            <div class="post-header-sp">
-              <div class="post-header-sp-user">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-header-sp-text">
-                  <div class="post-user-info">
-                    <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                    <p class="post-user-time">10月20日(木)</p>
-                  </div>
-                  <div class="post-recommend">
-                    <p>おすすめブキ：シャープマーカー</p>
-                    <p>おすすめエリア：ガチエリア</p>
-                  </div>
-                </div>
-              </div>
-              <div class="post-title">
-                <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-            <div class="post-center">
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-hat-cowboy font-awesome-color-black"></i>
-                  <p>アタマ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shirt font-awesome-color-black"></i>
-                  <p>フク</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shoe-prints font-awesome-color-black"></i>
-                  <p>クツ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="post-footer">
-              <%= link_to "#" do %>
-                <div class="post-bookmark hover-color-red hover-i-color-red">
-                  <i class="far fa-bookmark font-awesome-color-black font-awesome-size-105"></i>
-                  <p>17件</p>
-                </div>
-              <% end %>
-              <div class="post-to-show">
-                <%= link_to "> 編成詳細へ", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="post">
-          <div class="post-container">
-            <div class="post-header-pc">
-              <div class="post-left">
-                <div class="post-title">
-                  <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="post-recommend">
-                  <p>おすすめブキ：シャープマーカー</p>
-                  <p>おすすめエリア：ガチエリア</p>
-                </div>
-              </div>
-              <div class="post-right">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-user-info">
-                  <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                  <p class="post-user-time">10月20日(木)15:15</p>
-                </div>
-              </div>
-            </div>
-            <div class="post-header-sp">
-              <div class="post-header-sp-user">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-header-sp-text">
-                  <div class="post-user-info">
-                    <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                    <p class="post-user-time">10月20日(木)</p>
-                  </div>
-                  <div class="post-recommend">
-                    <p>おすすめブキ：シャープマーカー</p>
-                    <p>おすすめエリア：ガチエリア</p>
-                  </div>
-                </div>
-              </div>
-              <div class="post-title">
-                <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-            <div class="post-center">
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-hat-cowboy font-awesome-color-black"></i>
-                  <p>アタマ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shirt font-awesome-color-black"></i>
-                  <p>フク</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shoe-prints font-awesome-color-black"></i>
-                  <p>クツ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="post-footer">
-              <%= link_to "#" do %>
-                <div class="post-bookmark hover-color-red hover-i-color-red">
-                  <i class="far fa-bookmark font-awesome-color-black font-awesome-size-105"></i>
-                  <p>17件</p>
-                </div>
-              <% end %>
-              <div class="post-to-show">
-                <%= link_to "> 編成詳細へ", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-          </div>
+      <div class="toggle-radio toggle-radio-top">
+        <%= radio_button_tag "toggle", "posts", checked: "checked" %>
+        <%= label_tag "toggle_posts", "- 新着投稿 -" %>
+        <%= radio_button_tag "toggle", "favorites" %>
+        <%= label_tag "toggle_favorites", "- 人気投稿 -" %>
+      </div>
+      <div class="toggle toggle-posts">
+        <div class="posts">
+          <%= render @latest_posts.first(5) %>
         </div>
       </div>
-      <%= link_to "#" do %>
-        <div class="button top-button posts-button">
-          <p>> 人気投稿をもっと見る</p>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="posts-container">
-      <h2>- 新着投稿 -</h2>
-      <div class="posts">
-        <div class="post">
-          <div class="post-container">
-            <div class="post-header-pc">
-              <div class="post-left">
-                <div class="post-title">
-                  <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="post-recommend">
-                  <p>おすすめブキ：シャープマーカー</p>
-                  <p>おすすめエリア：ガチエリア</p>
-                </div>
-              </div>
-              <div class="post-right">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-user-info">
-                  <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                  <p class="post-user-time">10月20日(木)15:15</p>
-                </div>
-              </div>
-            </div>
-            <div class="post-header-sp">
-              <div class="post-header-sp-user">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-header-sp-text">
-                  <div class="post-user-info">
-                    <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                    <p class="post-user-time">10月20日(木)</p>
-                  </div>
-                  <div class="post-recommend">
-                    <p>おすすめブキ：シャープマーカー</p>
-                    <p>おすすめエリア：ガチエリア</p>
-                  </div>
-                </div>
-              </div>
-              <div class="post-title">
-                <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-            <div class="post-center">
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-hat-cowboy font-awesome-color-black"></i>
-                  <p>アタマ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shirt font-awesome-color-black"></i>
-                  <p>フク</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shoe-prints font-awesome-color-black"></i>
-                  <p>クツ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="post-footer">
-              <%= link_to "#" do %>
-                <div class="post-bookmark hover-color-red hover-i-color-red">
-                  <i class="far fa-bookmark font-awesome-color-black font-awesome-size-105"></i>
-                  <p>17件</p>
-                </div>
-              <% end %>
-              <div class="post-to-show">
-                <%= link_to "> 編成詳細へ", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="post">
-          <div class="post-container">
-            <div class="post-header-pc">
-              <div class="post-left">
-                <div class="post-title">
-                  <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="post-recommend">
-                  <p>おすすめブキ：シャープマーカー</p>
-                  <p>おすすめエリア：ガチエリア</p>
-                </div>
-              </div>
-              <div class="post-right">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-user-info">
-                  <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                  <p class="post-user-time">10月20日(木)15:15</p>
-                </div>
-              </div>
-            </div>
-            <div class="post-header-sp">
-              <div class="post-header-sp-user">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-header-sp-text">
-                  <div class="post-user-info">
-                    <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                    <p class="post-user-time">10月20日(木)</p>
-                  </div>
-                  <div class="post-recommend">
-                    <p>おすすめブキ：シャープマーカー</p>
-                    <p>おすすめエリア：ガチエリア</p>
-                  </div>
-                </div>
-              </div>
-              <div class="post-title">
-                <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-            <div class="post-center">
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-hat-cowboy font-awesome-color-black"></i>
-                  <p>アタマ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shirt font-awesome-color-black"></i>
-                  <p>フク</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shoe-prints font-awesome-color-black"></i>
-                  <p>クツ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="post-footer">
-              <%= link_to "#" do %>
-                <div class="post-bookmark hover-color-red hover-i-color-red">
-                  <i class="far fa-bookmark font-awesome-color-black font-awesome-size-105"></i>
-                  <p>17件</p>
-                </div>
-              <% end %>
-              <div class="post-to-show">
-                <%= link_to "> 編成詳細へ", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="post">
-          <div class="post-container">
-            <div class="post-header-pc">
-              <div class="post-left">
-                <div class="post-title">
-                  <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-                </div>
-                <div class="post-recommend">
-                  <p>おすすめブキ：シャープマーカー</p>
-                  <p>おすすめエリア：ガチエリア</p>
-                </div>
-              </div>
-              <div class="post-right">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-user-info">
-                  <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                  <p class="post-user-time">10月20日(木)15:15</p>
-                </div>
-              </div>
-            </div>
-            <div class="post-header-sp">
-              <div class="post-header-sp-user">
-                <div class="post-user-icon">
-                  <%= link_to (image_tag "/user_image/user_image_default_ye.png", alt: "デフォルトユーザーアイコン"), "#", class: "hover-opacity" %>
-                </div>
-                <div class="post-header-sp-text">
-                  <div class="post-user-info">
-                    <%= link_to "ユーザー名ユーザー名ユー", "#", class: "hover-textdecoration" %>
-                    <p class="post-user-time">10月20日(木)</p>
-                  </div>
-                  <div class="post-recommend">
-                    <p>おすすめブキ：シャープマーカー</p>
-                    <p>おすすめエリア：ガチエリア</p>
-                  </div>
-                </div>
-              </div>
-              <div class="post-title">
-                <%= link_to "編成名編成名編成名編成名", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-            <div class="post-center">
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-hat-cowboy font-awesome-color-black"></i>
-                  <p>アタマ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shirt font-awesome-color-black"></i>
-                  <p>フク</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-              <div class="post-center-one">
-                <div class="post-gearcategory">
-                  <i class="fa-solid fa-shoe-prints font-awesome-color-black"></i>
-                  <p>クツ</p>
-                </div>
-                <hr class="post-hr">
-                <div class="post-gearpowers">
-                  <div class="post-main-gearpower">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                  <div class="post-sub-gearpowers">
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                    <%= image_tag "/gear_powers/gear_power_sample.png", alt: "ギアパワー", class: "hover-brightness" %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="post-footer">
-              <%= link_to "#" do %>
-                <div class="post-bookmark hover-color-red hover-i-color-red">
-                  <i class="far fa-bookmark font-awesome-color-black font-awesome-size-105"></i>
-                  <p>17件</p>
-                </div>
-              <% end %>
-              <div class="post-to-show">
-                <%= link_to "> 編成詳細へ", "#", class: "hover-textdecoration" %>
-              </div>
-            </div>
-          </div>
+      <div class="toggle toggle-favorites">
+        <div class="posts">
+          <%= render @popular_posts.first(5) %>
         </div>
       </div>
-      <%= link_to "#" do %>
-        <div class="button top-button posts-button">
-          <p>> 新着投稿をもっと見る</p>
-        </div>
-      <% end %>
+      <%= link_to "&gt; 投稿一覧を見る".html_safe, posts_path, class: "button posts-button" %>
     </div>
   </div>
-
   <div class="users-area">
     <div class="users-container">
-      <h2>- 人気ユーザー -</h2>
+      <h2>- 新着ユーザー -</h2>
       <div class="users users-color-ye">
-        <%= render @users %>
+        <%= render @users.first(10) %>
       </div>
       <%= link_to "&gt; ユーザー一覧を見る".html_safe, list_users_path, class: "button users-button" %>
     </div>
   </div>
-
   <div class="gear-powers-area">
     <div class="gear-powers-container">
       <h2>- ギアパワー解説 -</h2>
@@ -752,3 +122,4 @@
   </div>
 </div>
 <%= link_to "＋投稿する", new_post_path, class: "fixed_to_post_link" %>
+<%= javascript_pack_tag 'users/toggle' %>
