@@ -58,11 +58,24 @@
   </div>
   <div class="posts-area">
     <div class="posts-container">
-      <h2>- 新着投稿 -</h2>
-      <div class="posts">
-        <%= render @posts %>
+      <div class="toggle-radio toggle-radio-top">
+        <%= radio_button_tag "toggle", "posts", checked: "checked" %>
+        <%= label_tag "toggle_posts", "- 新着投稿 -" %>
+        <%= radio_button_tag "toggle", "favorites" %>
+        <%= label_tag "toggle_favorites", "- 人気投稿 -" %>
       </div>
-      <%= link_to "&gt; 投稿一覧を見る".html_safe, posts_path, class: "button posts-button" %>
+      <div class="toggle toggle-posts">
+        <div class="posts">
+          <%= render @latest_posts %>
+        </div>
+        <%= link_to "&gt; 新着投稿をもっと見る".html_safe, posts_path, class: "button posts-button" %>
+      </div>
+      <div class="toggle toggle-favorites">
+        <div class="posts">
+          <%= render @popular_posts %>
+        </div>
+        <%= link_to "&gt; 人気投稿をもっと見る".html_safe, posts_path, class: "button posts-button" %>
+      </div>
     </div>
   </div>
   <div class="users-area">
@@ -110,3 +123,4 @@
   </div>
 </div>
 <%= link_to "＋投稿する", new_post_path, class: "fixed_to_post_link" %>
+<%= javascript_pack_tag 'users/toggle' %>
