@@ -1,12 +1,5 @@
-<div class="flash-blue flash-top">
-  <% if notice %>
-    <p class="notice"><%= notice %></p>
-  <% end %>
-</div>
-<div class="flash-red flash-top">
-  <% if alert %>
-    <p class="alert"><%= alert %></p>
-  <% end %>
+<div class="flash-top">
+  <%= render "shared/flash_messages" %>
 </div>
 <div class="top">
   <div class="top-title-area">
