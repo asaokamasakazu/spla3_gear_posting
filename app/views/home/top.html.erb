@@ -66,13 +66,13 @@
       </div>
       <div class="toggle toggle-posts">
         <div class="posts">
-          <%= render @latest_posts %>
+          <%= render @latest_posts.first(5) %>
         </div>
         <%= link_to "&gt; 新着投稿をもっと見る".html_safe, posts_path, class: "button posts-button" %>
       </div>
       <div class="toggle toggle-favorites">
         <div class="posts">
-          <%= render @popular_posts %>
+          <%= render @popular_posts.first(5) %>
         </div>
         <%= link_to "&gt; 人気投稿をもっと見る".html_safe, posts_path, class: "button posts-button" %>
       </div>
@@ -82,7 +82,7 @@
     <div class="users-container">
       <h2>- 新着ユーザー -</h2>
       <div class="users users-color-ye">
-        <%= render @users %>
+        <%= render @users.first(10) %>
       </div>
       <%= link_to "&gt; ユーザー一覧を見る".html_safe, list_users_path, class: "button users-button" %>
     </div>
