@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.includes(user: { image_attachment: :blob }).order(created_at: :desc)
   end
 
   def show
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def search
-    @results = @q_post.result.order(created_at: :desc)
+    @results = @q_post.result.includes(user: { image_attachment: :blob }).order(created_at: :desc)
   end
 
   private
