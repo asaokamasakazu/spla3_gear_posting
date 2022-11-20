@@ -87,7 +87,7 @@
         <h3 class="main-container-h3"><%= @user.name %>のお気に入り</h3>
         <div class="posts">
           <% if @user.favorites.present? %>
-            <%= render partial: "posts/favorited_post", collection: @user.favorites.order(created_at: :desc), as: "favorite" %>
+            <%= render partial: "users/user_favorite", collection: @user_favorites %>
           <% else %>
             <div class="no-post-message">
               <p>まだお気に入りはありません。</p>
