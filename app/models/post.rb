@@ -22,7 +22,9 @@ class Post < ApplicationRecord
 
   scope :latest, -> { order(created_at: :desc) }
   scope :old, -> { order(created_at: :asc) }
-  scope :favorites, -> { order(created_at: :desc).sort { |a, b| b.favorited_users.size <=> a.favorited_users.size } }
+  scope :favorites, -> {
+    order(created_at: :desc).sort { |a, b| b.favorited_users.size <=> a.favorited_users.size }
+  }
 
   SELECT_WEAPON_OPTIONS = [
     [
