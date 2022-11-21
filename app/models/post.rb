@@ -20,6 +20,10 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user
 
+  scope :latest, -> { order(created_at: :desc) }
+  scope :old, -> { order(created_at: :asc) }
+  scope :favorites, -> { order(created_at: :desc).sort { |a, b| b.favorited_users.size <=> a.favorited_users.size } }
+
   SELECT_WEAPON_OPTIONS = [
     [
       "シューター",

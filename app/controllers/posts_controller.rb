@@ -17,7 +17,13 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(user: { image_attachment: :blob }).order(created_at: :desc)
+    if params[:old]
+      @posts = Post.includes(user: { image_attachment: :blob }).old
+    elsif params[:favorites]
+      @posts = Post.includes(user: { image_attachment: :blob }).favorites
+    else
+      @posts = Post.includes(user: { image_attachment: :blob }).latest
+    end
   end
 
   def show
