@@ -15,10 +15,10 @@
       <div class="posts-sort">
         <ul>
           <div class="posts-sort-left">
-            <li class="posts-sort-li">並び順</li>
+            <li>並び順</li>
           </div>
           <div class="posts-sort-right">
-            <li class="posts-sort-li">
+            <li>
               <% if URI.parse(request.url).query %>
                 <%= link_to "新着順", posts_path, class:"link-color-blue hover-textdecoration" %>
               <% else %>
@@ -26,8 +26,8 @@
               <% end %>
               <span>|</span>
             </li>
-            <li class="posts-sort-li"><%= link_to_unless_current "古い順", posts_path(old: true), class:"link-color-blue hover-textdecoration" %><span>|</span></li>
-            <li class="posts-sort-li"><%= link_to_unless_current "人気順", posts_path(favorites: true), class:"link-color-blue hover-textdecoration" %></li>
+            <li><%= link_to_unless_current "古い順", posts_path(old: true), class:"link-color-blue hover-textdecoration" %><span>|</span></li>
+            <li><%= link_to_unless_current "人気順", posts_path(favorites: true), class:"link-color-blue hover-textdecoration" %></li>
           </div>
         </ul>
       </div>
