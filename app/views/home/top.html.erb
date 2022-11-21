@@ -68,13 +68,14 @@
         <div class="posts">
           <%= render @latest_posts.first(5) %>
         </div>
+        <%= link_to "&gt; 新着投稿をもっと見る".html_safe, posts_path, class: "button posts-button" %>
       </div>
       <div class="toggle toggle-favorites">
         <div class="posts">
           <%= render @popular_posts.first(5) %>
         </div>
+        <%= link_to "&gt; 人気投稿をもっと見る".html_safe, posts_path(favorites: true), class: "button posts-button" %>
       </div>
-      <%= link_to "&gt; 投稿一覧を見る".html_safe, posts_path, class: "button posts-button" %>
     </div>
   </div>
   <div class="users-area">
