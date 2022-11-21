@@ -141,6 +141,8 @@ RSpec.describe "Posts", type: :system do
     let!(:post3) { create(:post, weapon: "わかばシューター", battle: "ガチホコ", user: user2) }
     let!(:gear_powers) { create_list(:gear_power1, 27) }
     let!(:favorite) { create(:favorite, user: user1, post: post1) }
+    let!(:favorite2) { create(:favorite, user: user1, post: post3) }
+    let!(:favorite3) { create(:favorite, user: user2, post: post3) }
 
     before do
       visit posts_path
@@ -263,30 +265,30 @@ RSpec.describe "Posts", type: :system do
 
         it "お気に入りボタンを正しく表示していること" do
           within ".main-container" do
-            expect(page.all(".fas").count).to eq 1
-            expect(page.all(".far").count).to eq 2
+            expect(page.all(".fas").count).to eq 2
+            expect(page.all(".far").count).to eq 1
           end
         end
 
         context "お気に入りしていないボタンの場合", js: true do
           it "ボタンを押すとお気に入りできること" do
-            click_link "0件", match: :first
+            click_link "0件"
             visit current_path
-            expect(Favorite.all.count).to eq 2
+            expect(Favorite.all.count).to eq 4
           end
 
           it "ボタンを押すとお気に入り済みマークに切り替わること" do
             click_link "0件", match: :first
             visit current_path
-            expect(page.all(".fas").count).to eq 2
-            expect(page.all(".far").count).to eq 1
+            expect(page.all(".fas").count).to eq 3
+            expect(page.all(".far").count).to eq 0
           end
 
           it "ボタンを押すと表示されるカウントが1増えること" do
-            click_link "0件", match: :first
+            click_link "0件"
             visit current_path
             expect(page).to have_content("1件", count: 2)
-            expect(page).to have_content("0件", count: 1)
+            expect(page).to have_content("0件", count: 0)
           end
         end
 
@@ -294,21 +296,21 @@ RSpec.describe "Posts", type: :system do
           it "ボタンを押すとお気に入り解除できること" do
             click_link "1件"
             visit current_path
-            expect(Favorite.all.count).to eq 0
+            expect(Favorite.all.count).to eq 2
           end
 
           it "ボタンを押すと未お気に入りマークに切り替わること" do
             click_link "1件"
             visit current_path
-            expect(page.all(".fas").count).to eq 0
-            expect(page.all(".far").count).to eq 3
+            expect(page.all(".fas").count).to eq 1
+            expect(page.all(".far").count).to eq 2
           end
 
           it "ボタンを押すと表示されるカウントが1減ること" do
             click_link "1件"
             visit current_path
             expect(page).to have_content("1件", count: 0)
-            expect(page).to have_content("0件", count: 3)
+            expect(page).to have_content("0件", count: 2)
           end
         end
       end
@@ -399,6 +401,67 @@ RSpec.describe "Posts", type: :system do
           click_button "検索"
         end
         expect(page).to have_content "条件に一致する検索はありません。"
+      end
+    end
+
+    describe "並び替えのテスト" do
+      context "並び替える前の場合" do
+        it "古い順と人気順へのリンクがアクティブであること" do
+          expect(page).to have_link "古い順"
+          expect(page).to have_link "人気順"
+        end
+
+        it "新着順へのリンクが非アクティブであること" do
+          expect(page).not_to have_link "新着順"
+        end
+      end
+
+      context "古い順に並び替える場合" do
+        before do
+          click_link "古い順"
+        end
+
+        it "正しいクエリパラメーターを含むurlになっていること" do
+          expect(page).to have_current_path posts_path(old: true)
+        end
+
+        it "古い順に並び替えることができていること" do
+          click_link "> 編成詳細へ", match: :first
+          expect(current_path).to eq post_path(post2)
+        end
+
+        it "古い順に並び替えたら、新着順と人気順へのリンクがアクティブであること" do
+          expect(page).to have_link "新着順"
+          expect(page).to have_link "人気順"
+        end
+
+        it "古い順に並び替えたら、古い順へのリンクが非アクティブであること" do
+          expect(page).not_to have_link "古い順"
+        end
+      end
+
+      context "人気順に並び替える場合" do
+        before do
+          click_link "人気順"
+        end
+
+        it "正しいクエリパラメーターを含むurlになっていること" do
+          expect(page).to have_current_path posts_path(favorites: true)
+        end
+
+        it "人気順に並び替えることができていること" do
+          click_link "> 編成詳細へ", match: :first
+          expect(current_path).to eq post_path(post3)
+        end
+
+        it "人気順に並び替えたら、新着順と古い順へのリンクがアクティブであること" do
+          expect(page).to have_link "新着順"
+          expect(page).to have_link "古い順"
+        end
+
+        it "人気順に並び替えたら、人気順へのリンクが非アクティブであること" do
+          expect(page).not_to have_link "人気順"
+        end
       end
     end
   end
