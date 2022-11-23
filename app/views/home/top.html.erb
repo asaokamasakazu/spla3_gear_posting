@@ -11,15 +11,15 @@
       <p class="top-p">みんなの投稿を見て、イカしたギア編成を見つけたらお気に入り登録しておこう！</p>
       <% if user_signed_in? %>
         <div class="top-buttons-header">
-          <%= link_to "> ギア編成を投稿する", new_post_path, class: "button top-button top-button-first", "data-turbolinks": false %>
+          <%= link_to "&gt; ギア編成を投稿する".html_safe, new_post_path, class: "button top-button top-button-first", "data-turbolinks": false %>
         </div>
       <% else %>
         <div class="top-buttons-header">
-          <%= link_to "> 新規登録してギア編成を投稿する", new_user_registration_path, class: "button top-button top-button-first", "data-turbolinks": false %>
+          <%= link_to "&gt; 新規登録してギア編成を投稿する".html_safe, new_user_registration_path, class: "button top-button top-button-first", "data-turbolinks": false %>
         </div>
         <div class="top-buttons-footer">
-          <%= link_to "> ログインはこちら", new_user_session_path, class: "button top-button top-button-second", "data-turbolinks": false %>
-          <%= link_to "> ゲストログインはこちら", users_guest_sign_in_path, method: :post, class: "button top-button" %>
+          <%= link_to "&gt; ログインはこちら".html_safe, new_user_session_path, class: "button top-button top-button-second", "data-turbolinks": false %>
+          <%= link_to "&gt; ゲストログインはこちら".html_safe, users_guest_sign_in_path, method: :post, class: "button top-button" %>
         </div>
       <% end %>
       <hr class="top-title-hr">
@@ -68,13 +68,14 @@
         <div class="posts">
           <%= render @latest_posts.first(5) %>
         </div>
+        <%= link_to "&gt; 新着投稿をもっと見る".html_safe, posts_path, class: "button posts-button" %>
       </div>
       <div class="toggle toggle-favorites">
         <div class="posts">
           <%= render @popular_posts.first(5) %>
         </div>
+        <%= link_to "&gt; 人気投稿をもっと見る".html_safe, posts_path(favorites: true), class: "button posts-button" %>
       </div>
-      <%= link_to "&gt; 投稿一覧を見る".html_safe, posts_path, class: "button posts-button" %>
     </div>
   </div>
   <div class="users-area">
@@ -117,7 +118,7 @@
           </tbody>
         </table>
       </div>
-      <%= link_to "> ギアパワー一覧を見る", gear_powers_path, class: "top-button gear-powers-button button" %>
+      <%= link_to "&gt; ギアパワー一覧を見る".html_safe, gear_powers_path, class: "top-button gear-powers-button button" %>
     </div>
   </div>
 </div>

@@ -17,7 +17,13 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    if params[:old]
+      @posts = Post.includes(user: { image_attachment: :blob }).old
+    elsif params[:favorites]
+      @posts = Post.includes(user: { image_attachment: :blob }).favorites
+    else
+      @posts = Post.includes(user: { image_attachment: :blob }).latest
+    end
   end
 
   def show
@@ -64,7 +70,7 @@ class PostsController < ApplicationController
   end
 
   def search
-    @results = @q_post.result.order(created_at: :desc)
+    @results = @q_post.result.includes(user: { image_attachment: :blob }).order(created_at: :desc)
   end
 
   private

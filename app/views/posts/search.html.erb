@@ -5,8 +5,7 @@
   <div class="title">
     <div class="title-container">
       <%= breadcrumbs separator: " &rsaquo; " %> 
-      <h2>投稿一覧</h2>
-      <p>投稿一覧では、他のユーザーが投稿したギア編成を見ることができます。投稿を絞り込む場合は、検索機能をお使いください。</p>
+      <h2>投稿検索結果</h2>
       <p>検索結果：<%= @results.count %>件</p>
     </div>
   </div>
@@ -42,7 +41,7 @@
               </div>
               <div class="posts-search-form">
                 <%= f.label :weapon_eq, "ブキ", class: "parent-label" %>
-                <%= f.select :weapon_eq, grouped_options_for_select(Post::SELECT_WEAPON_OPTIONS_FOR_SEARCH, @q_post.weapon_eq) %>
+                <%= f.select :weapon_eq, grouped_options_for_select(Post::SELECT_WEAPON_OPTIONS, @q_post.weapon_eq), { include_blank: "未選択" } %>
               </div>
               <div class="posts-search-form">
                 <%= f.label :battle_eq, "バトル", class: "parent-label" %>

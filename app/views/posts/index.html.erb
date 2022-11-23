@@ -12,6 +12,26 @@
   </div>
   <div class="main">
     <div class="main-container">
+      <div class="posts-sort">
+        <ul>
+          <div class="posts-sort-left">
+            <li>並び順</li>
+          </div>
+          <div class="posts-sort-right">
+            <li>
+              <% if URI.parse(request.url).query %>
+                <%= link_to "新着順", posts_path, class:"link-color-blue hover-textdecoration" %>
+              <% else %>
+                新着順
+              <% end %>
+              <span>|</span>
+            </li>
+            <li><%= link_to_unless_current "古い順", posts_path(old: true), class:"link-color-blue hover-textdecoration" %><span>|</span></li>
+            <li><%= link_to_unless_current "人気順", posts_path(favorites: true), class:"link-color-blue hover-textdecoration" %></li>
+          </div>
+        </ul>
+      </div>
+      <hr class="hr-black posts-sort-hr">
       <%= search_form_for @q_post, url: search_posts_path do |f| %>
         <div class="posts-search">
           <div class="posts-search-container">

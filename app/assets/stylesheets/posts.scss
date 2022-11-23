@@ -170,6 +170,39 @@
     margin-right: 4px;
   }
 }
+.posts-sort {
+  ul {
+    display: flex;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 580px) {
+  .posts-sort {
+    font-size: 0.85rem;
+    ul {
+      flex-direction: column;
+    }
+  }
+}
+@media screen and (min-width: 581px) {
+  .posts-sort {
+    padding: 0 20px;
+    font-size: 0.9rem;
+  }
+}
+.posts-sort-left {
+  width: 165px;
+}
+.posts-sort-right {
+  display: flex;
+  span {
+    margin: 0 10px;
+  }
+}
+.posts-sort-hr {
+  margin: 8px 0;
+}
 .posts-search {
   input,
   select {

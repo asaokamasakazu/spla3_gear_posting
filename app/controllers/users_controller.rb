@@ -3,11 +3,13 @@ class UsersController < ApplicationController
   before_action :set_q, { only: [:search, :list] }
 
   def list
-    @users = User.all.order(created_at: :desc)
+    @users = User.includes(:posts).with_attached_image.order(created_at: :desc)
   end
 
   def show
     @user = User.find(params[:id])
+    @user_favorites = @user.favorites.includes(post: { user: { image_attachment: :blob } }).
+      order(created_at: :desc)
   end
 
   def account
@@ -15,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def search
-    @results = @q.result.order(created_at: :desc)
+    @results = @q.result.includes(:posts).with_attached_image.order(created_at: :desc)
   end
 
   private
