@@ -204,7 +204,7 @@
         </div>
       </div>
       <div class="post-show-favorited-container">
-        <%= render "posts/users_who_favorited", post: @post %>
+        <%= render "posts/users_who_favorited", favorites: @post_favorites %>
       </div>
       <%= link_to "&lt; 投稿一覧に戻る".html_safe, posts_path, class: "button top-button posts-button" %>
     </div>
