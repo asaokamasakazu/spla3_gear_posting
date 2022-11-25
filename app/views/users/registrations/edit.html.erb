@@ -10,98 +10,166 @@
   </div>
   <div class="main">
     <div class="main-container">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "users/shared/error_messages", resource: resource %>
-        <div class="form-line">
-          <div class="form-line-left">
-            <%= f.label :image %>
+      <% if current_user.email == "guest@example.com" %>
+        <p class="guest-edit-alert">※ ゲストユーザーのため変更できません</p>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :image %>
+            </div>
+            <div class="form-line-right">
+              <%= f.file_field :image, disabled: true, class: "input-file" %>
+            </div>
           </div>
-          <div class="form-line-right">
-            <%= f.file_field :image, accept: "image/jpg, image/jpeg, image/png, image/gif", class: "input-file" %>
-          </div>
-        </div>
-        <div class="form-line">
-          <div class="form-line-left">
-            <%= f.label :name %>
-            <span class="length-supplement">(20文字まで)</span>
-          </div>
-          <div class="form-line-right">
-            <% if current_user.email == "guest@example.com" %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :name %>
+              <span class="length-supplement">(20文字まで)</span>
+            </div>
+            <div class="form-line-right">
               <%= f.text_field :name, disabled: true %><br>
-              <span class="form-line-supplement">※ ゲストユーザーの場合は変更できません</span>
-            <% else %>
-              <%= f.text_field :name, autofocus: true, maxlength: 20 %>
-            <% end %>
+            </div>
           </div>
-        </div>
-        <div class="form-line">
-          <div class="form-line-left">
-            <%= f.label :profile %>
-            <span class="length-supplement">(100文字まで)</span>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :profile %>
+              <span class="length-supplement">(100文字まで)</span>
+            </div>
+            <div class="form-line-right">
+              <%= f.text_area :profile, disabled: true %>
+            </div>
           </div>
-          <div class="form-line-right">
-            <%= f.text_area :profile, maxlength: 100 %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :rank %>
+            </div>
+            <div class="form-line-right">
+              <%= f.number_field :rank, disabled: true %>
+            </div>
           </div>
-        </div>
-        <div class="form-line">
-          <div class="form-line-left">
-            <%= f.label :rank %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :prowess %>
+            </div>
+            <div class="form-line-right">
+              <%= f.text_field :prowess, disabled: true %>
+            </div>
           </div>
-          <div class="form-line-right">
-            <%= f.number_field :rank %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :email %>
+            </div>
+            <div class="form-line-right">
+              <%= f.email_field :email, disabled: true %><br>
+            </div>
           </div>
-        </div>
-        <div class="form-line">
-          <div class="form-line-left">
-            <%= f.label :prowess %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :password %>
+            </div>
+            <div class="form-line-right">
+              <%= f.password_field :password, disabled: true %><br>
+            </div>
           </div>
-          <div class="form-line-right">
-            <%= f.select :prowess, ["未設定", "S+", "S", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-"] %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :password_confirmation %>
+            </div>
+            <div class="form-line-right">
+              <%= f.password_field :password_confirmation, disabled: true %><br>
+            </div>
           </div>
-        </div>
-        <div class="form-line">
-          <div class="form-line-left">
-            <%= f.label :email %>
+          <div class="form-line-submit guest-edit-submit">
+            <%= f.submit "更新する", disabled: true %>
           </div>
-          <div class="form-line-right">
-            <% if current_user.email == "guest@example.com" %>
-              <%= f.email_field :email, autocomplete: "email", disabled: true %><br>
-              <span class="form-line-supplement">※ ゲストユーザーの場合は変更できません</span>
-            <% else %>
-              <%= f.email_field :email, autocomplete: "email" %>
-            <% end %>
-          </div>
-        </div>
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-        <div class="form-line">
-          <div class="form-line-left">
-            <%= f.label :password %>
+      <% else %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :image %>
+            </div>
+            <div class="form-line-right">
+              <%= f.file_field :image, accept: "image/jpg, image/jpeg, image/png, image/gif", class: "input-file" %>
+            </div>
           </div>
-          <div class="form-line-right">
-            <%= f.password_field :password, autocomplete: "new-password", minlength: 6, id: "input_pass" %><br>
-            <span class="form-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :name %>
+              <span class="length-supplement">(20文字まで)</span>
+            </div>
+            <div class="form-line-right">
+              <%= f.text_field :name, autofocus: true, maxlength: 20 %>
+            </div>
           </div>
-        </div>
-        <div class="form-line">
-          <div class="form-line-left">
-            <%= f.label :password_confirmation %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :profile %>
+              <span class="length-supplement">(100文字まで)</span>
+            </div>
+            <div class="form-line-right">
+              <%= f.text_area :profile, maxlength: 100 %>
+            </div>
           </div>
-          <div class="form-line-right">
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: 6, id: "input_pass_confirmation" %><br>
-            <span class="form-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :rank %>
+            </div>
+            <div class="form-line-right">
+              <%= f.number_field :rank %>
+            </div>
           </div>
-        </div>
-        <div class="checkbox-and-label">
-          <p>
-            <%= check_box_tag :passview %>
-            <%= label_tag :passview, "パスワードを表示する" %>
-          </p>
-        </div>
-        <div class="form-line-submit">
-          <%= f.submit "更新する", class: "hover-transform" %>
-        </div>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :prowess %>
+            </div>
+            <div class="form-line-right">
+              <%= f.select :prowess, ["未設定", "S+", "S", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-"] %>
+            </div>
+          </div>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :email %>
+            </div>
+            <div class="form-line-right">
+              <%= f.email_field :email, autocomplete: "email" %>
+            </div>
+          </div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :password %>
+            </div>
+            <div class="form-line-right">
+              <%= f.password_field :password, autocomplete: "new-password", minlength: 6, id: "input_pass" %><br>
+              <span class="form-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
+            </div>
+          </div>
+          <div class="form-line">
+            <div class="form-line-left">
+              <%= f.label :password_confirmation %>
+            </div>
+            <div class="form-line-right">
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: 6, id: "input_pass_confirmation" %><br>
+              <span class="form-line-supplement">※ 変更する場合のみ入力してください(<%= @minimum_password_length %>文字以上)</span>
+            </div>
+          </div>
+          <div class="checkbox-and-label">
+            <p>
+              <%= check_box_tag :passview %>
+              <%= label_tag :passview, "パスワードを表示する" %>
+            </p>
+          </div>
+          <div class="form-line-submit">
+            <%= f.submit "更新する", class: "hover-transform" %>
+          </div>
+        <% end %>
       <% end %>
       <hr class="hr-black"">
       <div class="under-forms">

@@ -1,21 +1,21 @@
 <header>
   <div class="header-container">
     <div class="header-left">
-      <%= link_to root_path, class: "header-home" do %>
+      <%= link_to root_path, class: "header-home", "data-turbolinks": false do %>
         <i class="fa-solid fa-house"></i>
       <% end %>
-      <%= link_to "投稿", posts_path, class: "pc-tb-only" %>
-      <%= link_to "ユーザー", list_users_path, class: "pc-tb-only" %>
-      <%= link_to "ギアパワー", gear_powers_path, class: "pc-tb-only" %>
+      <%= link_to "投稿", posts_path, class: "pc-tb-only", "data-turbolinks": false %>
+      <%= link_to "ユーザー", list_users_path, class: "pc-tb-only", "data-turbolinks": false %>
+      <%= link_to "ギアパワー", gear_powers_path, class: "pc-tb-only", "data-turbolinks": false %>
       <span class="nav_toggle_sp">
         メニュー
         <i class="fas fa-caret-down header-triangle"></i>
       </span>
       <nav class="nav_sp">
         <ul>
-          <li class="nav_menu_li"><%= link_to "投稿", posts_path %></li>
-          <li class="nav_menu_li"><%= link_to "ユーザー", list_users_path %></li>
-          <li class="nav_menu_li"><%= link_to "ギアパワー", gear_powers_path %></li>
+          <li class="nav_menu_li"><%= link_to "投稿", posts_path, "data-turbolinks": false %></li>
+          <li class="nav_menu_li"><%= link_to "ユーザー", list_users_path, "data-turbolinks": false %></li>
+          <li class="nav_menu_li"><%= link_to "ギアパワー", gear_powers_path, "data-turbolinks": false %></li>
         </ul>
       </nav>
       <div class="header-search">
