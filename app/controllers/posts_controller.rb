@@ -28,6 +28,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_favorites = @post.favorites.includes(user: { image_attachment: :blob }).
+      order(created_at: :desc)
     @head_main = GearPower.find(@post.head_main)
     @head_sub1 = GearPower.find(@post.head_sub1)
     @head_sub2 = GearPower.find(@post.head_sub2)
