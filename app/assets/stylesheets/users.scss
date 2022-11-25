@@ -346,3 +346,16 @@
 .search-message {
   font-size: 0.9rem;
 }
+
+/*=== USERS/EDIT ===*/
+.guest-edit-alert {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  padding: 0 5px;
+  width: fit-content;
+  background-color: red;
+  color: #fff;
+}
+.guest-edit-submit {
+  opacity: 0.7;
+}
