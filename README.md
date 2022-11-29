@@ -1,5 +1,5 @@
 ![](https://img.shields.io/badge/release-v1.0.0-blue)
-![](https://img.shields.io/badge/Ruby-v3.0.0-red)
+![](https://img.shields.io/badge/Ruby-v3.0.2-red)
 ![](https://img.shields.io/badge/Rails-v6.1.7-critical)
 
 # スプラトゥーン3 ギア編成投稿所
@@ -22,7 +22,7 @@
 そこで、「使うべきギアパワーを知れる場所を作りたい」という思いから、攻略サイトで働いていた経験をもとに、スプラトゥーンを遊んでいる人がより楽しめるように開発しました。
 
 ## URL
-（デプロイ後に記入）
+http://54.178.189.70/
 
 #### ゲストログインの方法
 ![ゲストログインボタン](https://user-images.githubusercontent.com/107730981/203513485-ed932495-c48c-4ed1-9ff4-a5cc99394a1d.png)
@@ -85,7 +85,7 @@
 - スプラトゥーン3を通してコミュニケーションを取りたい方
 
 ## 使用技術
-- Ruby 3.0.0
+- Ruby 3.0.2
 - Rails 6.1.7
 - RSpec 6.0.0
 - SQLite
@@ -93,14 +93,8 @@
 - jQuery
 - ajax
 - AWS
-  - （デプロイ後に記入）
-  <!-- - VPC -->
-  <!-- - EC2 -->
-  <!-- - RDS -->
-  <!-- - S3 -->
-  <!-- - ALB -->
-  <!-- - Route53 -->
-  <!-- - ACM -->
+  - EC2
+  - S3
 
 ### 機能における主要なGem
 - active storage（画像アップロード）
