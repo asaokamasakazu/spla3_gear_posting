@@ -86,3 +86,5 @@ gem 'ransack'
 gem 'jquery-rails'
 
 gem 'bullet'
+
+gem 'seed_dump'
