@@ -34,6 +34,9 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.password_confirmation = user.password
       user.name = "ゲスト"
+      user.rank = "99"
+      user.prowess = "S+"
+      user.profile = "ゲストログイン用のアカウントです。"
     end
   end
 
