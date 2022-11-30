@@ -95,6 +95,7 @@ http://spla3-gear-posting.ml/
 - AWS
   - EC2
   - S3
+  - Route53
 
 ### 機能における主要なGem
 - active storage（画像アップロード）
