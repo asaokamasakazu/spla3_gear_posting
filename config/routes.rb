@@ -20,5 +20,12 @@ Rails.application.routes.draw do
     end
   end
   resources :gear_powers, only: [:index, :show]
+  resources :contacts, only: [:index, :new] do
+    collection do
+      post "confirm"
+      post "back"
+      post "done"
+    end
+  end
   root "home#top"
 end
