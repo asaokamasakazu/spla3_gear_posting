@@ -1,3 +1,25 @@
+/*=== COMMON ===*/
+.contact-nav {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  ul {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  li {
+    width: 32%;
+    padding: 2px;
+    text-align: center;
+    background-color: #6464ff;
+    color: #fff;
+    opacity: 0.6;
+  }
+}
+.contact-nav-current {
+  opacity: 1 !important;
+}
+
 /*=== CONTACTS/NEW ===*/
 .contacts-textarea {
   textarea {
@@ -36,4 +58,9 @@
       font-size: 0.85rem;
     }
   }
+}
+
+/*=== CONTACTS/DONE ===*/
+.contact-done-message {
+  margin-top: 35px;
 }
