@@ -39,7 +39,7 @@
           <%= f.hidden_field :name %>
           <%= f.hidden_field :email %>
           <%= f.hidden_field :message %>
-          <%= f.submit "&lt;   入力画面に戻る".html_safe, class: "hover-transform" %>
+          <%= f.submit "&lt;   修正する".html_safe, class: "hover-transform" %>
         <% end %>
         <%= form_with model: @contact, url: done_contacts_path, method: :post do |f| %>
           <%= f.hidden_field :name %>
