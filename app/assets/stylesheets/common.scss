@@ -701,4 +701,8 @@ footer {
 .footer-container {
   max-width: 950px;
   margin: 0 auto;
+  hr {
+    background-color: rgb(143, 143, 143);
+    margin: 5px 0;
+  }
 }
