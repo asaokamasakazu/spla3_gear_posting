@@ -1,0 +1,55 @@
+<% provide(:title, "お問い合わせフォーム") %>
+<% breadcrumb :contacts_new %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>お問い合わせフォーム</h2>
+      <p>ご意見、ご要望、バグの報告等がございましたらご連絡ください。</p>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <h3 class="main-container-h3">お問い合わせ内容を入力</h3>
+      <div class="forms-container">
+        <div class="forms">
+          <%= form_with model: @contact, url: confirm_contacts_path, method: :post do |f| %>
+          <%= render "shared/error_messages", obj: @contact %>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :name, "お名前" %>
+                <span class="length-supplement">(20文字まで)</span>
+              </div>
+              <div class="form-line-right">
+                <%= f.text_field :name, autofocus: true, required: true, maxlength: 20, placeholder: "お名前を入力してください" %>
+                <div class="required-message">※ 入力必須です</div>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :email, "メールアドレス" %>
+                <span class="length-supplement">(返信を希望する場合のみ)</span>
+              </div>
+              <div class="form-line-right">
+                <%= f.email_field :email, placeholder: "メールアドレスを入力してください" %>
+              </div>
+            </div>
+            <div class="form-line">
+              <div class="form-line-left">
+                <%= f.label :message, "お問い合わせ内容" %>
+                <span class="length-supplement">(1,000文字まで)</span>
+              </div>
+              <div class="form-line-right contacts-textarea">
+                <%= f.text_area :message, required: true, maxlength: 1000, placeholder: "お問い合わせ内容を入力してください" %>
+                <div class="required-message">※ 入力必須です</div>
+              </div>
+            </div>
+            <div class="form-line-submit">
+              <%= f.submit "確認画面へ   &gt;".html_safe, class: "hover-transform" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -258,6 +258,7 @@ textarea {
   display: none;
 }
 input:invalid + .required-message,
+textarea:invalid + .required-message,
 select:invalid + .required-message-select {
   display: block;
 }

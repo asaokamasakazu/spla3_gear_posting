@@ -1,0 +1,32 @@
+/*=== CONTACTS/NEW ===*/
+.contacts-textarea {
+  textarea {
+    height: 300px;
+  }
+}
+
+/*=== CONTACTS/CONFIRM ===*/
+.contacts-confirm-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  form {
+    width: 100%;
+    margin-top: 20px;
+  }
+  form:first-child {
+    margin-right: 15px;
+  }
+  input {
+    width: 100%;
+    padding: 8px 20px;
+    height: 40px;
+    border: 1px solid #333;
+    font-size: 0.9rem;
+    transition: all .3s;
+    text-align: center;
+    color: #fff450;
+    background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+    cursor: pointer;
+  }
+}
