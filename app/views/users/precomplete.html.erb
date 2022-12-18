@@ -1,0 +1,17 @@
+<% provide(:title, "認証完了") %>
+<div class="whole">
+  <div class="display-none">
+    <%= render "shared/flash_messages" %>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <h3 class="main-container-h3">本人確認用のメールを送信しました</h3>
+      <p class="users-confirm-p">メールをご確認いただき、メールに記載されたURLをクリックして、ユーザー登録を完了してください。</p>
+      <h4 class="users-confirm-h4">メールが届かない場合</h4>
+      <p class="users-confirm-p">本人確認メールが届かない場合、以下をご確認ください。</p>
+      <p class="users-confirm-p">・迷惑メールフォルダに振り分けられていたり、設定によって受信ボックス以外の場所に保管されていないかご確認ください。</p>
+      <p class="users-confirm-p">・メールの配信に時間がかかる場合がございます。数分程度待った上で、メールが届いているか再度ご確認ください。</p>
+      <p class="users-confirm-p">・別のメールアドレスで認証を行う場合は、再度<%= link_to "ユーザー登録", new_user_registration_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %>を行ってください。</p>
+    </div>
+  </div>
+</div>
