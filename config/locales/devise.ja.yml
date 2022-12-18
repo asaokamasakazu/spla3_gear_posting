@@ -34,7 +34,7 @@ ja:
       user: ユーザ
   devise:
     confirmations:
-      confirmed: メールアドレスが確認できました。
+      confirmed: ユーザー登録が完了しました。サービスを利用するにはログインしてください。
       new:
         resend_confirmation_instructions: アカウント確認メール再送
       send_instructions: アカウントの有効化について数分以内にメールでご連絡します。
