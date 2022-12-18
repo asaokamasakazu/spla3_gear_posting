@@ -1,0 +1,60 @@
+<% provide(:title, "お問い合わせ内容の確認") %>
+<% breadcrumb :contacts_new %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>お問い合わせ内容の確認</h2>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-container">
+      <div class="contact-nav">
+        <ul>
+          <li>1. 入力</li>
+          <li class="contact-nav-current">2. 確認</li>
+          <li>3. 完了</li>
+        </ul>
+      </div>
+      <div class="form-line">
+        <div class="form-line-left">
+          <p>お名前</p>
+        </div>
+        <div class="form-line-right">
+          <p><%= @contact.name %></p>
+        </div>
+      </div>
+      <div class="form-line">
+        <div class="form-line-left">
+          <p>メールアドレス</p>
+          <span class="length-supplement">(返信を希望する場合のみ)</span>
+        </div>
+        <div class="form-line-right">
+          <p><%= @contact.email.present? ? @contact.email : "未入力" %></p>
+        </div>
+      </div>
+      <div class="form-line">
+        <div class="form-line-left">
+          <p>お問い合わせ内容</p>
+        </div>
+        <div class="form-line-right">
+          <p><%= @contact.message %></p>
+        </div>
+      </div>
+      <div class="contacts-confirm-buttons">
+        <%= form_with model: @contact, url: back_contacts_path, method: :post do |f| %>
+          <%= f.hidden_field :name %>
+          <%= f.hidden_field :email %>
+          <%= f.hidden_field :message %>
+          <%= f.submit "&lt;   修正する".html_safe, class: "hover-transform" %>
+        <% end %>
+        <%= form_with model: @contact, url: done_contacts_path, method: :post do |f| %>
+          <%= f.hidden_field :name %>
+          <%= f.hidden_field :email %>
+          <%= f.hidden_field :message %>
+          <%= f.submit "送信する   &gt;".html_safe, class: "hover-transform" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

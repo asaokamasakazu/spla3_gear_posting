@@ -67,6 +67,7 @@
             <li class="nav_menu_li"><%= link_to "設定", account_users_path %></li>
             <li class="nav_menu_li"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしてよろしいですか？" } %></li>
             <li class="nav_menu_li"><%= link_to "退会", registration_path(current_user), method: :delete, data: { confirm: "アカウントを削除してよろしいですか？" } %></li>
+            <li class="nav_menu_li"><%= link_to "お問い合わせ", new_contact_path %></li>
           </ul>
         </nav>
       <% else %>

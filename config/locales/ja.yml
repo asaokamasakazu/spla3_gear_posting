@@ -20,6 +20,10 @@ ja:
         shoes_sub1: クツのサブパワー1
         shoes_sub2: クツのサブパワー2
         shoes_sub3: クツのサブパワー3
+      contact:
+        name: お名前
+        message: お問い合わせ内容
+        email: メールアドレス
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
