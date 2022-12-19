@@ -705,11 +705,7 @@ RSpec.describe "Users", type: :system do
 
           it "新規登録成功後の遷移先が正しいこと" do
             new_user_id = User.maximum("id")
-            expect(current_path).to eq user_path(new_user_id)
-          end
-
-          it "新規登録成功後に正しいフラッシュを表示していること" do
-            expect(page).to have_content "アカウント登録が完了しました。"
+            expect(current_path).to eq precomplete_users_path
           end
         end
 

@@ -20,6 +20,9 @@ class UsersController < ApplicationController
     @results = @q.result.includes(:posts).with_attached_image.order(created_at: :desc)
   end
 
+  def precomplete
+  end
+
   private
 
   def set_q

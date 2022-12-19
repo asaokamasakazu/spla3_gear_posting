@@ -6,5 +6,6 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { Faker::Internet.password(min_length: 6) }
     password_confirmation { password }
+    after(:create) { |user| user.confirm }
   end
 end

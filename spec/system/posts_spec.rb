@@ -838,13 +838,6 @@ RSpec.describe "Posts", type: :system do
           expect(page.all(".fas").count).to eq 2
         end
 
-        it "ボタンを2度押すと未お気に入りマークに切り替わること" do
-          click_link "1件", match: :first
-          click_link "2件", match: :first
-          visit current_path
-          expect(page.all(".far").count).to eq 2
-        end
-
         it "ボタンを押すと表示されるカウントが1増えること" do
           click_link "1件", match: :first
           visit current_path

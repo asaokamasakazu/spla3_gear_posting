@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get "list"
       get "account"
       get "search"
+      get "precomplete"
     end
   end
   resources :gear_powers, only: [:index, :show]
