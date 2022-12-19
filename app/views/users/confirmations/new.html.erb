@@ -1,16 +1,26 @@
-<h2>Resend confirmation instructions</h2>
-
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+<% provide(:title, "不正なURLです") %>
+<div class="whole">
+  <div class="main">
+    <div class="main-container">
+      <%= render "users/shared/error_messages", resource: resource %>
+      <% if (render "users/shared/error_messages", resource: resource).include?("は既に登録済みです。ログインしてください。") %>
+        <p class="users-confirm-p">ログインは<%= link_to "こちら", new_user_session_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %></p>
+      <% elsif (render "users/shared/error_messages", resource: resource).include?("新しくリクエストしてください。") %>
+        <h4 class="users-confirm-h4">本人確認メールの再送信</h4>
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
+          <div class="field">
+            <%= f.label :email, "再送信先のメールアドレス" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+          </div>
+          <div class="actions">
+            <%= f.submit "再送信する" %>
+          </div>
+        <% end %>
+      <% elsif (render "users/shared/error_messages", resource: resource).include?("不正な値です。") %>
+        <p class="users-confirm-p">ユーザー登録をやり直す場合は<%= link_to "こちら", new_user_registration_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %></p>
+        <p class="users-confirm-p">ログインする場合は<%= link_to "こちら", new_user_session_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %></p>
+      <% end %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>
