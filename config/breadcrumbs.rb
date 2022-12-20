@@ -47,6 +47,16 @@ crumb :users_edit do
   parent :users_account
 end
 
+crumb :users_password_new do
+  link "パスワード再設定", new_user_password_path
+  parent :users_sign_in
+end
+
+crumb :users_password_edit do
+  link "パスワード入力", edit_user_password_path
+  parent :users_password_new
+end
+
 crumb :posts_new do
   link "新規投稿", new_post_path
   parent :root
