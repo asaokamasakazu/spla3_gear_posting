@@ -106,4 +106,4 @@ http://spla3-gear-posting.ml/
 - faker（ダミーデータ作成）
 
 ## データベース設計
-<img src="https://user-images.githubusercontent.com/107730981/203687438-2caae413-0cee-484f-bbba-7fe27565ae0f.png" alt="ER図" width="95%">
+<img src="https://user-images.githubusercontent.com/107730981/208698487-0259c279-d9bb-4f45-9f63-df41d38367d5.png" alt="ER図" width="95%">
