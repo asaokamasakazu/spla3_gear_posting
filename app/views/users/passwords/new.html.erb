@@ -1,16 +1,35 @@
-<h2>Forgot your password?</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<% provide(:title, "パスワード再設定メールの送信") %>
+<% breadcrumb :users_password_new %>
+<div class="whole">
+  <div class="title">
+    <div class="title-container">
+      <%= breadcrumbs separator: " &rsaquo; " %> 
+      <h2>パスワード再設定</h2>
+      <p>パスワードをお忘れの場合は、ご登録のメールアドレス宛に再設定用のURLをお送りいたします。</p>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+  <div class="main">
+    <div class="main-container">
+      <h3 class="main-container-h3">メールアドレスを入力してください</h3>
+      <div class="forms-container">
+        <div class="forms">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+            <div class="field">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
+            </div>
+            <div class="actions">
+              <%= f.submit "パスワード再設定メールを送信する", class: "hover-transform" %>
+            </div>
+          <% end %>
+        </div>
+        <hr class="hr-black"">
+        <div class="under-forms">
+          <p>パスワードをご存知の場合は、<%= link_to "ログイン", new_user_session_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %>してください。</p>
+          <p>アカウントをお持ちでない場合は<%= link_to "登録", new_user_registration_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %>を行うか、<%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "link-color-blue hover-textdecoration" %>をお使いください。</p>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

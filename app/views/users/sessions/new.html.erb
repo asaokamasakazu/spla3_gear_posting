@@ -39,6 +39,7 @@
           </div>
           <hr class="hr-black"">
           <div class="under-forms">
+            <p>パスワードをお忘れの場合は<%= link_to "再発行", new_user_password_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %>してください。</p>
             <p>アカウントをお持ちでない場合は<%= link_to "登録", new_user_registration_path, class: "link-color-blue hover-textdecoration", "data-turbolinks": false %>を行うか、<%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "link-color-blue hover-textdecoration" %>をお使いください。</p>
           </div>
         </div>
