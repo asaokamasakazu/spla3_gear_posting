@@ -16,6 +16,12 @@
         <div class="title-container-first-line-right">
           <% if @user === current_user %>
             <%= link_to "プロフィールを編集", edit_user_registration_path, class: "to-edit-profile-button hover-opacity", "data-turbolinks": false %>
+          <% else %>
+            <% if current_user.already_following?(@user) %>
+              <%= link_to "フォロー中", user_follows_path(@user.id), method: :delete, class: "to-edit-profile-button hover-opacity" %>
+            <% else %>
+              <%= link_to "フォローする", user_follows_path(@user.id), method: :post, class: "to-edit-profile-button hover-opacity" %>
+            <% end %>
           <% end %>
         </div>
       </div>
