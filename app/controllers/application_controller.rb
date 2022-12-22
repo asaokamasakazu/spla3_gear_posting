@@ -15,4 +15,12 @@ class ApplicationController < ActionController::Base
   def set_q_post
     @q_post = Post.ransack(params[:q])
   end
+
+  # ajax通信ではdeviseのauthenticate_user!が使えないため独自に定義
+  def authenticate_user
+    if current_user.nil?
+      flash[:alert] = "アカウント登録もしくはログインしてください。"
+      redirect_to new_user_session_path
+    end
+  end
 end
