@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       get "search"
       get "precomplete"
     end
+    resource :follows, only: [:create, :destroy]
+    get "followings" => "follows#followings", as: "followings"
+    get "followers" => "follows#followers", as: "followers"
   end
   resources :gear_powers, only: [:index, :show]
   resources :contacts, only: [:index, :new] do
