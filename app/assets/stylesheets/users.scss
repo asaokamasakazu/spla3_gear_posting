@@ -269,6 +269,14 @@
 .vertical-border {
   border-left: 1px solid #fff;
 }
+.follow-counts-users-show {
+  display: flex;
+  margin-top: 15px;
+  p {
+    margin-right: 15px;
+    font-size: 0.9rem;
+  }
+}
 .toggle-radio-users {
   max-width: 200px;
   label {
