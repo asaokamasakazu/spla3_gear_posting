@@ -14,6 +14,10 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_posts, through: :favorites, source: :post
+  has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+  has_many :followings, through: :follows, source: :followed
+  has_many :followers, through: :reverse_of_follows, source: :follower
 
   def update_without_current_password(params, *options)
     params.delete(:current_password)
