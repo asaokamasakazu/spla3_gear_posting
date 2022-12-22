@@ -1,4 +1,6 @@
 class FollowsController < ApplicationController
+  before_action :authenticate_user, { only: [:create, :destroy] }
+
   def create
     current_user.follow(params[:user_id])
     redirect_to request.referer
