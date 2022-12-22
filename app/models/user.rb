@@ -59,6 +59,6 @@ class User < ApplicationRecord
 
   # フォローしているか判定するときの処理
   def already_following?(user)
-    follows.include?(user)
+    follows.exists?(follower_id: user.id)
   end
 end
