@@ -270,11 +270,11 @@
   border-left: 1px solid #fff;
 }
 .follow-counts-users-show {
-  display: flex;
   margin-top: 15px;
-  p {
+  a {
     margin-right: 15px;
     font-size: 0.9rem;
+    color: #fff;
   }
 }
 .toggle-radio-users {
