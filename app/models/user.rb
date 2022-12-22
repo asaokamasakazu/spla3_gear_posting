@@ -46,4 +46,19 @@ class User < ApplicationRecord
   def already_favorited?(post)
     favorites.exists?(post_id: post.id)
   end
+
+  # フォローしたときの処理
+  def follow(user_id)
+    follows.create(followed_id: user_id)
+  end
+
+  # フォローを外したときの処理
+  def unfollow(user_id)
+    follows.find_by(followed_id: user_id).destroy
+  end
+
+  # フォローしているか判定するときの処理
+  def already_following?(user)
+    follows.include?(user)
+  end
 end
