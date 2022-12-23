@@ -1,0 +1,20 @@
+<% provide(:title, "#{@user.name}のフォロワー") %>
+<div class="whole">
+  <div class="main">
+    <div class="followings-followers-slide">
+      <%= link_to "フォロー", user_followings_path(@user) %>
+      <p>フォロワー</p>
+    </div>
+    <div class="main-container">
+      <h3 class="main-container-h3"><%= @user.name %>のフォロワー</h3>
+      <div class="users">
+        <% if @users.exists? %>
+          <%= render @users %>
+        <% else %>
+          <p class="no-follow-message">まだフォロワーはいません。</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to "＋投稿する", new_post_path, class: "fixed_to_post_link" %>

@@ -1,0 +1,25 @@
+.followings-followers-slide {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  max-width: 200px;
+  a,
+  p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding-bottom: 3px;
+  }
+  a {
+    opacity: 0.7;
+  }
+  a:hover {
+    opacity: 1;
+  }
+  p {
+    border-bottom: 4px solid #333;
+  }
+}
+.no-follow-message {
+  font-size: 0.9rem;
+}
