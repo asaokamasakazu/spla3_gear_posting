@@ -77,17 +77,50 @@
   }
 }
 @media screen and (max-width: 520px) {
-.user-achievements {
-  font-size: 0.75rem;
-}
+  .user-achievements {
+    font-size: 0.75rem;
+  }
 }
 .user-right {
-  font-size: 0.9rem;
-}
-@media screen and (max-width: 700px) {
-  .user-right {
-    font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  a:nth-child(2) {
+    margin-top: 5px;
   }
+}
+@media screen and (max-width: 520px) {
+  .user-right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 5px;
+    a:nth-child(2) {
+      margin-left: 7px;
+      margin-top: 0;
+    }
+  }
+}
+.users-list-button {
+  display: block;
+  min-width: 109px;
+  background: repeating-linear-gradient(135deg, #333, #333 20px, #3c3c3c 20px, #3c3c3c 40px);
+  border-radius: 3px;
+  color: #fff450;
+  padding: 4px 10px;
+  text-align: center;
+  font-size: 0.8rem;
+  transition: all .3s;
+}
+.users-list-button-reverse {
+  display: block;
+  min-width: 109px;
+  border: 1px solid #333;
+  border-radius: 3px;
+  color: #333;
+  padding: 3px 10px;
+  text-align: center;
+  font-size: 0.8rem;
+  transition: all .3s;
 }
 .users-search-forms {
   input {

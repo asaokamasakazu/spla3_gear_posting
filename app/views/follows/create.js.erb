@@ -1,2 +1,3 @@
 $('.follow_button_<%= @user.id %>').html("<%= j(render 'follows/follow', user: @user) %>");
 $('.follow-counts-users-show').html("<%= j(render 'follows/follow_counts', user: @user, user_following: @user_following, user_followed: @user_followed) %>");
+$('.follow_button_<%= @user.id %>_at_list').html("<%= j(render 'follows/follow_at_list', user: @user) %>");

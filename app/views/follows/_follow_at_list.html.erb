@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <% if user != current_user %>
+    <% if current_user.already_following?(user) %>
+      <%= link_to "フォロー中", user_follows_path(user.id, user.id), method: :delete, remote: true, class: "users-list-button-reverse hover-opacity" %>
+    <% else %>
+      <%= link_to "フォローする", user_follows_path(user.id), method: :post, remote: true, class: "users-list-button hover-opacity" %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= link_to "フォローする", user_follows_path(user.id), method: :post, remote: true, class: "users-list-button hover-opacity" %>
+<% end %>
