@@ -14,6 +14,12 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_posts, through: :favorites, source: :post
+  has_many :follows, class_name: "Follow", foreign_key: "follower_id",
+                     dependent: :destroy
+  has_many :reverse_of_follows, class_name: "Follow", foreign_key: "followed_id",
+                                dependent: :destroy
+  has_many :followings, through: :follows, source: :followed
+  has_many :followers, through: :reverse_of_follows, source: :follower
 
   def update_without_current_password(params, *options)
     params.delete(:current_password)
@@ -41,5 +47,20 @@ class User < ApplicationRecord
 
   def already_favorited?(post)
     favorites.exists?(post_id: post.id)
+  end
+
+  # フォローしたときの処理
+  def follow(user_id)
+    follows.create(followed_id: user_id)
+  end
+
+  # フォローを外したときの処理
+  def unfollow(user_id)
+    follows.find_by(followed_id: user_id).destroy
+  end
+
+  # フォローしているか判定するときの処理
+  def already_following?(user)
+    follows.exists?(followed_id: user.id)
   end
 end

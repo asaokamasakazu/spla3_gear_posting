@@ -14,9 +14,9 @@
           <% end %>
         </div>
         <div class="title-container-first-line-right">
-          <% if @user === current_user %>
-            <%= link_to "プロフィールを編集", edit_user_registration_path, class: "to-edit-profile-button hover-opacity", "data-turbolinks": false %>
-          <% end %>
+          <div class="follow_button_<%= @user.id %>">
+            <%= render "follows/follow", user: @user %>
+          </div>
         </div>
       </div>
       <h2><%= @user.name %></h2>
@@ -57,6 +57,9 @@
           </li>
           <div class="vertical-border"></div>
         </ul>
+        <div class="follow-counts-users-show">
+          <%= render "follows/follow_counts", user: @user, user_following: @user_following, user_followed: @user_followed %>
+        </div>
       </div>
     </div>
   </div>

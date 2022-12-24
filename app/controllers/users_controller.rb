@@ -10,6 +10,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_favorites = @user.favorites.includes(post: { user: { image_attachment: :blob } }).
       order(created_at: :desc)
+    @user_following = @user.followings
+    @user_followed = @user.followers
   end
 
   def account

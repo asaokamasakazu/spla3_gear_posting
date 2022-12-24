@@ -70,7 +70,7 @@ RSpec.describe "Users", type: :system do
       end
 
       it "「プロフィールへ」をクリックするとユーザー詳細ページへ遷移すること" do
-        click_link "> プロフィールへ", match: :first
+        click_link "プロフィールへ", match: :first
         expect(current_path).to eq user_path(user3)
       end
     end
@@ -704,7 +704,6 @@ RSpec.describe "Users", type: :system do
           end
 
           it "新規登録成功後の遷移先が正しいこと" do
-            new_user_id = User.maximum("id")
             expect(current_path).to eq precomplete_users_path
           end
         end

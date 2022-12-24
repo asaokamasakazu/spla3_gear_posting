@@ -33,7 +33,10 @@
       </div>
     </div>
     <div class="user-right">
-      <%= link_to "&gt; プロフィールへ".html_safe, user_path(user), class: "hover-textdecoration" %>
+      <div class="follow_button_<%= user.id %>_at_list">
+        <%= render "follows/follow_at_list", user: user %>
+      </div>
+      <%= link_to "プロフィールへ", user_path(user), class: "users-list-button hover-opacity" %>
     </div>
   </div>
 </div>
