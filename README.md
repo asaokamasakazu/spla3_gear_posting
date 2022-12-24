@@ -124,6 +124,9 @@ http://spla3-gear-posting.ml/
 <img src="https://user-images.githubusercontent.com/107730981/208698487-0259c279-d9bb-4f45-9f63-df41d38367d5.png" alt="ER図" width="95%">
 
 ## リリースログ
+### 22/12/24 バージョン1.2.0 リリース
+- フォロー機能を実装
+
 ### 22/12/21 バージョン1.1.0 リリース
 - メールアドレス認証機能を実装
 - パスワード再発行機能を実装
