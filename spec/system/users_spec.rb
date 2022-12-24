@@ -70,7 +70,7 @@ RSpec.describe "Users", type: :system do
       end
 
       it "「プロフィールへ」をクリックするとユーザー詳細ページへ遷移すること" do
-        click_link "> プロフィールへ", match: :first
+        click_link "プロフィールへ", match: :first
         expect(current_path).to eq user_path(user3)
       end
     end
