@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/release-v1.1.0-blue)
+![](https://img.shields.io/badge/release-v1.2.0-blue)
 ![](https://img.shields.io/badge/Ruby-v3.0.2-red)
 ![](https://img.shields.io/badge/Rails-v6.1.7-critical)
 
