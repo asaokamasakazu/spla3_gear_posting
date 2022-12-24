@@ -121,7 +121,7 @@ http://spla3-gear-posting.ml/
 - faker（ダミーデータ作成）
 
 ## データベース設計
-<img src="https://user-images.githubusercontent.com/107730981/208698487-0259c279-d9bb-4f45-9f63-df41d38367d5.png" alt="ER図" width="95%">
+<img src="https://user-images.githubusercontent.com/107730981/209417844-d7d893eb-de75-4a74-92f3-c9bd990d2e4a.png" alt="ER図" width="95%">
 
 ## リリースログ
 ### 22/12/24 バージョン1.2.0 リリース
