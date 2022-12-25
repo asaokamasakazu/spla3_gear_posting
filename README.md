@@ -125,6 +125,9 @@ http://spla3-gear-posting.ml/
 ## データベース設計
 <img src="https://user-images.githubusercontent.com/107730981/209417844-d7d893eb-de75-4a74-92f3-c9bd990d2e4a.png" alt="ER図" width="95%">
 
+## インフラ構成図
+<img src="https://user-images.githubusercontent.com/107730981/209455821-a8eb949e-258a-42bc-ae80-a1fa60487ff7.png" alt="インフラ構成図" width="60%">
+
 ## リリースログ
 ### 22/12/24 バージョン1.2.0 リリース
 - フォロー機能を実装
