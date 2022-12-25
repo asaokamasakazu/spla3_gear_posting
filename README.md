@@ -109,10 +109,19 @@ http://spla3-gear-posting.ml/
 - javascript
 - jQuery
 - ajax
+
+### インフラ
 - AWS
   - EC2
+    - Nginx
+    - UNICORN
   - S3
   - Route53
+
+#### AWSの追加予定機能
+- RDS
+- Amazon CloudFront
+- ELB
 
 ### 機能における主要なGem
 - active storage（画像アップロード）
