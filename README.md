@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/release-v1.1.0-blue)
+![](https://img.shields.io/badge/release-v1.2.0-blue)
 ![](https://img.shields.io/badge/Ruby-v3.0.2-red)
 ![](https://img.shields.io/badge/Rails-v6.1.7-critical)
 
@@ -34,6 +34,7 @@ http://spla3-gear-posting.ml/
 - ユーザー登録・ログイン機能
   - メールアドレス認証機能
   - パスワード再発行機能
+- フォロー機能
 - 投稿機能
 - お気に入り機能（ajax）
 - パンくず機能
@@ -54,6 +55,8 @@ http://spla3-gear-posting.ml/
 |![ユーザー一覧ページ](https://user-images.githubusercontent.com/107730981/203741052-2352ea96-c3d5-4532-84f0-3fe399f0028a.png)|**【ユーザー一覧ページ】**<br>登録済みの全ユーザーを表示します。テキストによるユーザー名の検索と、チェックボックスによるウデマエの検索に対応しています。|
 |![ユーザー検索結果ページ](https://user-images.githubusercontent.com/107730981/203741066-4f5f94cf-0c44-4c80-8d01-7deb19cd5b1b.png)|**【ユーザー検索結果ページ】**<br>ユーザーの検索結果を表示します。|
 |![ユーザー詳細ページ](https://user-images.githubusercontent.com/107730981/203741094-537c92af-8b32-4b15-9b14-804b523578b4.png)|**【ユーザー詳細ページ】**<br>ユーザーごとのプロフィールを表示します。投稿とお気に入りは、トグル機能によって表示を切り替えます。またログイン者が自身のユーザー詳細ページを開いた場合のみ、「プロフィールを編集」ボタンを表示します。|
+|![フォロー一覧ページ](https://user-images.githubusercontent.com/107730981/209418062-f440dee6-d0fa-403a-ae64-e55852b5d061.png)|**【フォロー一覧ページ】**<br>ユーザーごとのフォローしているユーザー表示します。|
+|![フォロワー一覧ページ](https://user-images.githubusercontent.com/107730981/209418063-1134f409-4c21-4d64-95f4-29356f62f115.png)|**【フォロワー一覧ページ】**<br>ユーザーごとのフォローされているユーザー表示します。|
 |![ユーザーアカウントページ](https://user-images.githubusercontent.com/107730981/203741109-f9d12979-f867-49d9-9c4f-4e409017eb71.png)|**【ユーザーアカウントページ】**<br>登録しているユーザー情報を表示します。|
 |![ユーザー編集ページ](https://user-images.githubusercontent.com/107730981/203741119-f9f96073-3897-42ee-b928-4741f19b3103.png)|**【ユーザー編集ページ】**<br>登録しているユーザー情報の変更を行います。パスワードの欄は、変更する場合のみ入力します。|
 |![ギア編成投稿ページ](https://user-images.githubusercontent.com/107730981/203741129-1b91044a-8704-427a-994b-fa5ddb1725fe.png)|**【ギア編成投稿ページ】**<br>投稿するギア編成の内容を入力します。ギアパワーの選択は、ラジオボタンによって制御しています。|
@@ -68,7 +71,6 @@ http://spla3-gear-posting.ml/
 |![お問い合わせ完了ページ](https://user-images.githubusercontent.com/107730981/208794855-a58f52bf-35d6-4fe4-833a-fd3252044818.png)|**【お問い合わせ完了ページ】**<br>お問い合わせが完了した旨を表示します。このタイミングで管理者にお問い合わせ内容がメールで届きます。|
 
 ### 追加予定の機能
-- ユーザー同士のフォロー機能
 - ギア編成投稿に対するコメント機能
 - ギア編成投稿のタグ付け機能
 - Twitter認証によるログイン機能
@@ -78,6 +80,7 @@ http://spla3-gear-posting.ml/
 - ~~ユーザー登録時のメールアドレス認証機能~~ ※22/12/21実装
 - ~~パスワード再発行機能~~ ※22/12/21実装
 - ~~お問い合わせ機能~~ ※22/12/21実装
+- ~~ユーザー同士のフォロー機能~~ ※22/12/24実装
 
 ## スプラトゥーン3ギア編成投稿所について
 ### 登場人物
@@ -106,10 +109,19 @@ http://spla3-gear-posting.ml/
 - javascript
 - jQuery
 - ajax
+
+### インフラ
 - AWS
   - EC2
+    - Nginx
+    - UNICORN
   - S3
   - Route53
+
+#### AWSの追加予定機能
+- RDS
+- Amazon CloudFront
+- ELB
 
 ### 機能における主要なGem
 - active storage（画像アップロード）
@@ -120,9 +132,15 @@ http://spla3-gear-posting.ml/
 - faker（ダミーデータ作成）
 
 ## データベース設計
-<img src="https://user-images.githubusercontent.com/107730981/208698487-0259c279-d9bb-4f45-9f63-df41d38367d5.png" alt="ER図" width="95%">
+<img src="https://user-images.githubusercontent.com/107730981/209417844-d7d893eb-de75-4a74-92f3-c9bd990d2e4a.png" alt="ER図" width="95%">
+
+## インフラ構成図
+<img src="https://user-images.githubusercontent.com/107730981/209455821-a8eb949e-258a-42bc-ae80-a1fa60487ff7.png" alt="インフラ構成図" width="60%">
 
 ## リリースログ
+### 22/12/24 バージョン1.2.0 リリース
+- フォロー機能を実装
+
 ### 22/12/21 バージョン1.1.0 リリース
 - メールアドレス認証機能を実装
 - パスワード再発行機能を実装
